@@ -40,7 +40,7 @@ if ($errflag) {
 }
 
 // Prepare query to get user details
-$qry = "SELECT * FROM admin WHERE username = ?";
+$qry = "SELECT * FROM users WHERE username = ?";
 $stmt = $conn->prepare($qry);
 $stmt->bind_param("s", $login);
 $stmt->execute();
