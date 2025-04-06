@@ -5025,7 +5025,104 @@ div.card-box {
 }
 
 /* ----------------------------------------------------ANNOUNCEMENT WEATHER------------------------------------------------ */
+    body {
+            margin: 0;
+            padding: 20px;
+            background-color: #f4f4f9;
+        }
 
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .weather-container {
+            display: grid;
+            grid-template-columns: repeat(1, 1fr); /*tiles per row */
+            gap: 40px;
+            justify-items: center;
+			margin-bottom: 0; /* Remove any bottom margin */
+    		padding-bottom: 0; /* Remove any bottom padding */
+        }
+
+        .weather-info {
+			background-color: rgba(159, 159, 159, 0.3); /* Translucent gray */
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            width: 100%;
+            max-width: 280px;
+            text-align: center;
+            transition: transform 0.3s ease-in-out;
+        }
+
+        .weather-info:hover {
+            transform: scale(1.05); /* Slight zoom effect on hover */
+        }
+
+        .weather-info h3 {
+            color: #333;
+            margin-bottom: 10px;
+        }
+
+        .weather-info img {
+            width: 70px;
+        }
+
+        .weather-info p {
+            margin: 5px 0;
+        }
+
+        .weather-info .temp {
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        .weather-info .more-info {
+            font-size: 16px;
+            margin-top: 10px;
+        }
+
+        .weather-info .more-info strong {
+            color: #4CAF50;
+        }
+
+        @media (max-width: 1200px) {
+            .weather-container {
+                grid-template-columns: repeat(3, 1fr); /* 3 tiles per row on medium screens */
+            }
+        }
+
+        @media (max-width: 900px) {
+            .weather-container {
+                grid-template-columns: repeat(2, 1fr); /* 2 tiles per row on smaller screens */
+            }
+        }
+
+        @media (max-width: 600px) {
+            .weather-container {
+                grid-template-columns: 1fr; /* 1 tile per row on mobile screens */
+            }
+        }
+
+        .show-more {
+            display: block;
+            margin: 30px auto;
+            padding: 10px 20px;
+            background-color: #244855;
+            color: white;
+            font-size: 16px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .show-more:hover {
+            background-color: #244855;
+            border-color: #244855;
+            color: #fff;
+            transform: scale(1.05); /* Slight zoom effect on hover */
+        }
 
 /*-----------------------------------------------------------SIDEBAR--------------------------------------------------------------------------*/
 /* Base styles */
