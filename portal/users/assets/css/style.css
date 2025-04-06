@@ -5039,7 +5039,7 @@ div.card-box {
 
         .weather-container {
             display: grid;
-            grid-template-columns: repeat(5, 1fr); /*tiles per row */
+            grid-template-columns: repeat(1, 1fr); /*tiles per row */
             gap: 40px;
             justify-items: center;
 			margin-bottom: 0; /* Remove any bottom margin */
