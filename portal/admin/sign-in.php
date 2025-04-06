@@ -54,7 +54,7 @@ session_start();
                             <button type="submit" name="login" class="btn btn-primary btn-block">Login</button>
                         </div>
                         <div class="text-center register-link">
-                            Login as user? <a href="/hiraya/portal/users/sign-in.php">Click Here</a>
+                            Login as user? <a href="/portal/users/sign-in.php">Click Here</a>
                         </div>
                     </form>
                 </div>
