@@ -59,22 +59,22 @@
         // ------------------------ //
 
         // Class configuration
-        protected static $_default_config = array(
-            'connection_string' => 'sqlite::memory:',
-            'id_column' => 'id',
-            'id_column_overrides' => array(),
-            'error_mode' => PDO::ERRMODE_EXCEPTION,
-            'username' => null,
-            'password' => null,
-            'driver_options' => null,
-            'identifier_quote_character' => null, // if this is null, will be autodetected
-            'limit_clause_style' => null, // if this is null, will be autodetected
-            'logging' => false,
-            'logger' => null,
-            'caching' => false,
-            'caching_auto_clear' => false,
-            'return_result_sets' => false,
-        );
+     protected static $_default_config = array(
+	    'connection_string' => 'mysql:host=srv1637.hstgr.io;dbname=u665838367_cjmed',
+	    'id_column' => 'id',
+	    'id_column_overrides' => array(),
+	    'error_mode' => PDO::ERRMODE_EXCEPTION,
+	    'username' => 'u665838367_cjmedDB',
+	    'password' => 'DBcjmed_2025!',
+	    'driver_options' => [PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES 'UTF8'"],
+	    'identifier_quote_character' => null, 
+	    'limit_clause_style' => null, 
+	    'logging' => false,
+	    'logger' => null,
+	    'caching' => false,
+	    'caching_auto_clear' => false,
+	    'return_result_sets' => false,
+	);
 
         // Map of configuration settings
         protected static $_config = array();
