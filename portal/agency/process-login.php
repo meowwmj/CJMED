@@ -48,7 +48,8 @@ if ($row) {
     $decrypted_password = openssl_decrypt($row['password'], 'aes-256-cbc', $encryption_key, 0, $iv);
 
     if ($password === $decrypted_password) {
-        session_regenerate_id();
+        session_regenerate_id(true);
+        
         $_SESSION['SESS_MEMBER_ID'] = $row['id'];
         $_SESSION['SESS_AGENCY_ID'] = $row['agency_id'];
         $_SESSION['SESS_FIRST_NAME'] = $row['name'];
