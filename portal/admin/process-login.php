@@ -1,5 +1,4 @@
 <?php 
-
 include 'includes/connect.php';
 session_start();
 
@@ -9,9 +8,7 @@ $iv = '1234567890123456'; // Must be 16 bytes
 
 // Function to sanitize input
 function clean($str) {
-    global $conn;
-    $str = trim($str);
-    return mysqli_real_escape_string($conn, $str);
+    return trim($str); // No need to use mysqli_real_escape_string with PDO
 }
 
 // Sanitize POST values
@@ -40,19 +37,17 @@ if ($errflag) {
 }
 
 // Prepare query to get user details
-$qry = "SELECT * FROM admin WHERE username = ?";
-$stmt = $conn->prepare($qry);
-$stmt->bind_param("s", $login);
+$qry = "SELECT * FROM admin WHERE username = :username";
+$stmt = $db->prepare($qry);
+$stmt->bindParam(':username', $login);
 $stmt->execute();
-$result = $stmt->get_result();
+$row = $stmt->fetch(PDO::FETCH_ASSOC);
 
 // Verify user credentials
-if ($row = $result->fetch_assoc()) {
-    // Decrypt stored password
+if ($row) {
     $decrypted_password = openssl_decrypt($row['password'], 'aes-256-cbc', $encryption_key, 0, $iv);
-    
+
     if ($password === $decrypted_password) {
-        // Password matches — start session
         session_regenerate_id();
         $_SESSION['SESS_MEMBER_ID'] = $row['id'];
         $_SESSION['SESS_AGENCY_ID'] = $row['agency_id'];
@@ -64,10 +59,9 @@ if ($row = $result->fetch_assoc()) {
         $_SESSION['SESS_ACCESS_LEVEL'] = $row['access_level'];
         $_SESSION['SESS_PRO_PIC'] = $row['photo'];
         $_SESSION['SESS_USERNAME'] = $row['username'];
-        
+
         session_write_close();
-        
-        // Redirect based on access level
+
         if ($_SESSION['SESS_ACCESS_LEVEL'] == 1) {
             header("Location: admin_dashboard.php");
         } else {
@@ -84,8 +78,4 @@ if ($row = $result->fetch_assoc()) {
     echo "<script>window.location.href='sign-in.php';</script>";
     exit();
 }
-
-$stmt->close();
-$conn->close();
-
 ?>
