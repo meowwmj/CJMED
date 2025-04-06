@@ -62,8 +62,4 @@ try {
 header("Location: sign-in.php");
 exit();
 }
-
-$stmt->close();
-$conn->close();
-
 ?>
