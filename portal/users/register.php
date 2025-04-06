@@ -28,7 +28,7 @@
 
                     <form method="post" action="save_users.php" enctype="multipart/form-data" class="form-signin">
 						<div class="account-logo">
-                            <a href="/hiraya/portal/users/sign-in.php"><img src="assets/img/pdrr.png" alt=""></a><br>
+                            <a href="/portal/users/sign-in.php"><img src="assets/img/pdrr.png" alt=""></a><br>
                             <p>CJMED</p>
                         </div>
                             
