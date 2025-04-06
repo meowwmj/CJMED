@@ -58,165 +58,172 @@
 
 
     <div class="page-wrapper">
-            <div class="content">                
-                <div class="card">
-                        <div class="row">
-                        <div class="col-md-12">
-                                <?php
-                                // Weather API Key
-                                $apiKey = '980c1618e365c5afc9ebbff60fa6781f'; // Replace with your OpenWeatherMap API Key
+            <div class="content">
+              <div class="card">   
+                <div class="choice-container">
 
-                                // List of towns in Bulacan with their coordinates (latitude, longitude)
-                                $towns = [
-                                    ['name' => 'Hagonoy', 'lat' => 14.8341, 'lon' => 120.7327],
-                                    ['name' => 'Malolos', 'lat' => 14.8440, 'lon' => 120.8182],
-                                    ['name' => 'San Jose del Monte', 'lat' => 14.7777, 'lon' => 121.0437],
-                                    ['name' => 'Meycauayan', 'lat' => 14.7254, 'lon' => 120.9570],
-                                    ['name' => 'Balagtas', 'lat' => 14.7833, 'lon' => 120.8500],
-                                    ['name' => 'Sta. Maria', 'lat' => 14.7701, 'lon' => 120.9604],
-                                    ['name' => 'Angat', 'lat' => 14.8791, 'lon' => 120.8877],
-                                    ['name' => 'Bocaue', 'lat' => 14.7554, 'lon' => 120.9672],
-                                    ['name' => 'Pandi', 'lat' => 14.8583, 'lon' => 120.9516],
-                                    ['name' => 'Plaridel', 'lat' => 14.7920, 'lon' => 120.7442],
-                                    ['name' => 'Baliuag', 'lat' => 14.9460, 'lon' => 120.9682],
-                                    ['name' => 'Norzon', 'lat' => 14.7809, 'lon' => 120.8247],
-                                    // Add more towns if needed
-                                ];
+                   <?php
+                    // Weather API Key
+                    $apiKey = '980c1618e365c5afc9ebbff60fa6781f'; // Replace with your OpenWeatherMap API Key
 
-                                // Function to get weather data
-                                function getWeatherData($latitude, $longitude, $apiKey) {
-                                    $url = "https://api.openweathermap.org/data/2.5/weather?lat={$latitude}&lon={$longitude}&appid={$apiKey}&units=metric";
-                                    $weatherData = file_get_contents($url);
-                                    return json_decode($weatherData, true);
-                                }
+                    // List of towns in Bulacan with their coordinates (latitude, longitude)
+                    $towns = [
+                        ['name' => 'Hagonoy', 'lat' => 14.8341, 'lon' => 120.7327],
+                        ['name' => 'Malolos', 'lat' => 14.8440, 'lon' => 120.8182],
+                        ['name' => 'San Jose del Monte', 'lat' => 14.7777, 'lon' => 121.0437],
+                        ['name' => 'Meycauayan', 'lat' => 14.7254, 'lon' => 120.9570],
+                        ['name' => 'Balagtas', 'lat' => 14.7833, 'lon' => 120.8500],
+                        ['name' => 'Sta. Maria', 'lat' => 14.7701, 'lon' => 120.9604],
+                        ['name' => 'Angat', 'lat' => 14.8791, 'lon' => 120.8877],
+                        ['name' => 'Bocaue', 'lat' => 14.7554, 'lon' => 120.9672],
+                        ['name' => 'Pandi', 'lat' => 14.8583, 'lon' => 120.9516],
+                        ['name' => 'Plaridel', 'lat' => 14.7920, 'lon' => 120.7442],
+                        ['name' => 'Baliuag', 'lat' => 14.9460, 'lon' => 120.9682],
+                        ['name' => 'Norzon', 'lat' => 14.7809, 'lon' => 120.8247],
+                        // Add more towns if needed
+                    ];
 
-                                // Caching mechanism: Cache for 10 minutes
-                                $cacheFile = 'weather_cache.json'; // Cache file
-                                $cacheTime = 600; // Cache for 10 minutes (600 seconds)
-
-                                if (file_exists($cacheFile) && time() - filemtime($cacheFile) < $cacheTime) {
-                                    $weatherData = json_decode(file_get_contents($cacheFile), true);
-                                } else {
-                                    // Fetch new weather data from API
-                                    $weatherData = [];
-                                    foreach ($towns as $town) {
-                                        $weatherData[] = getWeatherData($town['lat'], $town['lon'], $apiKey);
-                                    }
-
-                                    // Cache the data for future use
-                                    file_put_contents($cacheFile, json_encode($weatherData));
-                                }
-                                ?>
-    
-    <!DOCTYPE html>
-    <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/lazysizes/5.3.0/lazysizes.min.js"></script>
-        <style>
-        
-        </style>
-    </head>
-    <body>
-
-    <h1>Weather Information for Towns in Bulacan</h1>
-
-    <div class="weather-container" id="weather-container">
-        <!-- Initially Load 8 towns' weather data -->
-    </div>
-
-    <!-- Show More Button -->
-    <button class="show-more" onclick="showMore()">Show More Municipalities</button>
-
-    <script>
-    // JavaScript to dynamically load weather data using AJAX
-    let limit = 8;
-    let towns = <?php echo json_encode($towns); ?>;
-    let weatherData = <?php echo json_encode($weatherData); ?>;
-
-    function loadWeatherData() {
-        const container = document.getElementById("weather-container");
-
-        // Loop through the first 8 towns
-        for (let i = 0; i < limit; i++) {
-            const town = towns[i];
-            const weather = weatherData[i];
-            const iconUrl = `https://openweathermap.org/img/wn/${weather.weather[0].icon}.png`;
-
-            const weatherInfo = `
-                <div class='weather-info'>
-                    <h3>${town.name}</h3>
-                    <img class="lazyload" data-src='${iconUrl}' alt='Weather Icon'>
-                    <p class='temp'>${weather.main.temp}°C</p>
-                    <p><strong>Condition:</strong> ${weather.weather[0].description}</p>
-                    <p><strong>Humidity:</strong> ${weather.main.humidity}%</p>
-                    <p><strong>Wind Speed:</strong> ${weather.wind.speed} m/s</p>
-                    <div class='more-info'>
-                        <p><strong>Pressure:</strong> ${weather.main.pressure} hPa</p>
-                        <p><strong>Visibility:</strong> ${(weather.visibility / 1000)} km</p>
-                        <p><strong>Sunrise:</strong> ${new Date(weather.sys.sunrise * 1000).toLocaleTimeString()}</p>
-                        <p><strong>Sunset:</strong> ${new Date(weather.sys.sunset * 1000).toLocaleTimeString()}</p>
-                    </div>
-                </div>
-            `;
-            
-            container.innerHTML += weatherInfo;
-        }
-    }
-
-    function showMore() {
-        limit = towns.length; // Show all towns
-        const container = document.getElementById("weather-container");
-
-        // Fetch remaining weather data asynchronously
-        fetchWeatherData(limit);
-    }
-
-    function fetchWeatherData(limit) {
-        for (let i = 8; i < limit; i++) {
-            const town = towns[i];
-            const url = `https://api.openweathermap.org/data/2.5/weather?lat=${town.lat}&lon=${town.lon}&appid=980c1618e365c5afc9ebbff60fa6781f&units=metric`;
-            
-            fetch(url)
-                .then(response => response.json())
-                .then(weather => {
-                    const container = document.getElementById("weather-container");
-                    const iconUrl = `https://openweathermap.org/img/wn/${weather.weather[0].icon}.png`;
-
-                    const weatherInfo = `
-                        <div class='weather-info'>
-                            <h3>${town.name}</h3>
-                            <img class="lazyload" data-src='${iconUrl}' alt='Weather Icon'>
-                            <p class='temp'>${weather.main.temp}°C</p>
-                            <p><strong>Condition:</strong> ${weather.weather[0].description}</p>
-                            <p><strong>Humidity:</strong> ${weather.main.humidity}%</p>
-                            <p><strong>Wind Speed:</strong> ${weather.wind.speed} m/s</p>
-                            <div class='more-info'>
-                                <p><strong>Pressure:</strong> ${weather.main.pressure} hPa</p>
-                                <p><strong>Visibility:</strong> ${(weather.visibility / 1000)} km</p>
-                                <p><strong>Sunrise:</strong> ${new Date(weather.sys.sunrise * 1000).toLocaleTimeString()}</p>
-                                <p><strong>Sunset:</strong> ${new Date(weather.sys.sunset * 1000).toLocaleTimeString()}</p>
-                            </div>
-                        </div>
-                    `;
-                    container.innerHTML += weatherInfo;
-                })
-                .catch(error => console.error("Error fetching weather data:", error));
-        }
-
-                        // Hide the "Show More" button after it shows all towns
-                        document.querySelector('.show-more').style.display = 'none';
+                    // Function to get weather data
+                    function getWeatherData($latitude, $longitude, $apiKey) {
+                        $url = "https://api.openweathermap.org/data/2.5/weather?lat={$latitude}&lon={$longitude}&appid={$apiKey}&units=metric";
+                        $weatherData = file_get_contents($url);
+                        return json_decode($weatherData, true);
                     }
 
-                    document.addEventListener("DOMContentLoaded", function() {
-                        loadWeatherData();  // Load the first 8 towns
-                    });
-                    </script>
+                    // Caching mechanism: Cache for 10 minutes
+                    $cacheFile = 'weather_cache.json'; // Cache file
+                    $cacheTime = 600; // Cache for 10 minutes (600 seconds)
+
+                    if (file_exists($cacheFile) && time() - filemtime($cacheFile) < $cacheTime) {
+                        $weatherData = json_decode(file_get_contents($cacheFile), true);
+                    } else {
+                        // Fetch new weather data from API
+                        $weatherData = [];
+                        foreach ($towns as $town) {
+                            $weatherData[] = getWeatherData($town['lat'], $town['lon'], $apiKey);
+                        }
+
+                        // Cache the data for future use
+                        file_put_contents($cacheFile, json_encode($weatherData));
+                    }
+
+                    ?>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lazysizes/5.3.0/lazysizes.min.js"></script>
+    <style>
+       
+    </style>
+</head>
+<body>
+
+<h1>Weather Information for Towns in Bulacan</h1>
+
+<div class="weather-container" id="weather-container">
+    <!-- Initially Load 8 towns' weather data -->
+</div>
+
+<!-- Show More Button -->
+<button class="show-more" onclick="showMore()">Show More Municipalities</button>
+
+<script>
+// JavaScript to dynamically load weather data using AJAX
+let limit = 8;
+let towns = <?php echo json_encode($towns); ?>;
+let weatherData = <?php echo json_encode($weatherData); ?>;
+
+function loadWeatherData() {
+    const container = document.getElementById("weather-container");
+
+    // Loop through the first 8 towns
+    for (let i = 0; i < limit; i++) {
+        const town = towns[i];
+        const weather = weatherData[i];
+        const iconUrl = `https://openweathermap.org/img/wn/${weather.weather[0].icon}.png`;
+
+        const weatherInfo = `
+            <div class='weather-info'>
+                <h3>${town.name}</h3>
+                <img class="lazyload" data-src='${iconUrl}' alt='Weather Icon'>
+                <p class='temp'>${weather.main.temp}°C</p>
+                <p><strong>Condition:</strong> ${weather.weather[0].description}</p>
+                <p><strong>Humidity:</strong> ${weather.main.humidity}%</p>
+                <p><strong>Wind Speed:</strong> ${weather.wind.speed} m/s</p>
+                <div class='more-info'>
+                    <p><strong>Pressure:</strong> ${weather.main.pressure} hPa</p>
+                    <p><strong>Visibility:</strong> ${(weather.visibility / 1000)} km</p>
+                    <p><strong>Sunrise:</strong> ${new Date(weather.sys.sunrise * 1000).toLocaleTimeString()}</p>
+                    <p><strong>Sunset:</strong> ${new Date(weather.sys.sunset * 1000).toLocaleTimeString()}</p>
+                </div>
+            </div>
+        `;
+        
+        container.innerHTML += weatherInfo;
+    }
+}
+
+function showMore() {
+    limit = towns.length; // Show all towns
+    const container = document.getElementById("weather-container");
+
+    // Fetch remaining weather data asynchronously
+    fetchWeatherData(limit);
+}
+
+function fetchWeatherData(limit) {
+    for (let i = 8; i < limit; i++) {
+        const town = towns[i];
+        const url = `https://api.openweathermap.org/data/2.5/weather?lat=${town.lat}&lon=${town.lon}&appid=980c1618e365c5afc9ebbff60fa6781f&units=metric`;
+        
+        fetch(url)
+            .then(response => response.json())
+            .then(weather => {
+                const container = document.getElementById("weather-container");
+                const iconUrl = `https://openweathermap.org/img/wn/${weather.weather[0].icon}.png`;
+
+                const weatherInfo = `
+                    <div class='weather-info'>
+                        <h3>${town.name}</h3>
+                        <img class="lazyload" data-src='${iconUrl}' alt='Weather Icon'>
+                        <p class='temp'>${weather.main.temp}°C</p>
+                        <p><strong>Condition:</strong> ${weather.weather[0].description}</p>
+                        <p><strong>Humidity:</strong> ${weather.main.humidity}%</p>
+                        <p><strong>Wind Speed:</strong> ${weather.wind.speed} m/s</p>
+                        <div class='more-info'>
+                            <p><strong>Pressure:</strong> ${weather.main.pressure} hPa</p>
+                            <p><strong>Visibility:</strong> ${(weather.visibility / 1000)} km</p>
+                            <p><strong>Sunrise:</strong> ${new Date(weather.sys.sunrise * 1000).toLocaleTimeString()}</p>
+                            <p><strong>Sunset:</strong> ${new Date(weather.sys.sunset * 1000).toLocaleTimeString()}</p>
+                        </div>
+                    </div>
+                `;
+                container.innerHTML += weatherInfo;
+            })
+            .catch(error => console.error("Error fetching weather data:", error));
+    }
+
+    // Hide the "Show More" button after it shows all towns
+    document.querySelector('.show-more').style.display = 'none';
+}
+
+document.addEventListener("DOMContentLoaded", function() {
+    loadWeatherData();  // Load the first 8 towns
+});
+</script>
+
+
+
                     </div>
                 </div>
             </div>
-        </body>
+
+            
+
+
+
         <?php include 'includes/message.php'; ?>
         </div>
     </div>
@@ -252,12 +259,14 @@
   </div>
 </div>
 
-<section class="banners" style="margin-top:30px;">
-    <div class="page-wrapper">
-                <div class="row justify-content-center">
-            <h1 class="headline">Useful Links</h1>
-        </div>
-
+<div class="page-wrapper">
+            <div class="content">
+              <div class="card">   
+                <div class="card-header">
+                    <h1 class="card-title d-inline-block">Useful Links</h1></a>
+                </div>
+                    
+          <section class="banners" style="margin-top:10px;">    
             <div class="row justify-content-center">
                 <div class="col-12 col-md-3 mb-3">
                     <a href="https://bagong.pagasa.dost.gov.ph/index.php" target="_blank">
@@ -290,5 +299,8 @@
             </div>
         </div>
     </section>
+    </div>
+ </div>
+</div>
 </body>
 </html>
