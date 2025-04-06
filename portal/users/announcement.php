@@ -96,7 +96,7 @@
                             </head>
                         <body>
 
-                        <h1>Weather Information</h1>
+                        <h1>Weather Informations</h1>
                             <div class="weather-container" id="weather-container">
                                 <!-- Initially Load 8 towns' weather data -->
                             </div>
