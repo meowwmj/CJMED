@@ -35,9 +35,9 @@
                 </div>
             </div>
         </div>
-
-      <!-- Page Wrapper -->
-      <div class="page-wrapper">
+        
+       <!-- Page Wrapper -->
+       <div class="page-wrapper">
             <div class="content">
                 <div class="row">
                     <div class="col-sm-4 col-3">
@@ -47,7 +47,6 @@
 
                 <!-- Filters Section -->
                 <div class="row">
-                            
                     <div class="col-md-6">
                         <div class="form-group">
                             <label>Status</label>
@@ -79,6 +78,7 @@
                                         <tr>
                                             <th class="text-center"><strong>No.</th>
                                             <th class="text-center"><strong>Case ID</th>
+                                            <th class="text-center"><strong>Name</th>
                                             <th class="text-center"><strong>Agency Name</th>
                                             <th class="text-center"><strong>Issue</th>
                                             <th class="text-center"><strong>Address</th>
@@ -90,13 +90,14 @@
                                     
                                     <tbody>
                                         <?php
-                                        $result = $db->prepare("SELECT e.*, a.agency_name FROM emergency e INNER JOIN agency a ON e.agency_id = a.agency_id");
-                                        $result->execute();
-                                        for($i=1; $row = $result->fetch(); $i++){ 
+                                            $result = $db->prepare("SELECT e.*, a.agency_name FROM emergency e INNER JOIN agency a ON e.agency_id = a.agency_id");
+                                            $result->execute();
+                                            for($i=1; $row = $result->fetch(); $i++){ 
                                         ?>
                                             <tr>
                                                 <td class="text-center"><?php echo $i; ?></td>
                                                 <td class="text-center"><?php echo $row['emergency_id']; ?></td>
+                                                <td class="text-center"><?php echo $row['patient_name']; ?></td>
                                                 <td class="text-center"><?php echo $row['agency_name']; ?></td>
                                                 <td class="text-center"><?php echo $row['emergency_category']; ?></td>
                                                 <td class="text-center"><?php echo $row['address']; ?></td>
@@ -147,7 +148,6 @@
                         </div>
                         </div>
 
-
     <!-- Include JS Files -->
     <script src="assets/js/jquery-3.2.1.min.js"></script>
     <script src="assets/js/popper.min.js"></script>
@@ -192,4 +192,3 @@
 
 </body>
 </html>
-
