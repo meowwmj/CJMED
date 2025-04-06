@@ -5039,9 +5039,11 @@ div.card-box {
 
         .weather-container {
             display: grid;
-            grid-template-columns: repeat(4, 1fr); /* 4 tiles per row */
+            grid-template-columns: repeat(1, 1fr); /*tiles per row */
             gap: 40px;
             justify-items: center;
+			margin-bottom: 0; /* Remove any bottom margin */
+    		padding-bottom: 0; /* Remove any bottom padding */
         }
 
         .weather-info {
@@ -5338,7 +5340,6 @@ body {
 /*-----------------------------------------------------------PAGASA--------------------------------------------------------------------------*/
 .banner-item {
 	width: 100%;
-	height: auto;
 	border-radius: 5px;
 	box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
 	transition: transform 0.3s ease-in-out;
@@ -5363,5 +5364,15 @@ body {
 	margin-bottom: 20px;
 }
 .banners {
-	padding: 20px 0;
+	padding: 10px 0;
+	margin-top: 0; /* Remove top margin to close gap between sections */
+    padding-top: 0; /* Remove top padding */
+    
 }
+
+
+
+
+
+
+
