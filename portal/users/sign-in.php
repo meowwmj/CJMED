@@ -26,7 +26,7 @@ unset($_SESSION['login_error']); // Clear error after displaying
                 <div class="account-box">
                     <form method="post" action="process-login.php" class="form-signin">
                         <div class="account-logo text-center">
-                            <a href="/portal/admin/sign-in.php">
+                            <a href="/menu.php">
                                 <img src="assets/img/pdrr.png" alt="CJMED Logo" class="img-fluid" style="max-width: 150px;">
                             </a>
                             <h3 class="mt-2">C.J.M.E.D.</h3>
