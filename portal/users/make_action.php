@@ -67,19 +67,27 @@
                             <h5>Emergency Information</h5>
                             <ul class="list-group list-group-flush">
                                 <li class="list-group-item"><strong>Emergency ID:</strong> <?php echo $row['emergency_id']; ?></li>
-                                <li class="list-group-item"><strong>Name:</strong> <?php echo $_SESSION['SESS_FIRST_NAME']; ?></li>
+                                <li class="list-group-item"><strong>Name:</strong> <?php echo $row['patient_name']; ?></li>
                                 <li class="list-group-item"><strong>Emergency Category:</strong> <?php echo $row['emergency_category']; ?></li>
                                 <li class="list-group-item"><strong>Address:</strong> <span id="emergency-address"><?php echo $row['address']; ?></span></li>
-                                <li class="list-group-item"><strong>Phone Number:</strong> <?php echo $_SESSION['SESS_PHONE_NUMBER']; ?></li>
+                                <li class="list-group-item"><strong>Phone Number:</strong> <?php echo $row['phone']; ?></li>
                                 <li class="list-group-item"><strong>Email:</strong> <?php echo $_SESSION['SESS_EMAIL']; ?></li>
                                 <li class="list-group-item"><strong>Age:</strong> <?php echo $row['age']; ?></li>
-                                <li class="list-group-item"><strong>Status: </strong><?php echo $row['status']; ?></option>                      
+                                <li class="list-group-item"><strong>Status: </strong>
+                                    <td class="text-center">
+                                        <strong>
+                                            <?php
+                                                if($row['status'] == "Pending"){
+                                                    echo "<span class='badge badge-danger'>Ongoing</span>";   
+                                                } else {
+                                                    echo "<span class='badge badge-success'>Resolved</span>";
+                                                }     
+                                            ?> 
+                                        </strong>  
+                                    </td>                     
                                 <li class="list-group-item"><strong>Injury:</strong> <?php echo $row['injury']; ?></li>
                                 <li class="list-group-item"><strong>Description:</strong> <?php echo $row['description']; ?></li>
                             </ul>
-                            <div class="mt-3 text-center">
-                                <button class="btn btn-primary submit-btn">Update Status</button>
-                            </div>
                         </div>
                     </div>
 
@@ -87,7 +95,7 @@
                     <div class="col-md-6">
                         <div class="card p-4 shadow">
                             <h5>Location on Map</h5>
-                            <div id="map" style="height: 548px; border-radius: 10px;"></div>
+                            <div id="map" style="height: 485px; border-radius: 10px;"></div>
                         </div>
                     </div>
                 </div>
