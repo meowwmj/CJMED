@@ -52,34 +52,43 @@
             </div>
         </div>    
 
-        <!-- Page Wrapper -->
-        <div class="page-wrapper">
-            <div class="content">
-                <div class="choice-container">
-                    <a href="rescue.php"><div class="choice-item active" id="reportYourselfText" onclick="setActive(this)">🚨 Report Yourself</div></a>
-                    <a href="rescue.php"><div class="choice-item" id="reportIncidentText" onclick="setActive(this)">📢 Report an Incident</div></a>
-                </div>
-                
-                <div class="card">
-                <div class="card-header">
-                    <form action="save_emergency.php" method="post" enctype="multipart/form-data">
+<!-- Page Wrapper -->
+<div class="page-wrapper">
+    <div class="content">
+        <div class="card">   
+             <div class="choice-container">
+                <a href="rescue.php"><div class="choice-item active" id="reportYourselfText" onclick="setActive(this)">🚨 Report Yourself</div></a>
+                <a href="rescue.php"><div class="choice-item" id="reportIncidentText" onclick="setActive(this)">📢 Report an Incident</div></a>
+            </div>
+                <form action="save_emergency.php" method="post" enctype="multipart/form-data">
+                        <?php if(get("success")):?>
+                            <div>
+                            <?=App::message("success", "Your request has been successfully submitted help is on the way")?>
+                            </div>
+                        <?php endif;?>
                         <div class="row">
                             <div class="col-md-6">
                                 <!-- Emergency Details -->
-                                <div class="form-group">
+                                <div class="form-group" hidden>
                                     <label>Emergency ID</label>
                                     <input class="form-control" type="text" name="emergency_id" value="<?= rand(1000,9999) ?>" readonly>
                                 </div>
 
-                                <div class="form-group">
-                                    <label>Date</label>
-                                    <input class="form-control" name="dates" value="<?= date('m-d-Y') ?>" readonly>
+                                <div class="form-group" hidden>
+                                        <label>User ID</label>
+                                        <input class="form-control" type="text" name="user_id" value="<?= rand(1000,9999) ?>" readonly> 
                                 </div>
 
                                 <div class="form-group">
                                     <label>Patient's Name</label>
                                     <input class="form-control" type="text" name="patient_name" value="<?= $_SESSION['SESS_FIRST_NAME'] ?>" readonly>
                                 </div>
+
+                                <div class="form-group" hidden>
+                                    <label>Date</label>
+                                    <input class="form-control" name="dates" value="<?= date('m-d-Y') ?>" readonly>
+                                </div>                            
+
                                 <div class="form-group">
                                     <label>Contact</label>
                                     <input class="form-control" type="text" name="phone" value="<?= $_SESSION['SESS_PHONE_NUMBER'] ?>" readonly>
@@ -100,14 +109,14 @@
                                     <label>Emergency Category</label>
                                     <select class="form-control" name="emergency_category">
                                         <option>Select</option>
-                                        <?php
-                                        $result = $db->prepare("SELECT * FROM emergency_type");
-                                        $result->execute();
-                                        while($row = $result->fetch()): ?>
-                                            <option value="<?= $row['name'] ?>"><?= $row['name'] ?></option>
-                                        <?php endwhile; ?>
-                                    </select>
-                                </div>
+                                            <?php
+                                                $result = $db->prepare("SELECT * FROM emergency_type");
+                                                $result->execute();
+                                                while($row = $result->fetch()): ?>
+                                                    <option value="<?= $row['name'] ?>"><?= $row['name'] ?></option>
+                                            <?php endwhile; ?>
+                                        </select>
+                                    </div>
                                 
                                 
                                 <div class="form-group">
@@ -122,7 +131,7 @@
                                         <?php endwhile; ?>
                                         </select>
                                       </div>
-                                      
+                                            
                                 <div class="form-group">
                                     <label>Description</label>
                                     <textarea cols="30" rows="2" name="description" class="form-control"></textarea>
@@ -131,8 +140,8 @@
 
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <p><strong>Location:</strong> <span id="address" hidden>Fetching address...</span></p>
-                                    <div id="map" style="height: 326px; border-radius: 10px; margin-bottom: 10px;"></div>
+                                    <p><strong>Location:</strong><span id="address" hidden>Fetching address...</span></p>
+                                    <div id="map" style="height: 300px; border-radius: 10px; margin-bottom: 10px;"></div>
                                     <input type="hidden" name="address" id="addressInput">
                                     <input type="hidden" name="latitude" id="latitude">
                                     <input type="hidden" name="longitude" id="longitude">
@@ -154,8 +163,7 @@
                         </div>
                         
                         <div class="text-center mt-4">
-                            <button class="show-more" >Rescue</button>
-
+                            <button type="submit" class="btn btn-primary">Rescue</button>
                         </div>
                     </form>
                 </div>
@@ -183,7 +191,7 @@
                         subdomains: ['mt0', 'mt1', 'mt2', 'mt3']
                     }).addTo(map);
 
-                    const marker = L.marker([lat, lng], { draggable: true }).addTo(map);
+                    const marker = L.marker([lat, lng], { draggable: false }).addTo(map);
 
                     async function fetchAddress(lat, lng) {
                         const response = await fetch(`https://nominatim.openstreetmap.org/reverse?format=json&lat=${lat}&lon=${lng}`);
@@ -224,8 +232,6 @@
             }
         });
     </script>
-</body>
-</html>
 
 
 <style>
@@ -235,6 +241,8 @@
     justify-content: center;
     gap: 10px;
     margin: 30px 0;
+    background-size: cover; /* Ensures the background covers the whole page */
+	background-attachment: fixed; /* Optional: Keeps the background fixed when scrolling */
   }
 
   /* Base button style */
@@ -262,11 +270,7 @@
   }
  
  /* Main container styles */
-.content {
-    padding: 30px;
-    background: #f4f6f9;
-    min-height: 100vh;
-}
+
 
 /* Form container */
 .card {
@@ -312,6 +316,43 @@
   }
   
 </script>
+
+
+<?php include 'includes/message.php'; ?>
+        </div>
+    </div>
+    <div class="sidebar-overlay" data-reff=""></div>
+    <script src="assets/js/jquery-3.2.1.min.js"></script>
+	<script src="assets/js/popper.min.js"></script>
+    <script src="assets/js/bootstrap.min.js"></script>
+    <script src="assets/js/jquery.slimscroll.js"></script>
+    <script src="assets/js/select2.min.js"></script>
+	<script src="assets/js/moment.min.js"></script>
+	<script src="assets/js/bootstrap-datetimepicker.min.js"></script>
+    <script src="assets/js/app.js"></script>
+
+
+ <!-- Logout Confirmation Modal -->
+ <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="logoutModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="logoutModalLabel">Confirm Logout</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        Are you sure you want to log out?
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+        <a href="logout.php" class="btn btn-danger">Logout</a>
+      </div>
+    </div>
+  </div>
+</div>
+
 
 </body>
 </html>
