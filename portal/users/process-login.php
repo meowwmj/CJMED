@@ -1,65 +1,81 @@
-<?php
-
-error_reporting(E_ALL);
-ini_set('display_errors', 1);
+<?php 
+include 'includes/connect.php';
 session_start();
-include('includes/connect.php'); // This already sets $db as PDO
 
-$encryption_key = "your-secret-key"; // Same key used for encryption
-$iv = '1234567890123456'; // Must match the IV used for encryption
+// Encryption key (keep this secret and secure)
+$encryption_key = "your-secret-key";
+$iv = '1234567890123456'; // Must be 16 bytes
 
+// Function to sanitize input
 function clean($str) {
-    return trim($str); // No need for mysqli_real_escape_string when using prepared statements
+    return trim($str); // No need to use mysqli_real_escape_string with PDO
 }
 
-// Sanitize inputs
-$username = clean($_POST['username']);
-$password = $_POST['password'];
+// Sanitize POST values
+$login = clean($_POST['username']);
+$password = clean($_POST['password']);
 
-if (empty($username) || empty($password)) {
-    $_SESSION['login_error'] = "Username and password are required.";
-    header("Location: sign-in.php");
+// Input validations
+$errflag = false;
+$errmsg_arr = [];
+
+if (empty($login)) {
+    $errmsg_arr[] = 'Username missing';
+    $errflag = true;
+}
+
+if (empty($password)) {
+    $errmsg_arr[] = 'Password missing';
+    $errflag = true;
+}
+
+// Redirect if there are validation errors
+if ($errflag) {
+    echo "<script>alert('".implode('\\n', $errmsg_arr)."');</script>";
+    echo "<script>window.location.href='sign-in.php';</script>";
     exit();
 }
 
-try {
-    // Prepare secure query to fetch user data
-    $stmt = $db->prepare("SELECT * FROM users WHERE username = :username");
-    $stmt->bindParam(':username', $username);
-    $stmt->execute();
-    $user = $stmt->fetch(PDO::FETCH_ASSOC);
+// Prepare query to get user details
+$qry = "SELECT * FROM admin WHERE username = :username";
+$stmt = $db->prepare($qry);
+$stmt->bindParam(':username', $login);
+$stmt->execute();
+$row = $stmt->fetch(PDO::FETCH_ASSOC);
 
-    if ($user) {
-        // Decrypt the stored password
-        $decrypted_password = openssl_decrypt($user['password'], 'aes-256-cbc', $encryption_key, 0, $iv);
-        
-        if ($password === $decrypted_password) {
-            session_regenerate_id(true);
+// Verify user credentials
+if ($row) {
+    $decrypted_password = openssl_decrypt($row['password'], 'aes-256-cbc', $encryption_key, 0, $iv);
 
-            $_SESSION['SESS_MEMBER_ID'] = $user['id'];
-            $_SESSION['SESS_FIRST_NAME'] = $user['name'];
-            $_SESSION['SESS_EMAIL'] = $user['email'];
-            $_SESSION['SESS_PHONE_NUMBER'] = $user['phone'];
-            $_SESSION['SESS_STATE'] = $user['state'];
-            $_SESSION['SESS_ADDRESS'] = $user['address'];
-            $_SESSION['SESS_PRO_PIC'] = $user['photo'];
-            $_SESSION['SESS_USERNAME'] = $user['username'];
-            $_SESSION['SESS_USERS_ID'] = $user['user_id'];
+    if ($password === $decrypted_password) {
+        session_regenerate_id();
+        $_SESSION['SESS_MEMBER_ID'] = $row['id'];
+        $_SESSION['SESS_AGENCY_ID'] = $row['agency_id'];
+        $_SESSION['SESS_FIRST_NAME'] = $row['name'];
+        $_SESSION['SESS_EMAIL'] = $row['email'];
+        $_SESSION['SESS_PHONE_NUMBER'] = $row['phone'];
+        $_SESSION['SESS_STATE'] = $row['state'];
+        $_SESSION['SESS_ADDRESS'] = $row['address'];
+        $_SESSION['SESS_ACCESS_LEVEL'] = $row['access_level'];
+        $_SESSION['SESS_PRO_PIC'] = $row['photo'];
+        $_SESSION['SESS_USERNAME'] = $row['username'];
 
-            header("Location: index.php");
-            exit();
+        session_write_close();
+
+        if ($_SESSION['SESS_ACCESS_LEVEL'] == 1) {
+            header("Location: admin_dashboard.php");
         } else {
-            $_SESSION['login_error'] = "Invalid username or password.";
+            header("Location: index.php");
         }
+        exit();
     } else {
-        $_SESSION['login_error'] = "User not found.";
+        echo "<script>alert('Invalid password. Please try again.');</script>";
+        echo "<script>window.location.href='sign-in.php';</script>";
+        exit();
     }
-
-} catch (PDOException $e) {
-    $_SESSION['login_error'] = "Database error: " . $e->getMessage();
-}
-
-header("Location: sign-in.php");
-exit();
+} else {
+    echo "<script>alert('Username not found. Please try again.');</script>";
+    echo "<script>window.location.href='sign-in.php';</script>";
+    exit();
 }
 ?>
