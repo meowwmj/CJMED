@@ -69,7 +69,7 @@
                         <div class="card-header">
                             <div class="row">
                                 <div class="col-md-6">
-                                    <div class="form-group">
+                                    <div class="form-group"hidden>
                                         <label>Agency ID</label>
                                         <input class="form-control" type="text" name="agency_id" value="<?php echo rand(1000,9999); ?>" readonly="">
                                     </div>
