@@ -224,6 +224,12 @@ document.getElementById("photo").addEventListener("change", function (event) {
 </html>
 
 <style>
+body {
+    background: linear-gradient(135deg, rgb(231, 237, 237), #3f97da);
+    background-size: cover; /* Ensures the background covers the whole page */
+    background-attachment: fixed; /* Optional: Keeps the background fixed when scrolling */
+}     
+
 div.account-box {
     background: #fdfdfd;
     display: flex;
