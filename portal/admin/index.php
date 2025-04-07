@@ -130,6 +130,7 @@
 				<h4 class="card-title mb-0">USERS</h4>
 		    </div>
                         <div class="card-body p-0">
+				<div class="table-responsive">
                         <table class="table table-striped">
 		    <?php
 		        $result = $db->prepare("SELECT * FROM users ");
@@ -199,7 +200,7 @@
 
 <style>
     .table-responsive {
-        max-height: 270px; /* Adjust this height as needed */
+        max-height: 470px; /* Adjust this height as needed */
         overflow-y: auto;
     }
 </style>
