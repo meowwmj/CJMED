@@ -11,28 +11,29 @@
                     <div class="col-md-6 col-sm-6 col-lg-6 col-xl-3">
                     	<?php
 		                // include('../connect.php');
-						$result = $db->prepare("SELECT count(*) as total FROM emergency");
-						$result->execute();
-						for($i=0; $row = $result->fetch(); $i++){
-		                ?>
-                         <a href="view-emergency.php"><div class="dash-widget">
-							<span class="dash-widget-bg1"><i class="fa fa-stethoscope" aria-hidden="true"></i></span>
-							<div class="dash-widget-info text-right">
-								<h3><?php echo $row['total']; ?></h3>
-								<span class="widget-title1">Emergency <i class="fa fa-check" aria-hidden="true"></i></span>
-							</div>
+				$result = $db->prepare("SELECT count(*) as total FROM emergency");
+				$result->execute();
+				for($i=0; $row = $result->fetch(); $i++){
+		         ?>
+                         <a href="view-emergency.php">
+				<div class="dash-widget">
+					<span class="dash-widget-bg1"><i class="fa fa-stethoscope" aria-hidden="true"></i></span>
+						<div class="dash-widget-info text-right">
+							<h3><?php echo $row['total']; ?></h3>
+					<span class="widget-title1">Emergency <i class="fa fa-check" aria-hidden="true"></i></span>
+				</div>
                         </div>
-                        <?php } ?>
-                    </div>
+                	<?php } ?>
+                 </div>
                 
 
                     <div class="col-md-6 col-sm-6 col-lg-6 col-xl-3">
                     	<?php
 		                // include('../connect.php');
-						$result = $db->prepare("SELECT count(*) as total FROM agency");
-						$result->execute();
-						for($i=0; $row = $result->fetch(); $i++){
-		                ?>
+				$result = $db->prepare("SELECT count(*) as total FROM agency");
+				$result->execute();
+				for($i=0; $row = $result->fetch(); $i++){
+		        ?>
                         <a href="#"><div class="dash-widget">
                             <span class="dash-widget-bg3"><i class="fa fa-user-md" aria-hidden="true"></i></span>
                             <div class="dash-widget-info text-right">
@@ -62,7 +63,7 @@
                 </div>
 
    		<div class="row">
-                    <div class="col-12 col-md-6 col-lg-8 col-xl-8">
+		    <div class="col-12 col-md-12 col-lg-8 col-xl-8">
                         <div class="card">
                             <div class="card-header">
                                 <h4 class="card-title d-inline-block">Agency</h4>
