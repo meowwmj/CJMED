@@ -75,7 +75,7 @@
                     </div>
                 </div>
 				
-             <div class="row">
+          <div class="row">
 					<div class="col-12 col-md-12 col-lg-8 col-xl-8">
 						<div class="card">
 							<div class="card-header">
@@ -99,18 +99,19 @@
 			                for($i=1; $row = $result->fetch(); $i++){ 
 			               
 			               ?> 
-					   <tr>
-						<td style="min-width: 200px;">                                                    
-							<h2><a href="#"><?php echo $row['agency_name']; ?> <span><?php echo $row['state']; ?></span></a></h2>
-								</td>                 
-								<td>
-									<h5 class="time-title p-0"><?php echo $row['email']; ?></h5>
-									<p><?php echo $row['phone_number']; ?></p>
-									</td>
-										<td>
-											<h5 class="time-title p-0"><?php echo $row['personincharge']; ?></h5>
+											<tr>
+													<td style="min-width: 200px;">
+                                                    <span class="status online"></span></a>
+														<h2><a href="#"><?php echo $row['agency_name']; ?> <span><?php echo $row['state']; ?></span></a></h2>
+													</td>                 
+													<td>
+														<h5 class="time-title p-0"><?php echo $row['email']; ?></h5>
+														<p><?php echo $row['phone_number']; ?></p>
+													</td>
+													<td>
+														<h5 class="time-title p-0"><?php echo $row['personincharge']; ?></h5>
 														<!-- <p>7.00 PM</p> -->
-												</td>
+													</td>
 													
 												</tr>
 											<?php } ?>	
@@ -120,6 +121,7 @@
 							</div>
 						</div>
 					</div>
+                    
                     
                     
                     <div class="col-12 col-md-12 col-lg-4 col-xl-4">
