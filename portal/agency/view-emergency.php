@@ -42,6 +42,7 @@
                 </div>
             </div>
         </div>
+
   <!-- Page Wrapper -->
     <div class="page-wrapper">
         <div class="content">
