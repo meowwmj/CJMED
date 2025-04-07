@@ -36,7 +36,7 @@
             </div>
         </div>
         
-         <!-- Page Wrapper -->
+   <!-- Page Wrapper -->
     <div class="page-wrapper">
         <div class="content">
             <div class="row">
@@ -61,7 +61,7 @@
                 <div class="col-md-3">
                     <div class="form-group">
                         <label>&nbsp;</label>
-                        <button class="btn btn-primary" id="search-btn"><i class="fa fa-search"></i> Search</button>
+                        <!-- Removed the search button as it's no longer needed -->
                         <button class="btn btn-primary" id="print-btn"><i class="fa fa-print"></i> Print</button>
                     </div>
                 </div>
@@ -121,8 +121,11 @@
                                                     ?>
                                                 </td>
                                                 <td class="text-center"><?php echo date('m/d/Y'); ?></td>
+                                                <td class="text-center"> 
+                                                    <a class="btn btn-primary" href="make_action.php?id=<?php echo $row['id'];?>"><i class="fa fa-eye"></i></a> 
+                                                </td>
                                                 <td class="text-center">
-                                                    <a class="btn btn-primary" href="make_action.php?id=<?php echo $row['id']; ?>"><i class="fa fa-eye"></i></a>
+                                                    <a class="btn btn-danger" href="delete_emergency.php?id=<?php echo $row['id']; ?>"><i class="fa fa-trash-o"></i></a>
                                                 </td>
                                             </tr>
                                         <?php } ?>
@@ -147,11 +150,12 @@
     <script src="assets/js/moment.min.js"></script>
     <script src="assets/js/bootstrap-datetimepicker.min.js"></script>
     <script src="assets/js/app.js"></script>
+
     <script>
         $(document).ready(function () {
-            // When the search button is clicked
-            $('#search-btn').click(function () {
-                var status = $('#status').val();  // Get the selected status
+            // Trigger search automatically when the status dropdown value changes
+            $('#status').change(function () {
+                var status = $(this).val();  // Get the selected status
 
                 // Send an AJAX request to the server with the selected status
                 $.ajax({
@@ -169,6 +173,5 @@
             });
         });
     </script>
-
 </body>
 </html>
