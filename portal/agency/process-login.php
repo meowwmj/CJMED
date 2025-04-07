@@ -54,6 +54,9 @@ if ($stmt === false) {
     echo "Debug: Query prepared successfully.<br>";
 }
 
+// Output the query before execution
+echo "Debug: SQL Query: " . $qry . "<br>";
+
 $stmt->bind_param("s", $login); // 's' means string
 $stmt->execute();
 
@@ -72,6 +75,7 @@ echo "Debug: Number of rows found: " . $result->num_rows . "<br>";
 if ($result->num_rows > 0) {
     echo "Debug: User found.<br>";
     $row = $result->fetch_assoc();
+    var_dump($row); // Debug: Output the fetched row
 
     // Check if the password matches directly (no hashing involved)
     if ($password == $row['password']) {  // Direct password comparison
@@ -107,3 +111,4 @@ if ($result->num_rows > 0) {
     exit();
 }
 ?>
+
