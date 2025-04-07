@@ -48,9 +48,7 @@ try {
             $_SESSION['SESS_FIRST_NAME'] = $user['name'];
             $_SESSION['SESS_EMAIL'] = $user['email'];
             $_SESSION['SESS_PHONE_NUMBER'] = $user['phone'];
-            $_SESSION['SESS_STATE'] = $user['state'];
-            $_SESSION['SESS_ADDRESS'] = $user['address'];
-            $_SESSION['SESS_ACCESS_LEVEL'] = $user['access_level'];
+            $_SESSION['SESS_ADDRESS'] = $user['address'];           
             $_SESSION['SESS_PRO_PIC'] = $user['photo'];
             $_SESSION['SESS_USERNAME'] = $user['username'];
             
