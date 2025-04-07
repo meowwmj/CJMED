@@ -46,8 +46,9 @@ unset($_SESSION['login_error']); // Clear error after displaying
                         <div class="form-group">
                             <input type="text" class="form-control" name="username" id="username" placeholder="Username" required>
                         </div>
+                        
                         <div class="form-group">
-                            <input type="password" class="form-control" name="password" id="password" placeholder="Password" required>
+                            <input type="password" class="form-control" name="password" id="password" placeholder="Password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Password must contain at least one number, one uppercase and lowercase letter, and at least 8 or more characters" required>
                         </div>
 
                         <div class="form-group d-flex justify-content-between align-items-center">
