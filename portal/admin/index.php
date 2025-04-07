@@ -10,16 +10,16 @@
                     <div class="col-md-6 col-sm-6 col-lg-6 col-xl-3">
                     	<?php
 		                // include('../connect.php');
-						$result = $db->prepare("SELECT count(*) as total FROM emergency");
-						$result->execute();
-						for($i=0; $row = $result->fetch(); $i++){
-		                ?>
+				$result = $db->prepare("SELECT count(*) as total FROM emergency");
+				$result->execute();
+				for($i=0; $row = $result->fetch(); $i++){
+		        ?>
                          <a href="view-emergency.php"><div class="dash-widget">
-							<span class="dash-widget-bg1"><i class="fa fa-stethoscope" aria-hidden="true"></i></span>
-							<div class="dash-widget-info text-right">
-								<h3><?php echo $row['total']; ?></h3>
-								<span class="widget-title1">Emergency <i class="fa fa-check" aria-hidden="true"></i></span>
-							</div>
+				<span class="dash-widget-bg1"><i class="fa fa-stethoscope" aria-hidden="true"></i></span>
+					<div class="dash-widget-info text-right">
+						<h3><?php echo $row['total']; ?></h3>
+				<span class="widget-title1">Emergency <i class="fa fa-check" aria-hidden="true"></i></span>
+				</div>
                         </div>
                         <?php } ?>
                     </div>
@@ -76,7 +76,7 @@
                 </div>
 				
                 <div class="row">
-                    <div class="col-12 col-md-6 col-lg-8 col-xl-8">
+		    <div class="col-12 col-md-12 col-lg-8 col-xl-8">
                         <div class="card">
                             <div class="card-header">
                                 <h4 class="card-title d-inline-block">Agency</h4>
@@ -120,19 +120,18 @@
                         </div>
                     </div>
                     
-                    <div class="col-12 col-md-6 col-lg-4 col-xl-4">
+                    <div class="col-12 col-md-12 col-lg-4 col-xl-4">
                         <div class="card member-panel">
-							<div class="card-header bg-white">
-								<h4 class="card-title mb-0">USERS</h4>
-							</div>
-                            <div class="card-body p-0">
-                                <table class="table table-striped">
-			                 	<?php
-			                $result = $db->prepare("SELECT * FROM users ");
-			                $result->execute();
-			                for($i=1; $row = $result->fetch(); $i++){ 
-			               
-			               ?> 
+			    <div class="card-header bg-white">
+				<h4 class="card-title mb-0">USERS</h4>
+		    </div>
+                        <div class="card-body p-0">
+                        <table class="table table-striped">
+		    <?php
+		        $result = $db->prepare("SELECT * FROM users ");
+			 $result->execute();
+			for($i=1; $row = $result->fetch(); $i++){ 
+		     ?> 
                                 <ul class="contact-list">
                                     <li>
                                         <div class="contact-cont">
