@@ -192,3 +192,10 @@
 
 </body>
 </html>
+
+<style>
+    .table-responsive {
+        max-height: 270px; /* Adjust this height as needed */
+        overflow-y: auto;
+    }
+</style>
