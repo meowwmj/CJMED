@@ -3,7 +3,7 @@
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
 session_start();
-include('includes/connect.php');
+include('includes/connect.php'); // This already sets $db as PDO
 
 $encryption_key = "your-secret-key"; // Same key used for encryption
 $iv = '1234567890123456'; // Must match the IV used for encryption
@@ -13,6 +13,12 @@ function clean($str) {
 }
 
 // Sanitize inputs
+if (!isset($_POST['username']) || !isset($_POST['password'])) {
+    $_SESSION['login_error'] = "Username and password are required.";
+    header("Location: sign-in.php");
+    exit();
+}
+
 $username = clean($_POST['username']);
 $password = $_POST['password'];
 
@@ -22,21 +28,19 @@ if (empty($username) || empty($password)) {
     exit();
 }
 
-// Prepare secure query to fetch user data
-$sql = "SELECT * FROM admin WHERE username = ?";
-$stmt = $conn->prepare($sql);
-$stmt->bind_param("s", $username);
-$stmt->execute();
-$result = $stmt->get_result();
-$user = $result->fetch_assoc();
+try {
+    // Prepare secure query to fetch user data
+    $stmt = $db->prepare("SELECT * FROM admin WHERE username = :username");
+    $stmt->bindParam(':username', $username);
+    $stmt->execute();
+    $user = $stmt->fetch(PDO::FETCH_ASSOC);
 
-if ($user) {
-    // Decrypt the stored password
-    $decrypted_password = openssl_decrypt($user['password'], 'aes-256-cbc', $encryption_key, 0, $iv);
-    
-    if ($password === $decrypted_password) {
-        // Regenerate session ID to prevent session fixation
-        session_regenerate_id(true);
+    if ($user) {
+        // Decrypt the stored password
+        $decrypted_password = openssl_decrypt($user['password'], 'aes-256-cbc', $encryption_key, 0, $iv);
+        
+        if ($password === $decrypted_password) {
+            session_regenerate_id(true);
 
         $_SESSION['SESS_MEMBER_ID'] = $row['id'];
         $_SESSION['SESS_AGENCY_ID'] = $row['agency_id'];
@@ -50,19 +54,18 @@ if ($user) {
         $_SESSION['SESS_USERNAME'] = $row['username'];
         
         header("Location: index.php");
-        exit();
+            exit();
+        } else {
+            $_SESSION['login_error'] = "Invalid username or password.";
+        }
     } else {
-        $_SESSION['login_error'] = "Invalid username or password.";
-        header("Location: sign-in.php");
-        exit();
+        $_SESSION['login_error'] = "User not found.";
     }
-} else {
-    $_SESSION['login_error'] = "User not found.";
-    header("Location: sign-in.php");
-    exit();
+
+} catch (PDOException $e) {
+    $_SESSION['login_error'] = "Database error: " . $e->getMessage();
 }
 
-$stmt->close();
-$conn->close();
+header("Location: sign-in.php");
+exit();
 
-?>
