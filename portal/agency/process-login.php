@@ -4,7 +4,7 @@ session_start();
 
 // Function to sanitize input
 function clean($str) {
-    return trim($str);
+    return trim($str); // No need to use mysqli_real_escape_string with MySQLi here
 }
 
 // Sanitize POST values
@@ -35,21 +35,43 @@ if ($errflag) {
 // Debugging Output
 echo "Debug: After input validation.<br>";
 
+// Database connection check
+if ($db->connect_error) {
+    die("Connection failed: " . $db->connect_error);
+} else {
+    echo "Debug: Database connection successful.<br>";
+}
+
 // Prepare MySQLi query to get user details
 $qry = "SELECT * FROM agency WHERE username = ?";
 $stmt = $db->prepare($qry);
+
+// Check if the query is prepared successfully
+if ($stmt === false) {
+    echo "Debug: Query preparation failed.<br>";
+    die("Query preparation failed: " . $db->error);
+} else {
+    echo "Debug: Query prepared successfully.<br>";
+}
+
 $stmt->bind_param("s", $login); // 's' means string
 $stmt->execute();
+
+// Check if execution was successful
+if ($stmt->error) {
+    echo "Debug: Query execution failed: " . $stmt->error . "<br>";
+} else {
+    echo "Debug: Query executed successfully.<br>";
+}
+
 $result = $stmt->get_result();
 
-// Debugging Output
-echo "Debug: Query executed.<br>";
+// Debugging after executing the query
+echo "Debug: Number of rows found: " . $result->num_rows . "<br>";
 
-// Verify user credentials
 if ($result->num_rows > 0) {
-    // Fetch user data
-    $row = $result->fetch_assoc();
     echo "Debug: User found.<br>";
+    $row = $result->fetch_assoc();
 
     // Check if the password matches directly (no hashing involved)
     if ($password == $row['password']) {  // Direct password comparison
@@ -71,12 +93,14 @@ if ($result->num_rows > 0) {
         header("location: index.php");
         exit();
     } else {
+        echo "Debug: Incorrect password.<br>";
         echo '<script language="javascript">';
         echo "alert('Incorrect password');window.location.href='sign-in.php';";
         echo '</script>';
         exit();
     }
 } else {
+    echo "Debug: No user found.<br>";
     echo '<script language="javascript">';
     echo "alert('Username not found');window.location.href='sign-in.php';";
     echo '</script>';
