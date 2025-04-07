@@ -6,7 +6,7 @@
         <div class="sidebar" id="sidebar">
             <div class="sidebar-inner slimscroll">
                 <div id="sidebar-menu" class="sidebar-menu">
-                <ul>
+                     <ul>
                         <li>
                             <a href="index.php"><i class="fa fa-dashboard"></i> <span>Dashboard</span></a>
                         </li>
@@ -45,11 +45,14 @@
 
 
 
-            <div class="page-wrapper">
+<div class="page-wrapper">
             <div class="content">
                 <div class="row">
-                    <div class="col-sm-7 col-6">
+                    <div class="col-sm-4 col-3">
                         <h4 class="page-title">My History</h4>
+                    </div>
+                    <div class="col-sm-8 col-9 text-right m-b-20">
+                        <a href="add-agency.php" class="btn btn-primary btn-rounded float-right"></i> View Calendar</a>
                     </div>
 
                    
