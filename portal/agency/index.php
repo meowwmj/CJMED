@@ -16,11 +16,11 @@
                             for($i=0; $row = $result->fetch(); $i++){
 		                ?>
                          <a href="view-emergency.php"><div class="dash-widget">
-				<span class="dash-widget-bg1"><i class="fa fa-stethoscope" aria-hidden="true"></i></span>
-					<div class="dash-widget-info text-right">
-						<h3><?php echo $row['total']; ?></h3>
-						<span class="widget-title1">Emergency <i class="fa fa-check" aria-hidden="true"></i></span>
-					</div>
+							<span class="dash-widget-bg1"><i class="fa fa-stethoscope" aria-hidden="true"></i></span>
+							<div class="dash-widget-info text-right">
+								<h3><?php echo $row['total']; ?></h3>
+								<span class="widget-title1">Emergency <i class="fa fa-check" aria-hidden="true"></i></span>
+							</div>
                         </div>
                         <?php } ?>
                         </div>
@@ -29,10 +29,10 @@
                     <div class="col-md-6 col-sm-6 col-lg-6 col-xl-3">
                     	<?php
 		                // include('../connect.php');
-				$result = $db->prepare("SELECT count(*) as total FROM agency");
-				$result->execute();
-				for($i=0; $row = $result->fetch(); $i++){
-		        ?>
+						$result = $db->prepare("SELECT count(*) as total FROM agency");
+						$result->execute();
+						for($i=0; $row = $result->fetch(); $i++){
+		                ?>
                         <a href="#"><div class="dash-widget">
                             <span class="dash-widget-bg3"><i class="fa fa-user-md" aria-hidden="true"></i></span>
                             <div class="dash-widget-info text-right">
@@ -46,10 +46,10 @@
                     <div class="col-md-12 col-sm-12 col-lg-12 col-xl-3">	
                     	<?php
 		                // include('../connect.php');
-				$result = $db->prepare("SELECT count(*) as total FROM emergency WHERE status = 'Pending'");
-				$result->execute();
-				for($i=0; $row = $result->fetch(); $i++){
-		        ?>
+						$result = $db->prepare("SELECT count(*) as total FROM emergency WHERE status = 'Pending'");
+						$result->execute();
+						for($i=0; $row = $result->fetch(); $i++){
+		                ?>
                         <a href="view-emergency.php"><div class="dash-widget">
                             <span class="dash-widget-bg4"><i class="fa fa-heartbeat" aria-hidden="true"></i></span>
                             <div class="dash-widget-info text-right">
@@ -86,20 +86,20 @@
 			               
 			               ?> 
 											<tr>
-												<td style="min-width: 200px;">
-													<span class="status online"></span></a>
-													<h2><a href="#"><a href="agency_profile.php?id=<?php echo $row['id'];?>"><?php echo $row['agency_name']; ?>  <span><?php echo $row['address']; ?></span></a></h2>
-												</td>                 
-												<td>
-													<h5 class="time-title p-0"><?php echo $row['email']; ?></h5>
-													<p><?php echo $row['phone_number']; ?></p>
-												</td>
-												<td>
-													<h5 class="time-title p-0"><?php echo $row['personincharge']; ?></h5>
-													<!-- <p>7.00 PM</p> -->
-												</td>
-												
-											</tr>
+													<td style="min-width: 200px;">
+                                                    <span class="status online"></span></a>
+														<h2><a href="#"><?php echo $row['agency_name']; ?> <span><?php echo $row['state']; ?></span></a></h2>
+													</td>                 
+													<td>
+														<h5 class="time-title p-0"><?php echo $row['email']; ?></h5>
+														<p><?php echo $row['phone_number']; ?></p>
+													</td>
+													<td>
+														<h5 class="time-title p-0"><?php echo $row['personincharge']; ?></h5>
+														<!-- <p>7.00 PM</p> -->
+													</td>
+													
+												</tr>
 											<?php } ?>	
 										</tbody>
 									</table>
