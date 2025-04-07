@@ -2,59 +2,55 @@
 session_start();
 include('includes/connect.php');
 
-$a = $_POST['emergency_id'];
-$b = $_POST['agency_id'];
-$c = $_POST['case_severity'];
-$d = $_POST['emergency_category'];
-$e = $_POST['phone_number'];
-$f = $_POST['address'];
-$g = $_POST['name'];
-$h = $_POST['state'];
-$i = $_POST['status'];
-$j = $_POST['victim_id'];
-$k = $_POST['dates'];
-$l = $_POST['email'];
-$m = $_POST['description']; 
+// Retrieve and sanitize inputs
+$emergency_id = $_POST['emergency_id'] ?? null;
+$user_id = $_POST['user_id'] ?? null; 
+$patient_name = $_POST['patient_name'] ?? null;
+$phone = $_POST['phone'] ?? null;
+$age = $_POST['age'] ?? null;
+$emergency_category = $_POST['emergency_category'] ?? null;
+$latitude = $_POST['latitude'] ?? null;
+$longitude = $_POST['longitude'] ?? null;
+$address = $_POST['address'] ?? null;
+$status = $_POST['status'] ?? 'Pending';
+$dates = $_POST['dates'] ?? date('Y-m-d');
+$injury = $_POST['injury'] ?? null;
+$description = $_POST['description'] ?? null;
+$agency_id = $_POST['agency_id'] ?? null;
 
-$file_name = '';
-$file_name_new = '';
-
-if (!empty($_FILES['photo']['name'])) {
-    $file_name = strtolower($_FILES['photo']['name']);
-    $file_ext = substr($file_name, strrpos($file_name, '.'));
-    $prefix = 'emergency' . md5(time() * rand(1, 9999));
-    $file_name_new = $prefix . $file_ext;
-    $path = '../../uploads/' . $file_name_new;
-
-    if (@move_uploaded_file($_FILES['photo']['tmp_name'], $path)) {
-        // File uploaded successfully
-    } else {
-        // Handle file upload error
-        header("location:report-emergency.php?failed=true");
-        exit;
-    }
+// Validate inputs
+$missingFields = [];
+foreach (['emergency_id' => $emergency_id, 'patient_name' => $patient_name, 'phone' => $phone, 'age' => $age, 'emergency_category' => $emergency_category, 'latitude' => $latitude, 'longitude' => $longitude, 'address' => $address, 'injury' => $injury, 'description' => $description, 'agency_id' => $agency_id, 'dates' => $dates, 'user_id' => $user_id] as $field => $value) {
+    if (empty($value)) $missingFields[] = $field;
+}
+if (!empty($missingFields)) {
+    die('Error: The following fields are missing: ' . implode(', ', $missingFields));
 }
 
-$sql = "INSERT INTO emergency (emergency_id,agency_id,case_severity,emergency_category,phone_number,address,name,state,status,victim_id,dates,email,description,photo) VALUES (:a,:b,:c,:d,:e,:f,:g,:h,:i,:j,:k,:l,:m,:n)";
+// Insert into the database
+$sql = "INSERT INTO emergency (emergency_id, patient_name, phone, age, emergency_category, latitude, longitude, address, status, dates, injury, description, agency_id, user_id) 
+        VALUES (:emergency_id, :patient_name, :phone, :age, :emergency_category, :latitude, :longitude, :address, :status, :dates, :injury, :description, :agency_id, :user_id)";
 $q = $db->prepare($sql);
-$q->bindParam(':a', $a);
-$q->bindParam(':b', $b);
-$q->bindParam(':c', $c);
-$q->bindParam(':d', $d);
-$q->bindParam(':e', $e);
-$q->bindParam(':f', $f);
-$q->bindParam(':g', $g);
-$q->bindParam(':h', $h);
-$q->bindParam(':i', $i);
-$q->bindParam(':j', $j);
-$q->bindParam(':k', $k);
-$q->bindParam(':l', $l);
-$q->bindParam(':m', $m);
-$q->bindParam(':n', $file_name_new);
+$q->bindParam(':emergency_id', $emergency_id);
+$q->bindParam(':user_id', $user_id);
+$q->bindParam(':patient_name', $patient_name);
+$q->bindParam(':phone', $phone);
+$q->bindParam(':age', $age);
+$q->bindParam(':emergency_category', $emergency_category);
+$q->bindParam(':latitude', $latitude);
+$q->bindParam(':longitude', $longitude);
+$q->bindParam(':address', $address);
+$q->bindParam(':status', $status);
+$q->bindParam(':dates', $dates);
+$q->bindParam(':injury', $injury);
+$q->bindParam(':description', $description);
+$q->bindParam(':agency_id', $agency_id);
 
 if ($q->execute()) {
-    header("location:report-emergency.php?success=true");
+    header("Location: report-emergency.php?success=true");
+    exit;
 } else {
-    header("location:report-emergency.php?failed=true");
+    $errorInfo = $q->errorInfo();
+    die('Error: Failed to save data. ' . $errorInfo[2]);
 }
 ?>

@@ -39,34 +39,18 @@
                 </div>
             </div>
         </div>
-          <!-- Page Wrapper -->
-          <div class="page-wrapper">
+
+             <!-- Page Wrapper -->
+             <div class="page-wrapper">
             <div class="content">
                 <div class="row">
                     <div class="col-sm-4 col-3">
                         <h4 class="page-title">Emergency Incident Reports</h4> <!-- Updated Title -->
-                    </div> 
-                    <div class="col-sm-8 col-9 text-right m-b-20">
-                        <a href="emergency_type.php" class="btn btn-primary btn-rounded float-right"><i class="fa fa-plus"></i> Add Emergency Type</a>
                     </div>
                 </div> 
 
                 <!-- Filters Section -->
                 <div class="row">
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <label>Agency</label>
-                            <select class="form-control" name="agency" id="agency">
-                                <option value="">All</option>
-                                <?php
-                                $result = $db->query("SELECT * FROM agency");
-                                while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
-                                    echo '<option value="' . $row['agency_name'] . '">' . $row['agency_name'] . '</option>';
-                                }
-                                ?>
-                            </select>
-                        </div>
-                    </div>
                     <div class="col-md-6">
                         <div class="form-group">
                             <label>Status</label>
@@ -96,26 +80,28 @@
                                 <table class="table table-bordered table-striped custom-table datatable mb-0" id="myTable">
                                     <thead>
                                         <tr>
-                                            <th class="text-center">No.</th>
-                                            <th class="text-center">Case ID</th>
-                                            <th class="text-center">Agency</th>
-                                            <th class="text-center">Issue</th>
-                                            <th class="text-center">Address</th>
-                                            <th class="text-center">Status</th>
-                                            <th class="text-center">Date</th>
-                                            <th class="text-center">Action</th>
+                                            <th class="text-center"><strong>No.</th>
+                                            <th class="text-center"><strong>Case ID</th>
+                                            <th class="text-center"><strong>Name</th>
+                                            <th class="text-center"><strong>Agency Name</th>
+                                            <th class="text-center"><strong>Issue</th>
+                                            <th class="text-center"><strong>Address</th>
+                                            <th class="text-center"><strong>Status</th>
+                                            <th class="text-center"><strong>Date</th>
+                                            <th class="text-center"><strong>Action</th>
                                         </tr>
                                     </thead>
                                     
                                     <tbody>
                                         <?php
-                                        $result = $db->prepare("SELECT e.*, a.agency_name FROM emergency e INNER JOIN agency a ON e.agency_id = a.agency_id");
-                                        $result->execute();
-                                        for($i=1; $row = $result->fetch(); $i++){ 
+                                            $result = $db->prepare("SELECT e.*, a.agency_name FROM emergency e INNER JOIN agency a ON e.agency_id = a.agency_id");
+                                            $result->execute();
+                                            for($i=1; $row = $result->fetch(); $i++){ 
                                         ?>
                                             <tr>
                                                 <td class="text-center"><?php echo $i; ?></td>
                                                 <td class="text-center"><?php echo $row['emergency_id']; ?></td>
+                                                <td class="text-center"><?php echo $row['patient_name']; ?></td>
                                                 <td class="text-center"><?php echo $row['agency_name']; ?></td>
                                                 <td class="text-center"><?php echo $row['emergency_category']; ?></td>
                                                 <td class="text-center"><?php echo $row['address']; ?></td>
@@ -132,9 +118,6 @@
                                                 <td class="text-center"> 
                                                     <a class="btn btn-primary" href="make_action.php?id=<?php echo $row['id'];?>"><i class="fa fa-eye"></i></a> 
                                                 </td>
-                                                <td class="text-center">
-                                                    <a class="btn btn-danger" href="delete_emergency.php?id=<?php echo $row['id']; ?>"><i class="fa fa-trash-o"></i></a>
-                                                </td>
                                             </tr>
                                         <?php } ?>
                                     </tbody>
@@ -148,27 +131,26 @@
     </div>
 
 
-<!-- Logout Confirmation Modal -->
-<div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="logoutModalLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="logoutModalLabel">Confirm Logout</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        Are you sure you want to log out?
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-        <a href="logout.php" class="btn btn-danger">Logout</a>
-      </div>
-    </div>
-  </div>
-</div>
-
+                        <!-- Logout Confirmation Modal -->
+                        <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="logoutModalLabel" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="logoutModalLabel">Confirm Logout</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                Are you sure you want to log out?
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                                <a href="logout.php" class="btn btn-danger">Logout</a>
+                            </div>
+                            </div>
+                        </div>
+                        </div>
 
     <!-- Include JS Files -->
     <script src="assets/js/jquery-3.2.1.min.js"></script>
@@ -214,4 +196,3 @@
 
 </body>
 </html>
-

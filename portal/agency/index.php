@@ -4,6 +4,7 @@
     <div class="main-wrapper">
         <?php include 'includes/navigation.php'; ?>
         <?php include 'includes/sidebar.php'; ?>
+        
         <div class="page-wrapper">
             <div class="content">
                 <div class="row">

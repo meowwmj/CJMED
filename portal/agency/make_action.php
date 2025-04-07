@@ -71,15 +71,14 @@
                             <h5>Emergency Information</h5>
                             <ul class="list-group list-group-flush">
                                 <li class="list-group-item"><strong>Emergency ID:</strong> <?php echo $row['emergency_id']; ?></li>
-                                <li class="list-group-item"><strong>Name:</strong> <?php echo $_SESSION['SESS_FIRST_NAME']; ?></li>
+                                <li class="list-group-item"><strong>Name:</strong> <?php echo $row['patient_name']; ?></li>
                                 <li class="list-group-item"><strong>Emergency Category:</strong> <?php echo $row['emergency_category']; ?></li>
                                 <li class="list-group-item"><strong>Address:</strong> <span id="emergency-address"><?php echo $row['address']; ?></span></li>
-                                <li class="list-group-item"><strong>Phone Number:</strong> <?php echo $_SESSION['SESS_PHONE_NUMBER']; ?></li>
+                                <li class="list-group-item"><strong>Phone Number:</strong> <?php echo $row['phone']; ?></li>
                                 <li class="list-group-item"><strong>Email:</strong> <?php echo $_SESSION['SESS_EMAIL']; ?></li>
                                 <li class="list-group-item"><strong>Age:</strong> <?php echo $row['age']; ?></li>
                                 <li class="list-group-item"><strong>Status:</strong>
                                     <select class="select form-control" name="status">
-                                        <option value="<?php echo $row['status']; ?>"><?php echo $row['status']; ?></option>
                                         <option value="Pending">Ongoing</option>
                                         <option value="Resolved">Resolved</option>
                                     </select>

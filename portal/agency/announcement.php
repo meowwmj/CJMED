@@ -238,12 +238,15 @@
   </div>
 </div>
 
-<section class="banners" style="margin-top:30px;">
-    <div class="page-wrapper">
-                <div class="row justify-content-center">
-            <h1 class="headline">Useful Links</h1>
-        </div>
 
+<div class="page-wrapper">
+            <div class="content">
+              <div class="card">   
+                <div class="card-header">
+                    <h1 class="card-title d-inline-block">Useful Links</h1></a>
+                </div>
+                    
+          <section class="banners" style="margin-top:10px;">    
             <div class="row justify-content-center">
                 <div class="col-12 col-md-3 mb-3">
                     <a href="https://bagong.pagasa.dost.gov.ph/index.php" target="_blank">
@@ -276,5 +279,8 @@
             </div>
         </div>
     </section>
+    </div>
+ </div>
+</div>
 </body>
 </html>
