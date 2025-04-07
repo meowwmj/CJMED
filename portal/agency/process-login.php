@@ -40,42 +40,35 @@ $stmt->execute();
 $row = $stmt->fetch(PDO::FETCH_ASSOC);
 
 // Verify user credentials
-//Check whether the query was successful or not
-	if($result) {
-		if(mysqli_num_rows($result) > 0) {
-			//Login Successful
-			session_regenerate_id();
-			$member = mysqli_fetch_assoc($result);
-			$_SESSION['SESS_MEMBER_ID'] = $member['id'];
-			$_SESSION['SESS_FIRST_NAME'] = $member['agency_name'];
-			$_SESSION['SESS_EMAIL'] = $member['email'];
-			$_SESSION['SESS_PHONE_NUMBER'] = $member['phone_number'];
-			$_SESSION['SESS_STATE'] = $member['state'];
-			$_SESSION['SESS_ADDRESS'] = $member['address'];			
-			$_SESSION['SESS_PERSONINCHARGE'] = $member['personincharge'];
-			$_SESSION['SESS_PRO_PIC'] = $member['photo'];
-			$_SESSION['SESS_USERNAME'] = $member['username'];
-			$_SESSION['SESS_AGENCY_ID'] = $member['agency_id'];
+if ($row) {
+    // Check password (ensure password is hashed in the database)
+    if (password_verify($password, $row['password'])) { // Assuming the password in DB is hashed
+        // Login Successful
+        session_regenerate_id();
+        $_SESSION['SESS_MEMBER_ID'] = $row['id'];
+        $_SESSION['SESS_FIRST_NAME'] = $row['agency_name'];
+        $_SESSION['SESS_EMAIL'] = $row['email'];
+        $_SESSION['SESS_PHONE_NUMBER'] = $row['phone_number'];
+        $_SESSION['SESS_STATE'] = $row['state'];
+        $_SESSION['SESS_ADDRESS'] = $row['address'];            
+        $_SESSION['SESS_PERSONINCHARGE'] = $row['personincharge'];
+        $_SESSION['SESS_PRO_PIC'] = $row['photo'];
+        $_SESSION['SESS_USERNAME'] = $row['username'];
+        $_SESSION['SESS_AGENCY_ID'] = $row['agency_id'];
 
-
-
-			
-			session_write_close();
-			header("location: index.php");
-			exit();
-		}else {
-			
-  echo '<script language = "javascript">';
-  // echo "window.location.href='login.php'"; 
-  echo "alert('Something went wrong, Enter correct details');window.location.href='sign-in.php'";
-   echo '</script>';
-    exit;
-   // echo "<script language = 'javascript'> alert('Wrong Details');'</script>";
-                       
-                       
-                    }
-	}else {
-		die("Query failed");
-	}
+        session_write_close();
+        header("location: index.php");
+        exit();
+    } else {
+        echo '<script language="javascript">';
+        echo "alert('Incorrect password');window.location.href='sign-in.php';";
+        echo '</script>';
+        exit();
+    }
+} else {
+    echo '<script language="javascript">';
+    echo "alert('Username not found');window.location.href='sign-in.php';";
+    echo '</script>';
+    exit();
+}
 ?>
-
