@@ -4,10 +4,6 @@
 include 'includes/connect.php';
 session_start();
 
-// Encryption key (keep this secret and secure)
-$encryption_key = "your-secret-key";
-$iv = '1234567890123456'; // Must be 16 bytes
-
 function clean($str) {
 	global $conn;
 		$str = @trim($str);
