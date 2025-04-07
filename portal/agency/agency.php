@@ -10,10 +10,6 @@
                     <div class="col-sm-4 col-3">
                         <h4 class="page-title">All Agency</h4>
                     </div>
-                    <div class="col-sm-8 col-9 text-right m-b-20">
-                        <a href="add-agency.php" class="btn btn-primary btn-rounded float-right"><i class="fa fa-plus"></i> Add Agency</a>
-                    </div>
-
                 </div>
                     
 				<div class="row doctor-grid ">
@@ -62,14 +58,7 @@
                         <div class="agency">
                             <div class="doctor-img">
                                 <a class="avatar" href="#"><img alt="" src="../../uploads/<?php echo $row['photo'];?>"></a>
-                            </div>
-                            <div class="dropdown profile-action">
-                                <a href="#" class="action-icon dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="fa fa-ellipsis-v"></i></a>
-                                 <div class="dropdown-menu dropdown-menu-right">
-                                    
-                                    <a class="dropdown-item" href="deleteagency.php?id=<?=$row['id'] ?>"><i class="fa fa-trash-o m-r-5"></i> Delete</a>
-                                </div>
-                            </div>                                                                                                                                                                                                                                           
+                            </div>                                                                                                                                                                                                                                      
                             <h4 class="doctor-name text-ellipsis"><a href="agency_profile.php?id=<?php echo $row['id'];?>"><?php echo $row['agency_name'];?></a></h4>
                             <div class="doc-prof"><?php echo $row['email'];?>, <?php echo $row['phone_number']; ?></div>
                             <div class="user-country">
