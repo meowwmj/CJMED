@@ -1,4 +1,3 @@
-Norman Paraiso
 <?php
 
 $db_host     = "srv1637.hstgr.io";
