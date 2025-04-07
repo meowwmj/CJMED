@@ -60,37 +60,28 @@ echo "Debug: SQL Query: " . $qry . "<br>";
 $stmt->bind_param("s", $login); // 's' means string
 $stmt->execute();
 
-// Check if execution was successful
-if ($stmt->error) {
-    echo "Debug: Query execution failed: " . $stmt->error . "<br>";
-} else {
-    echo "Debug: Query executed successfully.<br>";
-}
+// Bind result variables
+$stmt->bind_result($id, $agency_name, $email, $phone_number, $state, $address, $personincharge, $photo, $username, $agency_id, $password_from_db);
 
-$result = $stmt->get_result();
-
-// Debugging after executing the query
-echo "Debug: Number of rows found: " . $result->num_rows . "<br>";
-
-if ($result->num_rows > 0) {
+// Fetch the result
+if ($stmt->fetch()) {
     echo "Debug: User found.<br>";
-    $row = $result->fetch_assoc();
-    var_dump($row); // Debug: Output the fetched row
-
-    // Check if the password matches directly (no hashing involved)
-    if ($password == $row['password']) {  // Direct password comparison
-        // Login Successful
+    echo "Debug: ID: $id, Username: $username, Password: $password_from_db<br>"; // Debugging output
+    
+    // Compare password directly (remove password hashing for now)
+    if ($password == $password_from_db) {
+        // Login successful
         session_regenerate_id();
-        $_SESSION['SESS_MEMBER_ID'] = $row['id'];
-        $_SESSION['SESS_FIRST_NAME'] = $row['agency_name'];
-        $_SESSION['SESS_EMAIL'] = $row['email'];
-        $_SESSION['SESS_PHONE_NUMBER'] = $row['phone_number'];
-        $_SESSION['SESS_STATE'] = $row['state'];
-        $_SESSION['SESS_ADDRESS'] = $row['address'];            
-        $_SESSION['SESS_PERSONINCHARGE'] = $row['personincharge'];
-        $_SESSION['SESS_PRO_PIC'] = $row['photo'];
-        $_SESSION['SESS_USERNAME'] = $row['username'];
-        $_SESSION['SESS_AGENCY_ID'] = $row['agency_id'];
+        $_SESSION['SESS_MEMBER_ID'] = $id;
+        $_SESSION['SESS_FIRST_NAME'] = $agency_name;
+        $_SESSION['SESS_EMAIL'] = $email;
+        $_SESSION['SESS_PHONE_NUMBER'] = $phone_number;
+        $_SESSION['SESS_STATE'] = $state;
+        $_SESSION['SESS_ADDRESS'] = $address;
+        $_SESSION['SESS_PERSONINCHARGE'] = $personincharge;
+        $_SESSION['SESS_PRO_PIC'] = $photo;
+        $_SESSION['SESS_USERNAME'] = $username;
+        $_SESSION['SESS_AGENCY_ID'] = $agency_id;
 
         session_write_close();
         echo "Debug: Redirecting to index.php.<br>";
@@ -110,5 +101,5 @@ if ($result->num_rows > 0) {
     echo '</script>';
     exit();
 }
-?>
+
 
