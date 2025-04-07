@@ -1,109 +1,82 @@
 <?php 
+
+ 
 include 'includes/connect.php';
 session_start();
 
-// Function to sanitize input
+// Encryption key (keep this secret and secure)
+$encryption_key = "your-secret-key";
+$iv = '1234567890123456'; // Must be 16 bytes
+
 function clean($str) {
-    return trim($str); // No need to use mysqli_real_escape_string with MySQLi here
-}
+	global $conn;
+		$str = @trim($str);
+		// if(get_magic_quotes_gpc()) {
+		// 	$str = stripslashes($str);
+		// }
+		return mysqli_real_escape_string($conn,$str);
+	}
+	
+	//Sanitize the POST values
+	$login = clean($_POST['username']);
+	$password = clean($_POST['password']);
+	
+	//Input Validations
+	if($login == '') {
+		$errmsg_arr[] = 'Username missing';
+		$errflag = true;
+	}
+	if($password == '') {
+		$errmsg_arr[] = 'Password missing';
+		$errflag = true; 
+	}
+	
+	//If there are input validations, redirect back to the login form
+	
+	
+	//Create query
+	$qry="SELECT * FROM agency WHERE username='$login' AND password='$password'";
+	$result=mysqli_query($conn,$qry);
+	
+	//Check whether the query was successful or not
+	if($result) {
+		if(mysqli_num_rows($result) > 0) {
+			//Login Successful
+			session_regenerate_id();
+			$member = mysqli_fetch_assoc($result);
+			$_SESSION['SESS_MEMBER_ID'] = $member['id'];
+			$_SESSION['SESS_FIRST_NAME'] = $member['agency_name'];
+			$_SESSION['SESS_EMAIL'] = $member['email'];
+			$_SESSION['SESS_PHONE_NUMBER'] = $member['phone_number'];
+			$_SESSION['SESS_STATE'] = $member['state'];
+			$_SESSION['SESS_ADDRESS'] = $member['address'];			
+			$_SESSION['SESS_PERSONINCHARGE'] = $member['personincharge'];
+			$_SESSION['SESS_PRO_PIC'] = $member['photo'];
+			$_SESSION['SESS_USERNAME'] = $member['username'];
+			$_SESSION['SESS_AGENCY_ID'] = $member['agency_id'];
 
-// Sanitize POST values
-$login = clean($_POST['username']);
-$password = clean($_POST['password']);
 
-// Input validations
-$errflag = false;
-$errmsg_arr = [];
 
-if (empty($login)) {
-    $errmsg_arr[] = 'Username missing';
-    $errflag = true;
-}
+			
+			session_write_close();
+			header("location: index.php");
+			exit();
+		}else {
+			
+  echo '<script language = "javascript">';
+  // echo "window.location.href='login.php'"; 
+  echo "alert('Something went wrong, Enter correct details');window.location.href='sign-in.php'";
+   echo '</script>';
+    exit;
+   // echo "<script language = 'javascript'> alert('Wrong Details');'</script>";
+                       
+                       
+                    }
+	}else {
+		die("Query failed");
+	}
+?>
 
-if (empty($password)) {
-    $errmsg_arr[] = 'Password missing';
-    $errflag = true;
-}
 
-// Redirect if there are validation errors
-if ($errflag) {
-    echo "<script>alert('".implode('\\n', $errmsg_arr)."');</script>";
-    echo "<script>window.location.href='sign-in.php';</script>";
-    exit();
-}
 
-// Debugging Output
-echo "Debug: After input validation.<br>";
-
-// Database connection check
-if ($db->connect_error) {
-    die("Connection failed: " . $db->connect_error);
-} else {
-    echo "Debug: Database connection successful.<br>";
-}
-
-// Prepare MySQLi query to get user details
-$qry = "SELECT * FROM agency WHERE username = ?";
-$stmt = $db->prepare($qry);
-
-// Check if the query is prepared successfully
-if ($stmt === false) {
-    echo "Debug: Query preparation failed.<br>";
-    die("Query preparation failed: " . $db->error);
-} else {
-    echo "Debug: Query prepared successfully.<br>";
-}
-
-// Bind the parameter and execute the query
-$stmt->bind_param("s", $login);  // 's' means string
-$stmt->execute();
-
-// Check if execution was successful
-if ($stmt->error) {
-    echo "Debug: Query execution failed: " . $stmt->error . "<br>";
-} else {
-    echo "Debug: Query executed successfully.<br>";
-}
-
-// Bind result variables to capture the output of the query
-$stmt->bind_result($id, $agency_name, $email, $phone_number, $state, $address, $personincharge, $photo, $username, $agency_id, $password_from_db);
-
-// Fetch the result
-if ($stmt->fetch()) {
-    echo "Debug: User found.<br>";
-    echo "Debug: ID: $id, Username: $username, Password: $password_from_db<br>";  // Debugging output
-
-    // Compare the password directly (no hashing involved)
-    if ($password == $password_from_db) {
-        // Login successful
-        session_regenerate_id();
-        $_SESSION['SESS_MEMBER_ID'] = $id;
-        $_SESSION['SESS_FIRST_NAME'] = $agency_name;
-        $_SESSION['SESS_EMAIL'] = $email;
-        $_SESSION['SESS_PHONE_NUMBER'] = $phone_number;
-        $_SESSION['SESS_STATE'] = $state;
-        $_SESSION['SESS_ADDRESS'] = $address;
-        $_SESSION['SESS_PERSONINCHARGE'] = $personincharge;
-        $_SESSION['SESS_PRO_PIC'] = $photo;
-        $_SESSION['SESS_USERNAME'] = $username;
-        $_SESSION['SESS_AGENCY_ID'] = $agency_id;
-
-        session_write_close();
-        echo "Debug: Redirecting to index.php.<br>";
-        header("location: index.php");
-        exit();
-    } else {
-        echo "Debug: Incorrect password.<br>";
-        echo '<script language="javascript">';
-        echo "alert('Incorrect password');window.location.href='sign-in.php';";
-        echo '</script>';
-        exit();
-    }
-} else {
-    echo "Debug: No user found.<br>";
-    echo '<script language="javascript">';
-    echo "alert('Username not found');window.location.href='sign-in.php';";
-    echo '</script>';
-    exit();
-}
 
