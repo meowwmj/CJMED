@@ -124,9 +124,6 @@
                                                 <td class="text-center"> 
                                                     <a class="btn btn-primary" href="make_action.php?id=<?php echo $row['id'];?>"><i class="fa fa-eye"></i></a> 
                                                 </td>
-                                                <td class="text-center">
-                                                    <a class="btn btn-danger" href="delete_emergency.php?id=<?php echo $row['id']; ?>"><i class="fa fa-trash-o"></i></a>
-                                                </td>
                                             </tr>
                                         <?php } ?>
                                     </tbody>
