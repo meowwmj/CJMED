@@ -13,6 +13,12 @@ function clean($str) {
 }
 
 // Sanitize inputs
+if (!isset($_POST['username']) || !isset($_POST['password'])) {
+    $_SESSION['login_error'] = "Username and password are required.";
+    header("Location: sign-in.php");
+    exit();
+}
+
 $username = clean($_POST['username']);
 $password = $_POST['password'];
 
@@ -36,16 +42,17 @@ try {
         if ($password === $decrypted_password) {
             session_regenerate_id(true);
             
-            $_SESSION['SESS_MEMBER_ID'] = $member['id'];
-            $_SESSION['SESS_FIRST_NAME'] = $member['agency_name'];
-            $_SESSION['SESS_EMAIL'] = $member['email'];
-            $_SESSION['SESS_PHONE_NUMBER'] = $member['phone_number'];
-            $_SESSION['SESS_STATE'] = $member['state'];
-            $_SESSION['SESS_ADDRESS'] = $member['address'];            
-            $_SESSION['SESS_PERSONINCHARGE'] = $member['personincharge'];
-            $_SESSION['SESS_PRO_PIC'] = $member['photo'];
-            $_SESSION['SESS_USERNAME'] = $member['username'];
-            $_SESSION['SESS_AGENCY_ID'] = $member['agency_id'];
+            // Use $user instead of $member
+            $_SESSION['SESS_MEMBER_ID'] = $user['id'];
+            $_SESSION['SESS_FIRST_NAME'] = $user['agency_name'];
+            $_SESSION['SESS_EMAIL'] = $user['email'];
+            $_SESSION['SESS_PHONE_NUMBER'] = $user['phone_number'];
+            $_SESSION['SESS_STATE'] = $user['state'];
+            $_SESSION['SESS_ADDRESS'] = $user['address'];            
+            $_SESSION['SESS_PERSONINCHARGE'] = $user['personincharge'];
+            $_SESSION['SESS_PRO_PIC'] = $user['photo'];
+            $_SESSION['SESS_USERNAME'] = $user['username'];
+            $_SESSION['SESS_AGENCY_ID'] = $user['agency_id'];
 
             header("Location: index.php");
             exit();
