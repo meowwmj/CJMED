@@ -44,8 +44,8 @@ if ($result->num_rows > 0) {
     // Fetch user data
     $row = $result->fetch_assoc();
 
-    // Check password (ensure password is hashed in the database)
-    if (password_verify($password, $row['password'])) { // Assuming the password in DB is hashed
+    // Check if the password matches directly (no hashing involved)
+    if ($password == $row['password']) {  // Direct password comparison
         // Login Successful
         session_regenerate_id();
         $_SESSION['SESS_MEMBER_ID'] = $row['id'];
