@@ -107,7 +107,7 @@
                         </div>
                     </div>
 
-                    <div class="col-12 col-md-6 col-lg-4 col-xl-4">
+                    <div class="col-12 col-md-12 col-lg-4 col-xl-4">
                         <div class="card member-panel">
 				<div class="card-header bg-white">
 					<h4 class="card-title mb-0">USERS</h4>
