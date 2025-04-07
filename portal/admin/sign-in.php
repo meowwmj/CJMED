@@ -1,11 +1,12 @@
 <?php 
 session_start();
- if(isset($_SESSION['SESS_FIRST_NAME'])){
-    header("location: index.php");
+if(isset($_SESSION['SESS_FIRST_NAME'])){
+    header("location: report-emergency.php");
     exit();
 }
-
-?> 
+$errorMessage = isset($_SESSION['login_error']) ? $_SESSION['login_error'] : "";
+unset($_SESSION['login_error']); // Clear error after displaying
+?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -35,6 +36,12 @@ session_start();
                             <h3 class="mt-2">C.J.M.E.D.</h3>
                             <p>Urgent Care Unit (Admin)</p>
                         </div>
+
+                        <!-- ERROR MESSAGE DISPLAY -->
+                         <?php if (!empty($errorMessage)) : ?>
+                            <div class="alert alert-danger text-center"><?php echo $errorMessage; ?></div>
+                        <?php endif; ?>
+                        <!-- END ERROR MESSAGE -->
 
                         <div class="form-group">
                             <input type="text" class="form-control" name="username" id="username" placeholder="Username" required>
