@@ -13,7 +13,7 @@
                         <li>
                             <a href="announcement.php"><i class="fa fa-bell"></i> <span>Announcements</span></a>
                         </li>
-                        <li class="active">
+                        <li">
                             <a href="report-emergency.php"><i class="fa fa-heartbeat"></i> <span>Report Emergency</span></a>
                         </li>
                         <?php
@@ -33,7 +33,7 @@
                             <a href="profile.php"><i class="fa fa-user"></i> <span>Profile</span></a>
                         </li>
                         
-                         <li>
+                         <li class="active> 
                             <a href="rescue.php"><i class="	fa fa-calendar-o"></i> <span>Rescue</span></a> 
                         </li>
 
