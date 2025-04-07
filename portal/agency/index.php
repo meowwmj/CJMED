@@ -87,7 +87,7 @@
 			               ?> 
 											<tr>
 													<td style="min-width: 200px;">
-                                                    <span class="status online"></span></a>
+                                                  
 														<h2><a href="#"><?php echo $row['agency_name']; ?> <span><?php echo $row['state']; ?></span></a></h2>
 													</td>                 
 													<td>
