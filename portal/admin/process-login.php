@@ -42,18 +42,19 @@ try {
         if ($password === $decrypted_password) {
             session_regenerate_id(true);
 
-        $_SESSION['SESS_MEMBER_ID'] = $row['id'];
-        $_SESSION['SESS_AGENCY_ID'] = $row['agency_id'];
-        $_SESSION['SESS_FIRST_NAME'] = $row['name'];
-        $_SESSION['SESS_EMAIL'] = $row['email'];
-        $_SESSION['SESS_PHONE_NUMBER'] = $row['phone'];
-        $_SESSION['SESS_STATE'] = $row['state'];
-        $_SESSION['SESS_ADDRESS'] = $row['address'];
-        $_SESSION['SESS_ACCESS_LEVEL'] = $row['access_level'];
-        $_SESSION['SESS_PRO_PIC'] = $row['photo'];
-        $_SESSION['SESS_USERNAME'] = $row['username'];
-        
-        header("Location: index.php");
+            // Use $user instead of $row
+            $_SESSION['SESS_MEMBER_ID'] = $user['id'];
+            $_SESSION['SESS_AGENCY_ID'] = $user['agency_id'];
+            $_SESSION['SESS_FIRST_NAME'] = $user['name'];
+            $_SESSION['SESS_EMAIL'] = $user['email'];
+            $_SESSION['SESS_PHONE_NUMBER'] = $user['phone'];
+            $_SESSION['SESS_STATE'] = $user['state'];
+            $_SESSION['SESS_ADDRESS'] = $user['address'];
+            $_SESSION['SESS_ACCESS_LEVEL'] = $user['access_level'];
+            $_SESSION['SESS_PRO_PIC'] = $user['photo'];
+            $_SESSION['SESS_USERNAME'] = $user['username'];
+            
+            header("Location: index.php");
             exit();
         } else {
             $_SESSION['login_error'] = "Invalid username or password.";
@@ -68,4 +69,3 @@ try {
 
 header("Location: sign-in.php");
 exit();
-
