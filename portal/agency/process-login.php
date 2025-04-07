@@ -4,7 +4,7 @@ session_start();
 
 // Function to sanitize input
 function clean($str) {
-    return trim($str); // No need to use mysqli_real_escape_string with MySQLi here
+    return trim($str);
 }
 
 // Sanitize POST values
@@ -32,6 +32,9 @@ if ($errflag) {
     exit();
 }
 
+// Debugging Output
+echo "Debug: After input validation.<br>";
+
 // Prepare MySQLi query to get user details
 $qry = "SELECT * FROM agency WHERE username = ?";
 $stmt = $db->prepare($qry);
@@ -39,10 +42,14 @@ $stmt->bind_param("s", $login); // 's' means string
 $stmt->execute();
 $result = $stmt->get_result();
 
+// Debugging Output
+echo "Debug: Query executed.<br>";
+
 // Verify user credentials
 if ($result->num_rows > 0) {
     // Fetch user data
     $row = $result->fetch_assoc();
+    echo "Debug: User found.<br>";
 
     // Check if the password matches directly (no hashing involved)
     if ($password == $row['password']) {  // Direct password comparison
@@ -60,6 +67,7 @@ if ($result->num_rows > 0) {
         $_SESSION['SESS_AGENCY_ID'] = $row['agency_id'];
 
         session_write_close();
+        echo "Debug: Redirecting to index.php.<br>";
         header("location: index.php");
         exit();
     } else {
