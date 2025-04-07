@@ -4,7 +4,7 @@ session_start();
 
 // Function to sanitize input
 function clean($str) {
-    return trim($str); // No need to use mysqli_real_escape_string with PDO
+    return trim($str); // No need to use mysqli_real_escape_string with MySQLi here
 }
 
 // Sanitize POST values
@@ -32,15 +32,18 @@ if ($errflag) {
     exit();
 }
 
-// Prepare query to get user details
-$qry = "SELECT * FROM agency WHERE username = :username";
+// Prepare MySQLi query to get user details
+$qry = "SELECT * FROM agency WHERE username = ?";
 $stmt = $db->prepare($qry);
-$stmt->bindParam(':username', $login);
+$stmt->bind_param("s", $login); // 's' means string
 $stmt->execute();
-$row = $stmt->fetch(PDO::FETCH_ASSOC);
+$result = $stmt->get_result();
 
 // Verify user credentials
-if ($row) {
+if ($result->num_rows > 0) {
+    // Fetch user data
+    $row = $result->fetch_assoc();
+
     // Check password (ensure password is hashed in the database)
     if (password_verify($password, $row['password'])) { // Assuming the password in DB is hashed
         // Login Successful
