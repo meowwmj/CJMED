@@ -2,10 +2,6 @@
 include 'includes/connect.php';
 session_start();
 
-// Encryption key (keep this secret and secure)
-$encryption_key = "your-secret-key";
-$iv = '1234567890123456'; // Must be 16 bytes
-
 // Function to sanitize input
 function clean($str) {
     return trim($str); // No need to use mysqli_real_escape_string with PDO
@@ -44,38 +40,42 @@ $stmt->execute();
 $row = $stmt->fetch(PDO::FETCH_ASSOC);
 
 // Verify user credentials
-if ($row) {
-    $decrypted_password = openssl_decrypt($row['password'], 'aes-256-cbc', $encryption_key, 0, $iv);
+//Check whether the query was successful or not
+	if($result) {
+		if(mysqli_num_rows($result) > 0) {
+			//Login Successful
+			session_regenerate_id();
+			$member = mysqli_fetch_assoc($result);
+			$_SESSION['SESS_MEMBER_ID'] = $member['id'];
+			$_SESSION['SESS_FIRST_NAME'] = $member['agency_name'];
+			$_SESSION['SESS_EMAIL'] = $member['email'];
+			$_SESSION['SESS_PHONE_NUMBER'] = $member['phone_number'];
+			$_SESSION['SESS_STATE'] = $member['state'];
+			$_SESSION['SESS_ADDRESS'] = $member['address'];			
+			$_SESSION['SESS_PERSONINCHARGE'] = $member['personincharge'];
+			$_SESSION['SESS_PRO_PIC'] = $member['photo'];
+			$_SESSION['SESS_USERNAME'] = $member['username'];
+			$_SESSION['SESS_AGENCY_ID'] = $member['agency_id'];
 
-    if ($password === $decrypted_password) {
-        session_regenerate_id();
-        $_SESSION['SESS_MEMBER_ID'] = $row['id'];
-        $_SESSION['SESS_AGENCY_ID'] = $row['agency_id'];
-        $_SESSION['SESS_FIRST_NAME'] = $row['name'];
-        $_SESSION['SESS_EMAIL'] = $row['email'];
-        $_SESSION['SESS_PHONE_NUMBER'] = $row['phone'];
-        $_SESSION['SESS_STATE'] = $row['state'];
-        $_SESSION['SESS_ADDRESS'] = $row['address'];
-        $_SESSION['SESS_ACCESS_LEVEL'] = $row['access_level'];
-        $_SESSION['SESS_PRO_PIC'] = $row['photo'];
-        $_SESSION['SESS_USERNAME'] = $row['username'];
 
-        session_write_close();
 
-        if ($_SESSION['SESS_ACCESS_LEVEL'] == 1) {
-            header("Location: admin_dashboard.php");
-        } else {
-            header("Location: index.php");
-        }
-        exit();
-    } else {
-        echo "<script>alert('Invalid password. Please try again.');</script>";
-        echo "<script>window.location.href='sign-in.php';</script>";
-        exit();
-    }
-} else {
-    echo "<script>alert('Username not found. Please try again.');</script>";
-    echo "<script>window.location.href='sign-in.php';</script>";
-    exit();
-}
+			
+			session_write_close();
+			header("location: index.php");
+			exit();
+		}else {
+			
+  echo '<script language = "javascript">';
+  // echo "window.location.href='login.php'"; 
+  echo "alert('Something went wrong, Enter correct details');window.location.href='sign-in.php'";
+   echo '</script>';
+    exit;
+   // echo "<script language = 'javascript'> alert('Wrong Details');'</script>";
+                       
+                       
+                    }
+	}else {
+		die("Query failed");
+	}
 ?>
+
