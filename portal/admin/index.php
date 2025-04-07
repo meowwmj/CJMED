@@ -100,7 +100,7 @@
                                             ?>
                                             <tr>
                                                 <td>
-                                                    <img src="../../uploads/<?php echo $row['photo']; ?>" alt="Agency Image" class="rounded-circle" width="40" height="40">
+                                                   <span class="status online"></span>
                                                     <a href="agency_profile.php?id=<?php echo $row['id']; ?>"><?php echo $row['agency_name']; ?></a>
                                                     <br><span><?php echo $row['address']; ?></span>
                                                 </td>
