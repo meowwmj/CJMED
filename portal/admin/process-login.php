@@ -9,8 +9,7 @@ $encryption_key = "your-secret-key"; // Same key used for encryption
 $iv = '1234567890123456'; // Must match the IV used for encryption
 
 function clean($str) {
-    global $conn;
-    return mysqli_real_escape_string($conn, trim($str));
+    return trim($str); // No need for mysqli_real_escape_string when using prepared statements
 }
 
 // Sanitize inputs
