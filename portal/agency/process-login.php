@@ -54,21 +54,26 @@ if ($stmt === false) {
     echo "Debug: Query prepared successfully.<br>";
 }
 
-// Output the query before execution
-echo "Debug: SQL Query: " . $qry . "<br>";
-
-$stmt->bind_param("s", $login); // 's' means string
+// Bind the parameter and execute the query
+$stmt->bind_param("s", $login);  // 's' means string
 $stmt->execute();
 
-// Bind result variables
+// Check if execution was successful
+if ($stmt->error) {
+    echo "Debug: Query execution failed: " . $stmt->error . "<br>";
+} else {
+    echo "Debug: Query executed successfully.<br>";
+}
+
+// Bind result variables to capture the output of the query
 $stmt->bind_result($id, $agency_name, $email, $phone_number, $state, $address, $personincharge, $photo, $username, $agency_id, $password_from_db);
 
 // Fetch the result
 if ($stmt->fetch()) {
     echo "Debug: User found.<br>";
-    echo "Debug: ID: $id, Username: $username, Password: $password_from_db<br>"; // Debugging output
-    
-    // Compare password directly (remove password hashing for now)
+    echo "Debug: ID: $id, Username: $username, Password: $password_from_db<br>";  // Debugging output
+
+    // Compare the password directly (no hashing involved)
     if ($password == $password_from_db) {
         // Login successful
         session_regenerate_id();
@@ -102,4 +107,4 @@ if ($stmt->fetch()) {
     exit();
 }
 
-
+?>
