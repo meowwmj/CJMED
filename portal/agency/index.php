@@ -61,6 +61,29 @@
                     </div>
                 </div>
 				
+				<div class="row">
+					<div class="col-12 col-md-12 col-lg-8 col-xl-8">
+						<div class="card">
+							<div class="card-header">
+								<h4 class="card-title d-inline-block">Agency</h4> <a href="agency.php" class="btn btn-primary float-right">View all</a>
+							</div>
+							<div class="card-body p-0">
+								<div class="table-responsive">
+									<table class="table mb-0">
+										<thead class="">
+											<tr>
+												<th>Agency</th>
+												<th>Contact</th>
+												<th>Person In Charge</th>
+												
+											</tr>
+										</thead>
+										<tbody>
+											<?php
+			                $result = $db->prepare("SELECT * FROM agency ORDER BY id DESC Limit 5");
+			                $result->execute();
+			                for($i=1; $row = $result->fetch(); $i++){ 
+			               
 			               ?> 
 											<tr>
 													<td style="min-width: 200px;">
