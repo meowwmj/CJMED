@@ -1,10 +1,12 @@
 <?php 
 session_start();
- if(isset($_SESSION['SESS_FIRST_NAME'])){
-    header("location: index.php");
+if(isset($_SESSION['SESS_FIRST_NAME'])){
+    header("location: report-emergency.php");
+    exit();
 }
-
-?> 
+$errorMessage = isset($_SESSION['login_error']) ? $_SESSION['login_error'] : "";
+unset($_SESSION['login_error']); // Clear error after displaying
+?>
 
 <!DOCTYPE html>
 <html lang="en">
