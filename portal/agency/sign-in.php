@@ -35,6 +35,12 @@ session_start();
                             <p>Urgent Care Unit (Agency)</p>
                         </div>
 
+                        <!-- ERROR MESSAGE DISPLAY -->
+                        <?php if (!empty($errorMessage)) : ?>
+                            <div class="alert alert-danger text-center"><?php echo $errorMessage; ?></div>
+                        <?php endif; ?>
+                        <!-- END ERROR MESSAGE -->
+                     
                         <div class="form-group">
                             <input type="text" class="form-control" name="username" id="username" placeholder="Username" required>
                         </div>
