@@ -43,10 +43,10 @@
             </div>
         </div>
 
-  <!-- Page Wrapper -->
+ <!-- Page Wrapper -->
     <div class="page-wrapper">
         <div class="content">
-             <?php if(get("success")):?>
+            <?php if(get("success")):?>
                 <div>
                     <?=App::message("success", "Your request has been successfully deleted")?>
                 </div>
@@ -73,6 +73,7 @@
                 <div class="col-md-3">
                     <div class="form-group">
                         <label>&nbsp;</label>
+                        <!-- Removed the search button as it's no longer needed -->
                         <button class="btn btn-primary" id="print-btn"><i class="fa fa-print"></i> Print</button>
                     </div>
                 </div>
@@ -135,6 +136,9 @@
                                                 <td class="text-center"> 
                                                     <a class="btn btn-primary" href="make_action.php?id=<?php echo $row['id'];?>"><i class="fa fa-eye"></i></a> 
                                                 </td>
+                                                <td class="text-center">
+                                                    <a class="btn btn-danger" href="delete_emergency.php?id=<?php echo $row['id']; ?>"><i class="fa fa-trash-o"></i></a>
+                                                </td>
                                             </tr>
                                         <?php } ?>
                                     </tbody>
@@ -161,14 +165,17 @@
 
     <script>
         $(document).ready(function () {
+            // Trigger search automatically when the status dropdown value changes
             $('#status').change(function () {
-                var status = $(this).val();
+                var status = $(this).val();  // Get the selected status
 
+                // Send an AJAX request to the server with the selected status
                 $.ajax({
-                    url: 'view-emergency.php',
+                    url: 'view-emergency.php',  // The same page to reload content
                     type: 'GET',
-                    data: { status: status },
+                    data: { status: status },  // Send the selected status as a GET parameter
                     success: function (response) {
+                        // Replace the table body with the new filtered results
                         $('#emergency-table-body').html($(response).find('#emergency-table-body').html());
                     },
                     error: function () {
