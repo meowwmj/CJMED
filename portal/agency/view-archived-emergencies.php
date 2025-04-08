@@ -45,23 +45,38 @@
                 </div>
             </div>
         </div>
-    
-      <div class="page-wrapper">
+            <div class="page-wrapper">
             <div class="content">
                 <div class="row">
                     <div class="col-sm-7 col-6">
                         <h3 class="page-title">Archived Emergencies</h3>
                     </div>
 
-                    <!-- Year Filter - Positioned to the right -->
+                    <!-- Filters: Year, Month, Day -->
                     <div class="col-sm-5 col-6 text-right m-b-20">
                         <form method="GET" action="" id="history-form">
+                            <!-- Year Filter -->
                             <select name="year" class="form-control d-inline-block" style="width: auto;" onchange="this.form.submit()">
                                 <option value="">Select Year</option>
+                                <option value="<?php echo date('Y'); ?>" <?php echo (isset($_GET['year']) && $_GET['year'] == date('Y') ? 'selected' : ''); ?>><?php echo date('Y'); ?></option>
+                            </select>
+
+                            <!-- Month Filter -->
+                            <select name="month" class="form-control d-inline-block" style="width: auto;" onchange="this.form.submit()">
+                                <option value="">Select Month</option>
                                 <?php
-                                // Fetch years from your data or set a range
-                                for ($y = 2020; $y <= date('Y'); $y++) {
-                                    echo '<option value="' . $y . '" ' . ($_GET['year'] == $y ? 'selected' : '') . '>' . $y . '</option>';
+                                for ($m = 1; $m <= 12; $m++) {
+                                    echo '<option value="' . $m . '" ' . (isset($_GET['month']) && $_GET['month'] == $m ? 'selected' : '') . '>' . date("F", mktime(0, 0, 0, $m, 10)) . '</option>';
+                                }
+                                ?>
+                            </select>
+
+                            <!-- Day Filter -->
+                            <select name="day" class="form-control d-inline-block" style="width: auto;" onchange="this.form.submit()">
+                                <option value="">Select Day</option>
+                                <?php
+                                for ($d = 1; $d <= 31; $d++) {
+                                    echo '<option value="' . $d . '" ' . (isset($_GET['day']) && $_GET['day'] == $d ? 'selected' : '') . '>' . $d . '</option>';
                                 }
                                 ?>
                             </select>
@@ -78,28 +93,47 @@
                             <div class="experience-box">
                                 <ul class="experience-list">
                                     <?php
-                                    // Get selected year
+                                    // Use isset() to check if the key exists before accessing
                                     $year = isset($_GET['year']) ? $_GET['year'] : '';
+                                    $month = isset($_GET['month']) ? $_GET['month'] : '';
+                                    $day = isset($_GET['day']) ? $_GET['day'] : '';
 
-                                    // Build the SQL query with dynamic filtering for the year
+                                    // Build the SQL query with dynamic filtering for year, month, and day
                                     $query = "SELECT e.*, a.agency_name FROM emergency_history e INNER JOIN agency a ON e.agency_id = a.agency_id";
 
-                                    // Add filter for year if selected
+                                    // Add filters based on the selected year, month, and day
+                                    $conditions = [];
                                     if ($year) {
-                                        $query .= " WHERE YEAR(e.deleted_at) = :year";
+                                        $conditions[] = "YEAR(e.deleted_at) = :year";
+                                    }
+                                    if ($month) {
+                                        $conditions[] = "MONTH(e.deleted_at) = :month";
+                                    }
+                                    if ($day) {
+                                        $conditions[] = "DAY(e.deleted_at) = :day";
+                                    }
+
+                                    if (!empty($conditions)) {
+                                        $query .= " WHERE " . implode(' AND ', $conditions);
                                     }
 
                                     // Prepare and execute the query
                                     $result = $db->prepare($query);
 
-                                    // Bind parameter if year is selected
+                                    // Bind parameters if filters are selected
                                     if ($year) {
                                         $result->bindParam(':year', $year, PDO::PARAM_INT);
+                                    }
+                                    if ($month) {
+                                        $result->bindParam(':month', $month, PDO::PARAM_INT);
+                                    }
+                                    if ($day) {
+                                        $result->bindParam(':day', $day, PDO::PARAM_INT);
                                     }
 
                                     $result->execute();
 
-                                    // Check if any records exist for the selected year
+                                    // Check if any records exist for the selected filters
                                     if ($result->rowCount() > 0) {
                                         // Fetch and display each archived emergency
                                         while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
@@ -120,15 +154,15 @@
                                         </li>
                                     <?php
                                         }
-                                    } else {?>
+                                    } else { ?>
                                         <li>
-                                        <div class="experience-user">
-                                            <div class="before-circle"></div>
-                                        </div>
-                                        <div class="experience-content">
-                                            <p>No history found for this year.</p>
-                                        </div>
-                                    </li>
+                                            <div class="experience-user">
+                                                <div class="before-circle"></div>
+                                            </div>
+                                            <div class="experience-content">
+                                                <p>No history found for this selection.</p>
+                                            </div>
+                                        </li>
                                     <?php } ?>
                                 </ul>
                             </div>
