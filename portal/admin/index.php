@@ -106,7 +106,7 @@
                                                 for($i=1; $row = $result->fetch(); $i++){ 
                                             ?> 
                                             <tr>
-                                                <td style="min-width: 200px;">
+                                                <td style="min-width: 12rem;">
                                                     <span class="status online"></span>
                                                     <h2><a href="#"><?php echo $row['agency_name']; ?> <span><?php echo $row['state']; ?></span></a></h2>
                                                 </td>                 
@@ -197,22 +197,23 @@
 
 <style>
     .table-responsive {
-        max-height: 470px; 
+        max-height: 29.375rem; /* 470px converted to rem (1rem = 16px) */
         overflow-y: auto;
         overflow-x: auto;
     }
 
     .dash-widget {
-        padding: 15px;
+        padding: 1rem;
         box-sizing: border-box;
     }
 
-    @media (max-width: 768px) {
+    @media (max-width: 48rem) { /* 768px */
         .dash-widget {
-            margin-bottom: 20px;
+            margin-bottom: 1.25rem;
         }
+
         .user-img img {
-            width: 40px;
+            width: 2.5rem; /* 40px */
             height: auto;
             max-width: 100%;
         }
