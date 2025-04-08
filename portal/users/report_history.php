@@ -37,86 +37,131 @@
         </div>
 
         
-	<div class="page-wrapper">
-            <div class="content">
-                <div class="row">
-                    <div class="col-sm-4 col-3">
-                        <h4 class="page-title">My History</h4>
-                    </div>
-                    <div class="col-sm-8 col-9 text-right m-b-20">
-                        <a href="#" class="btn btn-primary btn-rounded float-right"></i> View Calendar</a>
-                    </div>
-
-                   
+  <div class="page-wrapper">
+        <div class="content">
+            <div class="row">
+                <div class="col-sm-4 col-3">
+                    <h4 class="page-title">My History</h4>
                 </div>
                 
-                <div class="row">
+                <div class="col-sm-8 col-9 text-right m-b-20">
+                    <form method="GET" action="" id="history-form">
+                        <select name="year" class="form-control d-inline-block" style="width: auto;" onchange="this.form.submit()">
+                            <option value="">Select Year</option>
+                            <?php
+                            // Fetch years from your data or set a range
+                            for ($y = 2020; $y <= date('Y'); $y++) {
+                                echo '<option value="' . $y . '" ' . ($_GET['year'] == $y ? 'selected' : '') . '>' . $y . '</option>';
+                            }
+                            ?>
+                        </select>
+                    </form>
+                </div>
+            </div>
+
+            <div class="row">
                 <div class="col-md-12">
                     <div class="card">
                         <div class="card-header">
-                    <h3 class="card-title">History</h3>
                             <div class="experience-box">
-                                <ul class="experience-list">
+                            <?php
+                            // Get selected year
+                            $year = isset($_GET['year']) ? $_GET['year'] : '';
 
-               <?php
-                                $result = $db->prepare("SELECT e.*, a.agency_name FROM emergency e INNER JOIN agency a ON e.agency_id = a.agency_id");
-                                $result->execute();
-                                for($i=1; $row = $result->fetch(); $i++){ 
-                                ?> 
-                                   
-                                    <li>
-                                        <div class="experience-user">
-                                                <div class="before-circle"></div>
-                                            </div>
-                                                <div class="experience-content"><?php echo $row['created_at']; ?> 
-                                                <div class="experience-content">You Reported <?php echo $row['emergency_category']; ?>                        
-                                                <div class="content">at <?php echo $row['agency_name']; ?>
-                                                <div class="content">on <?php echo $row['address']; ?>, Bulacan
-                                                <div class="content"><?php echo date('m/d/Y'); ?></span>
-                                            </div>  
-                                        </div>
-                                    </li>
-                                    <?php } ?>
-                                </ul>
+                            // Build the SQL query with dynamic filtering for the year
+                            $query = "SELECT e.*, a.agency_name FROM emergency e INNER JOIN agency a ON e.agency_id = a.agency_id";
+
+                            // Add filter for year if selected
+                            if ($year) {
+                                $query .= " WHERE YEAR(e.created_at) = :year";
+                            }
+
+                            // Prepare and execute the query
+                            $result = $db->prepare($query);
+
+                            // Bind parameter if year is selected
+                            if ($year) {
+                                $result->bindParam(':year', $year, PDO::PARAM_INT);
+                            }
+
+                            $result->execute();
+
+                            // Check if any records exist for the selected year
+                            if ($result->rowCount() > 0) {
+                                echo '<h3 class="card-title">History for ' . $year . '</h3>';
+                            } else {
+                                echo '<h3 class="card-title">No History for ' . $year . '</h3>';
+                            }
+                            ?>
                             </div>
                         </div>
+                        <div class="experience-box">
+                            <ul class="experience-list">
+                                <?php
+                                // If records exist, display them
+                                if ($result->rowCount() > 0) {
+                                    for ($i = 1; $row = $result->fetch(); $i++) {
+                                ?> 
+                                        <li>
+                                            <div class="experience-user">
+                                                <div class="before-circle"></div>
+                                            </div>
+                                            <div class="experience-content"><?php echo $row['created_at']; ?>
+                                                <div class="experience-content">You Reported <?php echo $row['emergency_category']; ?>                        
+                                                    <div class="content">at <?php echo $row['agency_name']; ?>
+                                                        <div class="content">on <?php echo $row['address']; ?>, Bulacan
+                                                            <div class="content"><?php echo date('m/d/Y'); ?></span>
+                                                        </div>  
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </li>
+                                    <?php } ?>
+                                <?php } else { ?>
+                                    <li>
+                                        <div class="experience-user">
+                                            <div class="before-circle"></div>
+                                        </div>
+                                        <div class="experience-content">
+                                            <p>No history found for this year.</p>
+                                        </div>
+                                    </li>
+                                <?php } ?>
+                            </ul>
+                        </div>
                     </div>
-                </div>
-				
+                </div>            
             </div>
-            
         </div>
     </div>
 
-<!-- Logout Confirmation Modal -->
-<div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="logoutModalLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="logoutModalLabel">Confirm Logout</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        Are you sure you want to log out?
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-        <a href="logout.php" class="btn btn-danger">Logout</a>
+    <!-- Logout Confirmation Modal -->
+    <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="logoutModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="logoutModalLabel">Confirm Logout</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            Are you sure you want to log out?
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+            <a href="logout.php" class="btn btn-danger">Logout</a>
+          </div>
+        </div>
       </div>
     </div>
-  </div>
-</div>
 
     <div class="sidebar-overlay" data-reff=""></div>
     <script src="assets/js/jquery-3.2.1.min.js"></script>
-	<script src="assets/js/popper.min.js"></script>
+    <script src="assets/js/popper.min.js"></script>
     <script src="assets/js/bootstrap.min.js"></script>
     <script src="assets/js/jquery.slimscroll.js"></script>
     <script src="assets/js/app.js"></script>
 </body>
-
-
-<!-- profile23:03-->
 </html>
+
