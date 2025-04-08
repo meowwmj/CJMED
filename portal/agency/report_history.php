@@ -70,7 +70,7 @@
                             <option value="">Select Month</option>
                             <?php
                             // Fetch months
-                            for ($m = 1; $m <= 4; $m++) {
+                            for ($m = 1; $m <= 12; $m++) {
                                 echo '<option value="' . $m . '" ' . ($_GET['month'] == $m ? 'selected' : '') . '>' . date("F", mktime(0, 0, 0, $m, 10)) . '</option>';
                             }
                             ?>
