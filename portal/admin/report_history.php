@@ -52,15 +52,16 @@
             </div>
         </div>       
 
-    <div class="page-wrapper">
+   <div class="page-wrapper">
         <div class="content">
             <div class="row">
                 <div class="col-sm-4 col-3">
                     <h4 class="page-title">My History</h4>
                 </div>
+                
                 <div class="col-sm-8 col-9 text-right m-b-20">
-                    <form method="GET" action="">
-                        <select name="year" class="form-control d-inline-block" style="width: auto;">
+                    <form method="GET" action="" id="history-form">
+                        <select name="year" class="form-control d-inline-block" style="width: auto;" onchange="this.form.submit()">
                             <option value="">Select Year</option>
                             <?php
                             // Fetch years from your data or set a range
@@ -69,7 +70,6 @@
                             }
                             ?>
                         </select>
-                        <button type="submit" class="btn btn-primary">Filter</button>
                     </form>
                 </div>
             </div>
@@ -78,46 +78,67 @@
                 <div class="col-md-12">
                     <div class="card">
                         <div class="card-header">
-                            <h3 class="card-title">History</h3>
+                            <div class="experience-box">
+                            <?php
+                            // Get selected year
+                            $year = isset($_GET['year']) ? $_GET['year'] : '';
+
+                            // Build the SQL query with dynamic filtering for the year
+                            $query = "SELECT e.*, a.agency_name FROM emergency e INNER JOIN agency a ON e.agency_id = a.agency_id";
+
+                            // Add filter for year if selected
+                            if ($year) {
+                                $query .= " WHERE YEAR(e.created_at) = :year";
+                            }
+
+                            // Prepare and execute the query
+                            $result = $db->prepare($query);
+
+                            // Bind parameter if year is selected
+                            if ($year) {
+                                $result->bindParam(':year', $year, PDO::PARAM_INT);
+                            }
+
+                            $result->execute();
+
+                            // Check if any records exist for the selected year
+                            if ($result->rowCount() > 0) {
+                                echo '<h3 class="card-title">History for ' . $year . '</h3>';
+                            } else {
+                                echo '<h3 class="card-title">No History for ' . $year . '</h3>';
+                            }
+                            ?>
+                            </div>
                         </div>
                         <div class="experience-box">
                             <ul class="experience-list">
                                 <?php
-                                // Get selected year
-                                $year = isset($_GET['year']) ? $_GET['year'] : '';
-
-                                // Build the SQL query with dynamic filtering for the year
-                                $query = "SELECT e.*, a.agency_name FROM emergency e INNER JOIN agency a ON e.agency_id = a.agency_id";
-
-                                // Add filter for year if selected
-                                if ($year) {
-                                    $query .= " WHERE YEAR(e.created_at) = :year";
-                                }
-
-                                // Prepare and execute the query
-                                $result = $db->prepare($query);
-
-                                // Bind parameter if year is selected
-                                if ($year) {
-                                    $result->bindParam(':year', $year, PDO::PARAM_INT);
-                                }
-
-                                $result->execute();
-                                
-                                for ($i = 1; $row = $result->fetch(); $i++) {
+                                // If records exist, display them
+                                if ($result->rowCount() > 0) {
+                                    for ($i = 1; $row = $result->fetch(); $i++) {
                                 ?> 
+                                        <li>
+                                            <div class="experience-user">
+                                                <div class="before-circle"></div>
+                                            </div>
+                                            <div class="experience-content"><?php echo $row['created_at']; ?>
+                                                <div class="experience-content">You Reported <?php echo $row['emergency_category']; ?>                        
+                                                    <div class="content">at <?php echo $row['agency_name']; ?>
+                                                        <div class="content">on <?php echo $row['address']; ?>, Bulacan
+                                                            <div class="content"><?php echo date('m/d/Y'); ?></span>
+                                                        </div>  
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </li>
+                                    <?php } ?>
+                                <?php } else { ?>
                                     <li>
                                         <div class="experience-user">
                                             <div class="before-circle"></div>
                                         </div>
-                                        <div class="experience-content"><?php echo $row['created_at']; ?>
-                                            <div class="experience-content">You Reported <?php echo $row['emergency_category']; ?>                        
-                                                <div class="content">at <?php echo $row['agency_name']; ?>
-                                                    <div class="content">on <?php echo $row['address']; ?>, Bulacan
-                                                        <div class="content"><?php echo date('m/d/Y'); ?></span>
-                                                    </div>  
-                                                </div>
-                                            </div>
+                                        <div class="experience-content">
+                                            <p>No history found for this year.</p>
                                         </div>
                                     </li>
                                 <?php } ?>
