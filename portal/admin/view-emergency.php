@@ -64,9 +64,8 @@
 
             <!-- Filters Section -->
             <div class="row">
-                <div class="col-md-6">
+                <div class="col-md-4">
                     <div class="form-group">
-                        <label>Status</label>
                         <select class="form-control" name="status" id="status">
                             <option value="">All</option>
                             <option value="Pending">Ongoing</option>
@@ -74,6 +73,7 @@
                         </select>
                     </div>
                 </div>
+
 
                 <div class="col-md-3">
                     <div class="form-group">
