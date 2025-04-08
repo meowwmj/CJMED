@@ -54,7 +54,7 @@
         </div>    
         </div>
 
-     <div class="page-wrapper">
+    <div class="page-wrapper">
             <div class="content">
                 <div class="row">
                     <div class="col-sm-7 col-6">
@@ -128,10 +128,16 @@
                                         </li>
                                     <?php
                                         }
-                                    } else {
-                                        echo '<li>No archived history found for this year.</li>';
-                                    }
-                                    ?>
+                                    } else {?>
+                                        <li>
+                                        <div class="experience-user">
+                                            <div class="before-circle"></div>
+                                        </div>
+                                        <div class="experience-content">
+                                            <p>No history found for this year.</p>
+                                        </div>
+                                    </li>
+                                    <?php } ?>
                                 </ul>
                             </div>
                         </div>
@@ -169,3 +175,4 @@
     <script src="assets/js/app.js"></script>
 </body>
 </html>
+
