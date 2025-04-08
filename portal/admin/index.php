@@ -1,5 +1,3 @@
-
-
 <?php include 'includes/head.php'; ?>
 <body>
     <div class="main-wrapper">
