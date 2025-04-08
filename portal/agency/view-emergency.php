@@ -49,11 +49,6 @@
  <!-- Page Wrapper -->
     <div class="page-wrapper">
         <div class="content">
-            <?php if(get("success")):?>
-                <div>
-                    <?=App::message("success", "Your request has been successfully deleted")?>
-                </div>
-            <?php endif;?>
             <div class="row">
                 <div class="col-sm-4 col-3">
                     <h4 class="page-title">Emergency Incident Reports</h4>
