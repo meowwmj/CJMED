@@ -37,11 +37,14 @@
         </div>
 
         
-        <div class="page-wrapper">
+	<div class="page-wrapper">
             <div class="content">
                 <div class="row">
-                    <div class="col-sm-7 col-6">
+                    <div class="col-sm-4 col-3">
                         <h4 class="page-title">My History</h4>
+                    </div>
+                    <div class="col-sm-8 col-9 text-right m-b-20">
+                        <a href="#" class="btn btn-primary btn-rounded float-right"></i> View Calendar</a>
                     </div>
 
                    
@@ -117,4 +120,3 @@
 
 <!-- profile23:03-->
 </html>
-
