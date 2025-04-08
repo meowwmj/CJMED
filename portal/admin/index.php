@@ -1,4 +1,5 @@
 
+
 <?php include 'includes/head.php'; ?>
 <body>
     <div class="main-wrapper">
@@ -101,7 +102,7 @@
 			               ?> 
 											<tr>
 													<td style="min-width: 200px;">
-                                                    
+                                                    <span class="status online"></span></a>
 														<h2><a href="#"><?php echo $row['agency_name']; ?> <span><?php echo $row['state']; ?></span></a></h2>
 													</td>                 
 													<td>
@@ -130,7 +131,6 @@
 				<h4 class="card-title mb-0">USERS</h4>
 		    </div>
                         <div class="card-body p-0">
-				<div class="table-responsive">
                         <table class="table table-striped">
 		    <?php
 		        $result = $db->prepare("SELECT * FROM users ");
@@ -199,8 +199,25 @@
 </html>
 
 <style>
-    .table-responsive {
-        max-height: 270px; /* Adjust this height as needed */
-        overflow-y: auto;
+   .table-responsive {
+    max-height: 470px; 
+    overflow-y: auto;
+    overflow-x: auto;
+}
+
+.dash-widget {
+    padding: 15px;
+    box-sizing: border-box;
+}
+
+@media (max-width: 768px) {
+    .dash-widget {
+        margin-bottom: 20px;
     }
+    .user-img img {
+        width: 40px;
+        height: auto;
+        max-width: 100%;
+    }
+}
 </style>
