@@ -33,6 +33,9 @@
                             <a href="view-archived-emergencies.php"><i class="fa fa-file"></i> <span>Archived</span></a>
                         </li>
                         <li>
+                            <a href="profile.php"><i class="fa fa-user"></i> <span>Profile</span></a>
+                        </li>
+                        <li>
                             <a href="rescue.php"><i class="fa fa-calendar-o"></i> <span>Rescue</span></a> 
                         </li>
                         <li>
