@@ -43,8 +43,6 @@
             </div>
         </div>
 
-
-
 	<div class="page-wrapper">
             <div class="content">
                 <div class="row">
