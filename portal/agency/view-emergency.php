@@ -46,106 +46,108 @@
             </div>
         </div>
 
- <!-- Page Wrapper -->
-    <div class="page-wrapper">
-        <div class="content">
-            <div class="row">
-                <div class="col-sm-4 col-3">
-                    <h4 class="page-title">Emergency Incident Reports</h4>
-                </div>
-            </div>
-
-            <!-- Filters Section -->
-             <div class="row">
-                <div class="col-md-4">
-                    <div class="form-group">
-                        <select class="form-control" name="status" id="status">
-                            <option value="">All</option>
-                            <option value="Pending">Ongoing</option>
-                            <option value="Resolved">Resolved</option>
-                        </select>
+     <!-- Page Wrapper -->
+        <div class="page-wrapper">
+            <div class="content">
+                <div class="row">
+                    <div class="col-sm-4 col-3">
+                        <h4 class="page-title">Emergency Incident Reports</h4>
                     </div>
                 </div>
 
-                <div class="col-md-3">
-                    <div class="form-group">
-                        <label>&nbsp;</label>
-                        <!-- Removed the search button as it's no longer needed -->
-                        <button class="btn btn-primary" id="print-btn"><i class="fa fa-print"></i> Print</button>
+                <!-- Filters Section -->
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <select class="form-control" name="status" id="status">
+                                <option value="">All</option>
+                                <option value="Pending">Ongoing</option>
+                                <option value="Resolved">Resolved</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label>&nbsp;</label>
+                            <button class="btn btn-primary" id="print-btn"><i class="fa fa-print"></i> Print</button>
+                        </div>
                     </div>
                 </div>
-            </div>
 
-            <!-- Emergency Report Table -->
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="card">
-                        <div class="card-header">
-                            <div class="table-responsive print-table">
-                                <table class="table table-bordered table-striped custom-table datatable mb-0" id="myTable">
-                                    <thead>
-                                        <tr>
-                                            <th class="text-center"><strong>No.</strong></th>
-                                            <th class="text-center"><strong>Case ID</strong></th>
-                                            <th class="text-center"><strong>Name</strong></th>
-                                            <th class="text-center"><strong>Agency Name</strong></th>
-                                            <th class="text-center"><strong>Issue</strong></th>
-                                            <th class="text-center"><strong>Address</strong></th>
-                                            <th class="text-center"><strong>Status</strong></th>
-                                            <th class="text-center"><strong>Date</strong></th>
-                                            <th class="text-center"><strong>Action</strong></th>
-                                        </tr>
-                                    </thead>
-                                    <tbody id="emergency-table-body">
-                                        <?php
-                                            $statusFilter = isset($_GET['status']) ? $_GET['status'] : ''; // Get the status filter from GET request
-                                            $sql = "SELECT e.*, a.agency_name FROM emergency e INNER JOIN agency a ON e.agency_id = a.agency_id";
-
-                                            if ($statusFilter) {
-                                                $sql .= " WHERE e.status = :status";
-                                            }
-
-                                            $stmt = $db->prepare($sql);
-                                            if ($statusFilter) {
-                                                $stmt->bindParam(':status', $statusFilter);
-                                            }
-                                            $stmt->execute();
-                                            $i = 1;
-                                            while ($row = $stmt->fetch()) {
-                                        ?>
+                <!-- Emergency Report Table -->
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="card">
+                            <div class="card-header">
+                                <div class="table-responsive print-table">
+                                    <table class="table table-bordered table-striped custom-table datatable mb-0" id="myTable">
+                                        <thead>
                                             <tr>
-                                                <td class="text-center"><?php echo $i++; ?></td>
-                                                <td class="text-center"><?php echo $row['emergency_id']; ?></td>
-                                                <td class="text-center"><?php echo $row['patient_name']; ?></td>
-                                                <td class="text-center"><?php echo $row['agency_name']; ?></td>
-                                                <td class="text-center"><?php echo $row['emergency_category']; ?></td>
-                                                <td class="text-center"><?php echo $row['address']; ?></td>
-                                                <td class="text-center">
-                                                    <?php
-                                                    if ($row['status'] == "Pending") {
-                                                        echo "<span class='badge badge-danger'>Ongoing</span>";
-                                                    } else {
-                                                        echo "<span class='badge badge-success'>Resolved</span>";
-                                                    }
-                                                    ?>
-                                                </td>
-                                                <td class="text-center"><?php echo $row['created_at']; ?></td>
-                                                <td class="text-center"> 
-                                                    <a class="btn btn-primary" href="make_action.php?id=<?php echo $row['id'];?>"><i class="fa fa-eye"></i></a> 
-                                                </td>
-                                                <td class="text-center">
-                                                    <a class="btn btn-danger" href="delete_emergency.php?id=<?php echo $row['id']; ?>"><i class="fa fa-trash-o"></i></a>
-                                                </td>
+                                                <th class="text-center"><strong>No.</strong></th>
+                                                <th class="text-center"><strong>Case ID</strong></th>
+                                                <th class="text-center"><strong>Name</strong></th>
+                                                <th class="text-center"><strong>Agency Name</strong></th>
+                                                <th class="text-center"><strong>Issue</strong></th>
+                                                <th class="text-center"><strong>Address</strong></th>
+                                                <th class="text-center"><strong>Status</strong></th>
+                                                <th class="text-center"><strong>Date</strong></th>
+                                                <th class="text-center"><strong>Action</strong></th>
                                             </tr>
-                                        <?php } ?>
-                                    </tbody>
-                                </table>
+                                        </thead>
+                                        <tbody id="emergency-table-body">
+                                            <?php
+                                                $statusFilter = isset($_GET['status']) ? $_GET['status'] : ''; 
+                                                
+                                                $sql = "SELECT e.*, a.agency_name FROM emergency e INNER JOIN agency a ON e.agency_id = a.agency_id";
+                                                
+                                                if ($statusFilter) {
+                                                    $sql .= " WHERE e.status = :status";
+                                                }
+                                                
+                                                $stmt = $db->prepare($sql);
+                                                if ($statusFilter) {
+                                                    $stmt->bindParam(':status', $statusFilter);
+                                                }
+                                                $stmt->execute();
+                                                $i = 1;
+                                                while ($row = $stmt->fetch()) {
+                                            ?>
+                                                <tr>
+                                                    <td class="text-center"><?php echo $i++; ?></td>
+                                                    <td class="text-center"><?php echo $row['emergency_id']; ?></td>
+                                                    <td class="text-center"><?php echo $row['patient_name']; ?></td>
+                                                    <td class="text-center"><?php echo $row['agency_name']; ?></td>
+                                                    <td class="text-center"><?php echo $row['emergency_category']; ?></td>
+                                                    <td class="text-center"><?php echo $row['address']; ?></td>
+                                                    <td class="text-center">
+                                                        <?php
+                                                        if ($row['status'] == "Pending") {
+                                                            echo "<span class='badge badge-danger'>Ongoing</span>";
+                                                        } else {
+                                                            echo "<span class='badge badge-success'>Resolved</span>";
+                                                        }
+                                                        ?>
+                                                    </td>
+                                                    <td class="text-center"><?php echo $row['created_at']; ?></td>
+                                                    <td class="text-center"> 
+                                                        <a class="btn btn-primary" href="make_action.php?id=<?php echo $row['id'];?>"><i class="fa fa-eye"></i></a> 
+                                                    </td>
+                                                    <td class="text-center">
+                                                        <a class="btn btn-danger" href="delete_emergency.php?id=<?php echo $row['id']; ?>"><i class="fa fa-trash-o"></i></a>
+                                                    </td>
+                                                </tr>
+                                            <?php } ?>
+                                        </tbody>
+                                    </table>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+
     </div>
 
     <!-- Include JS Files -->
@@ -162,25 +164,45 @@
 
     <script>
         $(document).ready(function () {
-            // Trigger search automatically when the status dropdown value changes
-            $('#status').change(function () {
-                var status = $(this).val();  // Get the selected status
+            // Periodic Table Refresh (every 5 seconds)
+            setInterval(function () {
+                var status = $('#status').val(); // Get current filter status
 
-                // Send an AJAX request to the server with the selected status
+                // AJAX request to reload table content
+                $.ajax({
+                    url: 'view-emergency.php',  // Reload the same page
+                    type: 'GET',
+                    data: { status: status },  // Pass the status filter
+                    success: function (response) {
+                        // Replace the table body with updated rows
+                        $('#emergency-table-body').html($(response).find('#emergency-table-body').html());
+                    },
+                    error: function () {
+                        alert('Error retrieving updated data.');
+                    }
+                });
+            }, 5000); // Refresh every 5 seconds
+
+            // When the status dropdown changes, filter results
+            $('#status').change(function () {
+                var status = $(this).val(); // Get the selected status filter
+
+                // Send AJAX request to fetch filtered results
                 $.ajax({
                     url: 'view-emergency.php',  // The same page to reload content
                     type: 'GET',
-                    data: { status: status },  // Send the selected status as a GET parameter
+                    data: { status: status },  // Send the selected status to filter
                     success: function (response) {
                         // Replace the table body with the new filtered results
                         $('#emergency-table-body').html($(response).find('#emergency-table-body').html());
                     },
                     error: function () {
-                        alert('Error retrieving search results.');
+                        alert('Error retrieving filtered results.');
                     }
                 });
             });
         });
     </script>
+
 </body>
 </html>
