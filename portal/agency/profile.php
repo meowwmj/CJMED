@@ -29,6 +29,9 @@
                         <li >
                             <a href="report_history.php"><i class="fa fa-file-text-o"></i> <span>History</span></a>
                         </li>
+			<li class>                          
+                            <a href="view-archived-emergencies.php"><i class="fa fa-file"></i> <span>Archived</span></a>
+                        </li>
                         <li class="active">
                             <a href="profile.php"><i class="fa fa-user"></i> <span>Profile</span></a>
                         </li>
