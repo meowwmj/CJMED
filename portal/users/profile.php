@@ -18,7 +18,7 @@
                             <a href="announcement.php"><i class="fa fa-bell"></i> <span>Announcements</span></a>
                         </li>           
                         <li>
-                            <a href="report_history.php"><i class="fa fa-file-text-o"></i> <span>Reports History</span></a>
+                            <a href="report_history.php"><i class="fa fa-file-text-o"></i> <span>History</span></a>
                         </li>
                         <li>
                             <a href="rescue.php"><i class="	fa fa-calendar-o"></i> <span>Rescue</span></a> 
