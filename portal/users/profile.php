@@ -47,13 +47,13 @@
                             <div class="profile-view">
                                 <div class="profile-img-wrap">
                                     <div class="profile-img">
-                                        <?php
-                                            if (!empty($_SESSION['SESS_PRO_PIC'])) {
-                                                echo '<img class="rounded-circle" src="../../uploads/' . $_SESSION['SESS_PRO_PIC'] . '" width="24" alt="Admin">';
-                                            } else {
-                                                echo '<img class="rounded-circle" src="../../uploads/default.jpg" width="24" alt="Admin">';
-                                            }
-                                            ?>
+                                      <?php
+                                  	  if (!empty($_SESSION['SESS_PRO_PIC'])) {
+                                 	  echo '<img class="rounded-circle" src="../../uploads/' . $_SESSION['SESS_PRO_PIC'] . '" width="24" height="24">';
+                                	  } else {
+                                          echo '<img class="rounded-circle" src="../../uploads/default.jpg" width="24" height="24">';
+                                   	  }
+                                      ?>       
                                     </div>
                                 </div>
                                 <div class="profile-basic">
