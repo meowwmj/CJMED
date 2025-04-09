@@ -61,52 +61,51 @@
                     </div>
                 </div>
 				
-				<div class="row">
-					<div class="col-12 col-md-12 col-lg-8 col-xl-8">
-						<div class="card">
-							<div class="card-header">
-								<h4 class="card-title d-inline-block">Agency</h4> <a href="agency.php" class="btn btn-primary float-right">View all</a>
-							</div>
-							<div class="card-body p-0">
-								<div class="table-responsive">
-									<table class="table mb-0">
-										<thead class="">
-											<tr>
-												<th>Agency</th>
-												<th>Contact</th>
-												<th>Person In Charge</th>
+		<div class="row">
+			<div class="col-12 col-md-12 col-lg-8 col-xl-8">
+				<div class="card">
+					<div class="card-header">
+						<h4 class="card-title d-inline-block">Agency</h4> <a href="agency.php" class="btn btn-primary float-right">View all</a>
+					</div>
+					<div class="card-body p-0">
+						<div class="table-responsive">
+							<table class="table mb-0">
+								<thead class="">
+									<tr>
+										<th>Agency</th>
+										<th>Contact</th>
+										<th>Person In Charge</th>
 												
-											</tr>
-										</thead>
-										<tbody>
-											<?php
+									</tr>
+								</thead>
+								<tbody>
+					<?php
 			                $result = $db->prepare("SELECT * FROM agency ORDER BY id DESC Limit 5");
 			                $result->execute();
 			                for($i=1; $row = $result->fetch(); $i++){ 
 			               
 			               ?> 
-											<tr>
-													<td style="min-width: 200px;">
-                                                  
-														<h2><a href="#"><?php echo $row['agency_name']; ?> <span><?php echo $row['state']; ?></span></a></h2>
-													</td>                 
-													<td>
-														<h5 class="time-title p-0"><?php echo $row['email']; ?></h5>
-														<p><?php echo $row['phone_number']; ?></p>
-													</td>
-													<td>
-														<h5 class="time-title p-0"><?php echo $row['personincharge']; ?></h5>
-														<!-- <p>7.00 PM</p> -->
-													</td>
+					<tr>
+					     <td style="min-width: 200px;">                                                  
+						<h2><a href="#"><?php echo $row['agency_name']; ?> <span><?php echo $row['state']; ?></span></a></h2>
+					      </td>                 
+					      <td>
+						   <h5 class="time-title p-0"><?php echo $row['email']; ?></h5>
+						   <p><?php echo $row['phone_number']; ?></p>
+					      </td>
+					      <td>
+						   <h5 class="time-title p-0"><?php echo $row['personincharge']; ?></h5>
+						<!-- <p>7.00 PM</p> -->
+					      </td>
 													
-												</tr>
-											<?php } ?>	
-										</tbody>
-									</table>
-								</div>
-							</div>
-						</div>
-					</div>
+					</tr>
+					<?php } ?>	
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+</div>
                     
                     <div class="col-12 col-md-12 col-lg-4 col-xl-4">
                         <div class="card member-panel">
