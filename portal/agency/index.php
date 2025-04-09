@@ -4,83 +4,60 @@
         <?php include 'includes/navigation.php'; ?>
         <?php include 'includes/sidebar.php'; ?>
         
-         <div class="page-wrapper">
+        <div class="page-wrapper">
             <div class="content">
                 <div class="row">
-                    <!-- Emergency Tile -->
                     <div class="col-md-6 col-sm-6 col-lg-6 col-xl-3">
-                        <?php
-                        $result = $db->prepare("SELECT count(*) as total FROM emergency");
-                        $result->execute();
-                        for ($i = 0; $row = $result->fetch(); $i++) {
-                        ?>
-                            <a href="view-emergency.php">
-                                <div class="dash-widget">
-                                    <span class="dash-widget-bg1"><i class="fa fa-stethoscope" aria-hidden="true"></i></span>
-                                    <div class="dash-widget-info text-right">
-                                        <h3><?php echo $row['total']; ?></h3>
-                                        <span class="widget-title1">Emergency <i class="fa fa-check" aria-hidden="true"></i></span>
-                                    </div>
-                                </div>
-                            </a>
-                        <?php } ?>
-                    </div>
 
-                    <!-- Users Tile -->
-                    <div class="col-md-6 col-sm-6 col-lg-6 col-xl-3">
-                        <?php
-                        $result = $db->prepare("SELECT count(*) as total FROM users");
-                        $result->execute();
-                        for ($i = 0; $row = $result->fetch(); $i++) {
-                        ?>
-                            <a href="users1.php">
-                                <div class="dash-widget">
-                                    <span class="dash-widget-bg2"><i class="fa fa-user-o"></i></span>
-                                    <div class="dash-widget-info text-right">
-                                        <h3><?php echo $row['total']; ?></h3>
-                                        <span class="widget-title2">Users <i class="fa fa-check" aria-hidden="true"></i></span>
-                                    </div>
-                                </div>
-                            </a>
+                    	<?php
+                            // include('../connect.php');
+                            $result = $db->prepare("SELECT count(*) as total FROM emergency");
+                            $result->execute();
+                            for($i=0; $row = $result->fetch(); $i++){
+		                ?>
+                         <a href="view-emergency.php"><div class="dash-widget">
+							<span class="dash-widget-bg1"><i class="fa fa-stethoscope" aria-hidden="true"></i></span>
+							<div class="dash-widget-info text-right">
+								<h3><?php echo $row['total']; ?></h3>
+								<span class="widget-title1">Emergency <i class="fa fa-check" aria-hidden="true"></i></span>
+							</div>
+                        </div>
                         <?php } ?>
-                    </div>
+                        </div>
+                
 
-                    <!-- Agency Tile -->
                     <div class="col-md-6 col-sm-6 col-lg-6 col-xl-3">
-                        <?php
-                        $result = $db->prepare("SELECT count(*) as total FROM agency");
-                        $result->execute();
-                        for ($i = 0; $row = $result->fetch(); $i++) {
-                        ?>
-                            <a href="agency.php">
-                                <div class="dash-widget">
-                                    <span class="dash-widget-bg3"><i class="fa fa-user-md" aria-hidden="true"></i></span>
-                                    <div class="dash-widget-info text-right">
-                                        <h3><?php echo $row['total']; ?></h3>
-                                        <span class="widget-title3">Agency <i class="fa fa-check" aria-hidden="true"></i></span>
-                                    </div>
-                                </div>
-                            </a>
-                        <?php } ?>
+                    	<?php
+		                // include('../connect.php');
+						$result = $db->prepare("SELECT count(*) as total FROM agency");
+						$result->execute();
+						for($i=0; $row = $result->fetch(); $i++){
+		                ?>
+                        <a href="#"><div class="dash-widget">
+                            <span class="dash-widget-bg3"><i class="fa fa-user-md" aria-hidden="true"></i></span>
+                            <div class="dash-widget-info text-right">
+                                <h3><?php echo $row['total'] ;?></h3>
+                                <span class="widget-title3">Agency <i class="fa fa-check" aria-hidden="true"></i></span>
+                            </div>
+                        </div>
+                    <?php } ?>
                     </div>
-
-                    <!-- Ongoing Emergencies Tile -->
-                    <div class="col-md-6 col-sm-6 col-lg-6 col-xl-3">
-                        <?php
-                        $result = $db->prepare("SELECT count(*) as total FROM emergency WHERE status = 'Pending'");
-                        $result->execute();
-                        for ($i = 0; $row = $result->fetch(); $i++) {
-                        ?>
-                            <a href="view-emergency.php">
-                                <div class="dash-widget">
-                                    <span class="dash-widget-bg4"><i class="fa fa-heartbeat" aria-hidden="true"></i></span>
-                                    <div class="dash-widget-info text-right">
-                                        <h3><?php echo $row['total']; ?></h3>
-                                        <span class="widget-title4">Ongoing <i class="fa fa-check" aria-hidden="true"></i></span>
-                                    </div>
-                                </div>
-                            </a>
-                        <?php } ?>
+                 
+                    <div class="col-md-12 col-sm-12 col-lg-12 col-xl-3">	
+                    	<?php
+		                // include('../connect.php');
+						$result = $db->prepare("SELECT count(*) as total FROM emergency WHERE status = 'Pending'");
+						$result->execute();
+						for($i=0; $row = $result->fetch(); $i++){
+		                ?>
+                        <a href="view-emergency.php"><div class="dash-widget">
+                            <span class="dash-widget-bg4"><i class="fa fa-heartbeat" aria-hidden="true"></i></span>
+                            <div class="dash-widget-info text-right">
+                                <h3><?php echo $row['total'] ;?></h3>
+                                <span class="widget-title4">Ongoing <i class="fa fa-check" aria-hidden="true"></i></span>
+                            </div>
+                        </div>
+                    <?php } ?>
                     </div>
                 </div>
 
