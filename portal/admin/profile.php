@@ -35,8 +35,8 @@
                                         <div class="col-md-5">
                                             <div class="profile-info-left">
                                                 <h3 class="user-name m-t-0 mb-0"><?php echo $_SESSION['SESS_FIRST_NAME'];?></h3>
-                                                <small class="text-muted">Users</small><br>
-                                                <div class="staff-id">USER-<?php echo $_SESSION['SESS_AGENCY_ID'];?></div>
+                                                <small class="text-muted">Admin</small><br>
+                                                <div class="staff-id">ADM<?php echo $_SESSION['SESS_AGENCY_ID'];?></div>
                                             </div>
                                         </div>
                                         <div class="col-md-7">
