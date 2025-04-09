@@ -61,15 +61,13 @@
                                 ?>                                   
 				    </div>
                                 </div>
-                                <div class="profile-basic">
-                                    
+                                <div class="profile-basic">                                   
                                     <div class="row">
                                         <div class="col-md-5">
                                             <div class="profile-info-left">
                                                 <h3 class="user-name m-t-0 mb-0"><?php echo $_SESSION['SESS_FIRST_NAME'];?></h3>
                                                 <small class="text-muted">Users</small><br>
                                                 <div class="staff-id">USER-<?php echo $_SESSION['SESS_AGENCY_ID'];?></div>
-                                                
                                             </div>
                                         </div>
                                         <div class="col-md-7">
@@ -141,8 +139,6 @@
     </div>
 </div>
 </div>
-
-<!-- Bootstrap JS and dependencies -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
 
 </body>
