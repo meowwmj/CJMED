@@ -121,7 +121,7 @@
                                             <li>
                                                 <div class="contact-cont">
                                                     <div class="float-left user-img m-r-10">
-                                                        <a href="#" title="John Doe"><img src="../../uploads/<?php echo $row['photo']; ?>" alt="" class="w-40 rounded-circle"></a>
+                                                        <a href="#" title="John Doe"><img src="../../uploads/<?php echo $row['photo']; ?>" class="rounded-circle m-r-5" width="28" height="28"></a>
                                                     </div>
                                                     <div class="contact-info">
                                                         <span class="contact-name text-ellipsis"><?php echo $row['username']; ?></span>
