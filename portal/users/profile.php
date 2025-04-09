@@ -67,7 +67,7 @@
                                             <div class="profile-info-left">
                                                 <h3 class="user-name m-t-0 mb-0"><?php echo $_SESSION['SESS_FIRST_NAME'];?></h3><br>
                                                 <small class="text-muted">Users</small><br>
-                                                <div class="staff-id">USER-<?php echo $_SESSION['SESS_AGENCY_ID'];?></div>
+                                                <div class="staff-id">USER-<?php echo $_SESSION['SESS_USERS_ID'];?></div>
                                             </div>
                                         </div>
                                         <div class="col-md-7">
