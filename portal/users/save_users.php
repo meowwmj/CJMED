@@ -5,11 +5,6 @@ ini_set('display_errors', 1);
 session_start();
 include('includes/connect.php');
 
-// Check connection
-if ($conn === null) {
-    die("Connection to the database failed.");
-}
-
 $name = $_POST['name'];
 $email = $_POST['email'];
 $username = $_POST['username'];
@@ -33,11 +28,6 @@ move_uploaded_file($_FILES['photo']['tmp_name'], $target_file);
 $sql = "INSERT INTO users (user_id, name, email, username, password, phone, address, photo) 
         VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
 $stmt = $conn->prepare($sql);
-
-if ($stmt === false) {
-    die('Error preparing statement: ' . $conn->error);
-}
-
 $stmt->bind_param("ssssssss", $user_id, $name, $email, $username, $encrypted_password, $phone, $address, $photo);
 
 if ($stmt->execute()) {
@@ -49,4 +39,5 @@ if ($stmt->execute()) {
 
 $stmt->close();
 $conn->close();
+
 ?>
