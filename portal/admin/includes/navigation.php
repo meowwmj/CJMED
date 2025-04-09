@@ -62,9 +62,9 @@
                         <span class="user-img">
                             <?php
                             if (!empty($_SESSION['SESS_PRO_PIC'])) {
-                                echo '<img class="rounded-circle" src="../../uploads/' . $_SESSION['SESS_PRO_PIC'] . '" width="24" alt="Admin">';
+                                echo '<img class="rounded-circle" src="../../uploads/' . $_SESSION['SESS_PRO_PIC'] . '" width="24" height="24">';
                             } else {
-                                echo '<img class="rounded-circle" src="../../uploads/default.jpg" width="24" alt="Admin">';
+                                echo '<img class="rounded-circle" src="../../uploads/default.jpg" width="24" height="24">';
                             }
                             ?>
                            <!-- <span class="status online"></span>-->
