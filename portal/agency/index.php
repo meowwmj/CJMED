@@ -89,7 +89,7 @@
                     <div class="col-12 col-md-12 col-lg-8 col-xl-8">
                       <div class="card member-panel">
                         <div class="card-header bg-white">
-                                    <h4 class="card-title d-inline-block">Agency</h4> <a href="agency.php" class="btn btn-primary float-right">View all</a>
+                                    <h4 class="card-title d-inline-block">Agency</h4>
                                 </div>
                                 <div class="card-body p-0">
                                     <div class="table-responsive">
