@@ -148,7 +148,7 @@
                                                     </div>
                                                     <div class="contact-info">
                                                         <span class="contact-name text-ellipsis"><?php echo $row['username']; ?></span>
-                                                        <span class="contact-date"><?php echo $row['phone']; ?></span>
+                                                        <span class="contact-date"><?php echo $row['phone']; ?></span><br>
                                                     </div>
                                                 </div>
                                             </li>
@@ -159,7 +159,6 @@
                         </div>
                     </div>
                 </div>
-<br>
 
                <!-- Emergency Chart Section -->
                <div class="row">
