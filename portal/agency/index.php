@@ -131,7 +131,7 @@
                     <div class="col-12 col-md-12 col-lg-4 col-xl-4">
                         <div class="card member-panel">
                             <div class="card-header bg-white">
-                                    <h4 class="card-title d-inline-block">Users</h4></a>
+                                    <h4 class="card-title d-inline-block">Users</h4><a href="agency.php" class="btn btn-primary float-right">View all</a>
                                 </div>
                             <div class="card-body p-0">
                                 <table class="table table-striped">
