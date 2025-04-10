@@ -5,7 +5,7 @@
         <?php include 'includes/navigation.php'; ?>
         <?php include 'includes/sidebar.php'; ?>
         
-        <div class="page-wrapper">
+       <div class="page-wrapper">
             <div class="content">
                 <div class="row">
                     <!-- Emergency Tile -->
@@ -88,19 +88,19 @@
                 <!-- Agency Table -->
                 <div class="row">
                     <div class="col-12 col-md-12 col-lg-8 col-xl-8">
-                        <div class="card">
-                            <div class="card-header">
-                                <h4 class="card-title d-inline-block">Agency</h4> <a href="agency.php" class="btn btn-primary float-right">View all</a>
-                            </div>
-                            <div class="card-body p-0">
-                                <div class="table-responsive">
-                                    <table class="table mb-0">
-                                        <thead>
-                                            <tr>
-                                                <th>Agency</th>
-                                                <th>Contact</th>
-                                                <th>Person In Charge</th>
-                                            </tr>
+                      <div class="card member-panel">
+                        <div class="card-header bg-white">
+                                    <h4 class="card-title d-inline-block">Agency</h4> <a href="agency.php" class="btn btn-primary float-right">View all</a>
+                                </div>
+                                <div class="card-body p-0">
+                                    <div class="table-responsive">
+                                        <table class="table mb-0">
+                                            <thead>
+                                                <tr>
+                                                    <th>Agency</th>
+                                                    <th>Contact</th>
+                                                    <th>Person In Charge</th>
+                                                </tr>   
                                         </thead>
                                         <tbody>
                                             <?php
@@ -132,8 +132,8 @@
                     <div class="col-12 col-md-12 col-lg-4 col-xl-4">
                         <div class="card member-panel">
                             <div class="card-header bg-white">
-                                <h4 class="card-title mb-0">USERS</h4>
-                            </div>
+                                    <h4 class="card-title d-inline-block">Users</h4> <a href="users1.php" class="btn btn-primary float-right">View all</a>
+                                </div>
                             <div class="card-body p-0">
                                 <table class="table table-striped">
                                     <?php
@@ -310,7 +310,7 @@
 
 <style>
     .table-responsive {
-        max-height: 270px; /* Adjust this height as needed */
+        max-height: 250px; /* Adjust this height as needed */
         overflow-y: auto;
     }
 </style>
