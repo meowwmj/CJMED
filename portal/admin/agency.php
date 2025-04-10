@@ -17,9 +17,6 @@
                             <li class="active">
                             <a href="agency.php"><i class="fa fa-user-md"></i> <span>Agency</span></a>
                         </li>
-                         <li>
-                            <a href="report-emergency.php"><i class="fa fa-heartbeat"></i> <span>Reports Emergency</span></a>
-                        </li>
                         <?php
                         // include('../connect.php');
                         $result = $db->prepare("SELECT count(*) as total FROM emergency WHERE status = 'Pending'");
