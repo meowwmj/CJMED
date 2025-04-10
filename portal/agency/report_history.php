@@ -12,10 +12,7 @@
                         </li>
                         <li>
                             <a href="announcement.php"><i class="fa fa-bell"></i> <span>Announcements</span></a>
-                        </li>
-                        <li>
-                            <a href="report-emergency.php"><i class="fa fa-heartbeat"></i> <span>Report Emergency</span></a>
-                        </li>
+                        </li>                       
                         <?php
                         // include('../connect.php');
                         $result = $db->prepare("SELECT count(*) as total FROM emergency WHERE status = 'Pending'");
