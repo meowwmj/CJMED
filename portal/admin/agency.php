@@ -61,7 +61,7 @@
 
                 </div>
                     
-				<div class="row doctor-grid ">
+		<div class="row doctor-grid ">
                     <?php if(!isset($_GET["page"])){
                         $_GET["page"] = 1;
                     }
