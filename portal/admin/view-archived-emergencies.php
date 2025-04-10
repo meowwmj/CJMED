@@ -30,7 +30,7 @@
                             <a href="report_history.php"><i class="fa fa-file-text-o"></i> <span>History</span></a>
                         </li>
                         <li class="active">                          
-                            <a href="view-archived-emergencies.php"><i class="fa fa-file"></i> <span>Archived</span></a>
+                            <a href="view-archived-emergencies.php"><i class="fa fa-archive"></i> <span>Archived</span></a>
                         </li>
                         <li>
                             <a href="users.php"><i class="fa fa-user-plus"></i> <span>Manage Admin</span></a>
