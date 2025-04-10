@@ -219,7 +219,34 @@
     box-shadow: 0 0 5px rgba(0, 123, 255, 0.2);
 }
 
+.submenu-list {
+    list-style: none;
+    padding-left: 20px;
+    margin: 0; /* Remove any margin */
+    background-color: #2c3e50; /* Ensure the background blends with the sidebar */
+}   
+.submenu-list li {
+    margin: 0;
+    background-color: #2c3e50; 
+    padding: 0px;
+    padding-top: 10px;
+}
 
+.submenu-list a {
+    background-color: #2c3e50;
+    text-decoration: none;
+    font-size: 15px;
+    padding: 10px;
+    display: block;
+    border-radius: 25px;
+    transition: all 0.3s ease;
+}
+
+.submenu-list a:hover,
+.submenu-list .active a {
+    background-color: #fff;
+    color: #2c3e50;
+}
 </style> 
 
 <script>
