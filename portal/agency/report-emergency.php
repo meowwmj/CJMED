@@ -20,7 +20,7 @@
                         for($i=0; $row = $result->fetch(); $i++){
                         ?>  
                      <li class="active">
-                            <a href="view-emergency.php"><i class="fa fa-file"></i> <span>Emergency</span> <span class="badge badge-pill btn-primary float-right"><?php echo $row['total'] ;?></span></a>
+                            <a href="view-emergency.php"><i class="fa fa-file"></i> <span>Emergency</span> <span class="badge badge-pill bg-primary float-right"><?php echo $row['total'] ;?></span></a>
                         </li>
                     <?php } ?>
                         <li >
