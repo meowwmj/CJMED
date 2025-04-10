@@ -56,7 +56,6 @@
                     <div class="col-sm-4 col-3">
                         <h4 class="page-title">Emergency Incident Reports</h4>
                     </div>
-                </div>
                 
                 <div class="col-sm-8 col-9 text-right m-b-20">
                     <a href="report-agency.php" class="btn btn-primary btn-rounded float-right"><i class="fa fa-plus"></i>Report Emergency</a>
