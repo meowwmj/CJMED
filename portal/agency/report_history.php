@@ -31,12 +31,9 @@
                         </li>
 			<li class>                          
                             <a href="view-archived-emergencies.php"><i class="fa fa-archive"></i> <span>Archived</span></a>
-                        </li>
-                        <li>
-                            <a href="profile.php"><i class="fa fa-user"></i> <span>Profile</span></a>
-                        </li>
+                        </li>                      
 			<li>
-                            <a href="rescue.php"><i class="	fa fa-calendar-o"></i> <span>Rescue</span></a> 
+                            <a href="rescue.php"><i class="fa fa-calendar-o"></i> <span>Rescue</span></a> 
                         </li>
                         <li>
                             <a href="logout.php"><i class="fa fa-power-off"></i> <span>Logout</span></a>
