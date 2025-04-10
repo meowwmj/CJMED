@@ -33,10 +33,9 @@
                             <a href="view-archived-emergencies.php"><i class="fa fa-archive"></i> <span>Archived</span></a>
                         </li>
                         <li class="active">
-			    <a href="#"><i class="fa fa-users"></i> <span>Manage</span> <span class="menu-arrow"></span></a>
-			    <ul class="submenu-list">
+			    <a href="#"><i class="fa fa-users"></i> <span>Manage</span> <span class="menu-arrow"></span></a>			   
 			</li>
-		        <li>
+		        <li> <ul class="submenu-list">
 			    <li>
 			        <a href="users.php"><i class="fa fa-user-plus"></i> <span>Manage Admin</span></a>
 			    </li>
