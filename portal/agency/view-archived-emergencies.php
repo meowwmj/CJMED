@@ -6,7 +6,7 @@
         <div class="sidebar" id="sidebar">
             <div class="sidebar-inner slimscroll">
                 <div id="sidebar-menu" class="sidebar-menu">
-                <ul>
+                    <ul>
                         <li>
                             <a href="index.php"><i class="fa fa-dashboard"></i> <span>Dashboard</span></a>
                         </li>
@@ -31,10 +31,7 @@
                         </li>
                         <li class="active">                          
                             <a href="view-archived-emergencies.php"><i class="fa fa-archive"></i> <span>Archived</span></a>
-                        </li>
-                        <li>
-                            <a href="profile.php"><i class="fa fa-user"></i> <span>Profile</span></a>
-                        </li>
+                        </li>                      
                         <li>
                             <a href="rescue.php"><i class="fa fa-calendar-o"></i> <span>Rescue</span></a> 
                         </li>
