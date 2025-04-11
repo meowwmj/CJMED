@@ -52,53 +52,54 @@
                 </div>
             </div>
         </div>    
-        <div class="page-wrapper">
+
+         <div class="page-wrapper">
             <div class="content">
                 <div class="row">
                     <div class="col-lg-8 offset-lg-2">
                         <h4 class="page-title">Add Department</h4>
                     </div>
                 </div>
-                 <?php
-		    $id=$_GET['id'];
-		    $result = $db->prepare("SELECT * FROM emergency_type where id= :post_id");
-		    $result->bindParam(':post_id', $id);
-		    $result->execute();
-		    for($i=0; $row = $result->fetch(); $i++){                        
-		?>
-                <div class="row">
-                    <div class="col-lg-8 offset-lg-2">
-                        <form>
-							<div class="form-group">
-								<label>Department Name</label>
-								<input class="form-control" value="<?php echo $row["name"]; ?>" type="text">
-							</div>
-                            <div class="form-group">
-                                <label>Description</label>
-                                <textarea cols="30" rows="4"  class="form-control" value="<?php echo $row["name"]; ?>"></textarea>
-                            </div>
-                            <div class="form-group">
-                                <label class="display-block">Department Status</label>
-								<div class="form-check form-check-inline">
-									<input class="form-check-input" type="radio" name="status" id="product_active" value="option1" checked>
-									<label class="form-check-label" for="product_active">
-									Active
-									</label>
-								</div>
-								<div class="form-check form-check-inline">
-									<input class="form-check-input" type="radio" name="status" id="product_inactive" value="option2">
-									<label class="form-check-label" for="product_inactive">
-									Inactive
-									</label>
-								</div>
-                            </div>
-                            <div class="m-t-20 text-center">
-                                <button class="btn btn-primary submit-btn">Create Department</button>
-                            </div>
-                        </form>
+                <?php
+                if (isset($_GET['id']) && is_numeric($_GET['id'])) {
+                    $id = $_GET['id'];
+
+                    $result = $db->prepare("SELECT * FROM emergency_type WHERE id = :post_id");
+                    $result->bindParam(':post_id', $id);
+                    $result->execute();
+
+                    if ($row = $result->fetch()) {
+                ?>
+                    <div class="row">
+                        <div class="col-lg-8 offset-lg-2">
+                            <form method="POST" action="update_emergency_type.php">
+                                <input type="hidden" name="id" value="<?php echo $id; ?>">
+
+                                <div class="form-group">
+                                    <label>Department Name</label>
+                                    <input class="form-control" name="name" value="<?php echo htmlspecialchars($row['name']); ?>" type="text" required>
+                                </div>
+
+                                <div class="form-group">
+                                    <label>Description</label>
+                                    <textarea name="description" cols="30" rows="4" class="form-control"><?php echo htmlspecialchars($row['description']); ?></textarea>
+                                </div>
+
+                                <div class="m-t-20 text-center">
+                                    <button class="btn btn-primary submit-btn">Update Department</button>
+                                </div>
+                            </form>
+                        </div>
                     </div>
-                </div>
-            <?php } ?>
+                <?php
+                    } else {
+                        echo "<div class='alert alert-warning'>No department found with that ID.</div>";
+                    }
+                } else {
+                    echo "<div class='alert alert-danger'>Invalid access. No ID provided.</div>";
+                }
+                ?>
+
             </div>
 			<?php include 'includes/message.php'; ?>
         </div>
@@ -129,13 +130,11 @@
 
     <div class="sidebar-overlay" data-reff=""></div>
     <script src="assets/js/jquery-3.2.1.min.js"></script>
-	<script src="assets/js/popper.min.js"></script>
+    <script src="assets/js/popper.min.js"></script>
     <script src="assets/js/bootstrap.min.js"></script>
     <script src="assets/js/jquery.slimscroll.js"></script>
     <script src="assets/js/select2.min.js"></script>
     <script src="assets/js/app.js"></script>
-
-
 
 </body>
 </html>
