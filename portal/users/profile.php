@@ -25,7 +25,7 @@
                             <a href="report_history.php"><i class="fa fa-file-text-o"></i> <span>History</span></a>
                         </li>
                         <li>
-                            <a href="rescue.php"><i class="	fa fa-calendar-o"></i> <span>Rescue</span></a> 
+                            <a href="rescue.php"><i class="fa fa-calendar-o"></i> <span>Rescue</span></a> 
                         </li>
                         <li>
                             <a href="logout.php"><i class="fa fa-power-off"></i> <span>Logout</span></a>
