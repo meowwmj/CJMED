@@ -30,7 +30,7 @@
             </div>
         </div>
 
-         <div class="page-wrapper">
+ class="page-wrapper">
             <div class="content">
                 <div class="row">
                     <div class="col-sm-7 col-6">
@@ -70,10 +70,10 @@
                                 $_SESSION['SESS_EMAIL'] = $new_email;
                                 $_SESSION['SESS_ADDRESS'] = $new_address;
                                 $_SESSION['SESS_PRO_PIC'] = $new_profile_pic;
-
+                                
                                 // $update_query = "UPDATE users SET first_name = ?, phone_number = ?, email = ?, address = ?, profile_pic = ? WHERE id = ?";
                                 // $stmt = $db->prepare($update_query);
-                                // $stmt->execute([$new_first_name, $new_phone_number, $new_email, $new_address, $new_profile_pic, $user_id]);
+                                // $stmt->execute([$new_first_name, $new_phone_number, $new_email, $new_address, $new_profile_pic, $user_id]);                             
                             }
                         ?>
 
@@ -181,7 +181,6 @@
         </div>
     </div>
 </div>
-
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
 
 </body>
