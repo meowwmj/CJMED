@@ -82,9 +82,9 @@
                                 $_SESSION['SESS_ADDRESS'] = $new_address;
                                 $_SESSION['SESS_PRO_PIC'] = $new_profile_pic;
 
-                                $update_query = "UPDATE users SET first_name = ?, phone_number = ?, email = ?, address = ?, profile_pic = ? WHERE id = ?";
-                                $stmt = $db->prepare($update_query);
-                                $stmt->execute([$new_first_name, $new_phone_number, $new_email, $new_address, $new_profile_pic, $user_id]);
+                                // $update_query = "UPDATE users SET first_name = ?, phone_number = ?, email = ?, address = ?, profile_pic = ? WHERE id = ?";
+                                // $stmt = $db->prepare($update_query);
+                                // $stmt->execute([$new_first_name, $new_phone_number, $new_email, $new_address, $new_profile_pic, $user_id]);
                             }
                         ?>
 
