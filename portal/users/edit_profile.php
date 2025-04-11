@@ -35,7 +35,7 @@
             </div>
         </div>
 
- class="page-wrapper">
+  <div class="page-wrapper">
             <div class="content">
                 <div class="row">
                     <div class="col-sm-7 col-6">
