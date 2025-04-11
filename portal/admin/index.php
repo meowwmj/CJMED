@@ -5,7 +5,7 @@
         <?php include 'includes/navigation.php'; ?>
         <?php include 'includes/sidebar.php'; ?>
         
-       <div class="page-wrapper">
+        <div class="page-wrapper">
             <div class="content">
                 <div class="row">
                     <!-- Emergency Tile -->
@@ -235,75 +235,66 @@
 
             // Create the Chart
             var emergencyChart = new Chart(ctx, {
-                type: 'line',  // Line chart to visualize trends
-                data: {
-                    labels: months,  // These labels will be displayed on the X-axis
-                    datasets: [{
-                        label: 'Emergencies Per Month',
-                        data: emergencyCounts,  // This will be plotted on the Y-axis
-                        backgroundColor: 'rgba(72, 140, 220, 0.2)',  // Light blue background
-                        borderColor: 'rgba(72, 140, 220, 1)',        // Dark blue border
-                        borderWidth: 2,
-                        fill: true,
-                    }]
+    type: 'bar',  // Changed from 'line' to 'bar'
+    data: {
+        labels: months,
+        datasets: [{
+            label: 'Emergencies Per Month',
+            data: emergencyCounts,
+            backgroundColor: 'rgba(72, 140, 220, 0.7)',  // Slightly more solid for bars
+            borderColor: 'rgba(72, 140, 220, 1)',
+            borderWidth: 1
+        }]
+    },
+    options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+            tooltip: {
+                backgroundColor: 'rgba(0, 0, 0, 0.8)',
+                titleColor: '#fff',
+                bodyColor: '#fff',
+                footerColor: '#fff',
+            }
+        },
+        scales: {
+            x: {
+                ticks: {
+                    font: {
+                        family: 'Arial, sans-serif',
+                        weight: 'bold',
+                        size: 14
+                    },
+                    color: '#555',
                 },
-                options: {
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    plugins: {
-                        tooltip: {
-                            backgroundColor: 'rgba(0, 0, 0, 0.8)', // Dark background for tooltip
-                            titleColor: '#fff', // White title color
-                            bodyColor: '#fff', // White body color
-                            footerColor: '#fff', // White footer color
-                        }
-                    },
-                    scales: {
-                        x: {
-                            ticks: {
-                                font: {
-                                    family: 'Arial, sans-serif',
-                                    weight: 'bold',
-                                    size: 14
-                                },
-                                color: '#555', // Subtle gray text
-                            },
-                            grid: {
-                                display: false, // No grid lines for X-axis
-                            }
-                        },
-                        y: {
-                            ticks: {
-                                font: {
-                                    family: 'Arial, sans-serif',
-                                    size: 14,
-                                    weight: 'bold'
-                                },
-                                color: '#555', // Subtle gray text for Y-axis labels
-                                beginAtZero: true,
-                            },
-                            grid: {
-                                color: 'rgba(0, 0, 0, 0.1)', // Very light grid lines
-                                borderColor: 'rgba(0, 0, 0, 0.1)', // Light border color
-                            }
-                        }
-                    },
-                    elements: {
-                        line: {
-                            tension: 0.4, // Smooth curve for the line chart
-                        },
-                        point: {
-                            radius: 5, // Size of the points on the chart
-                            hoverRadius: 7, // Larger point on hover
-                        }
-                    },
-                    layout: {
-                        padding: {
-                            top: 20, // Add some padding for better spacing
-                        }
-                    }
+                grid: {
+                    display: false,
                 }
-            });
+            },
+            y: {
+                ticks: {
+                    font: {
+                        family: 'Arial, sans-serif',
+                        size: 14,
+                        weight: 'bold'
+                    },
+                    color: '#555',
+                    beginAtZero: true,
+                },
+                grid: {
+                    color: 'rgba(0, 0, 0, 0.1)',
+                    borderColor: 'rgba(0, 0, 0, 0.1)',
+                }
+            }
+        },
+        layout: {
+            padding: {
+                top: 20,
+            }
+        }
+    }
+});
+
         </script>
     </body>
 </html>
