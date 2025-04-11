@@ -7,38 +7,29 @@
             <div class="sidebar-inner slimscroll">
                 <div id="sidebar-menu" class="sidebar-menu">
                     <ul>
-                        <li class="">
+                        <li>
                             <a href="index.php"><i class="fa fa-dashboard"></i> <span>Dashboard</span></a>
                         </li>
                         <li>
                             <a href="announcement.php"><i class="fa fa-bell"></i> <span>Announcements</span></a>
-                        </li>
-                        <li class="">
-                            <a href="agency.php"><i class="fa fa-user-md"></i> <span>Agency</span></a>
-                        </li>                         
+                        </li>                        
                         <?php
                         // include('../connect.php');
                         $result = $db->prepare("SELECT count(*) as total FROM emergency WHERE status = 'Pending'");
                         $result->execute();
                         for($i=0; $row = $result->fetch(); $i++){
                         ?>  
-                        <li class="">
+                        <li>
                             <a href="view-emergency.php"><i class="fa fa-file"></i> <span>Emergency</span> <span class="badge badge-pill btn-primary float-right"><?php echo $row['total'] ;?></span></a>
                         </li>
                     <?php } ?>
-                        <li>
+                        <li >
                             <a href="report_history.php"><i class="fa fa-file-text-o"></i> <span>History</span></a>
                         </li>
-                        <li>                          
+			<li class>                          
                             <a href="view-archived-emergencies.php"><i class="fa fa-archive"></i> <span>Archived</span></a>
-                        </li>
-                        <li>
-                            <a href="users.php"><i class="fa fa-user-plus"></i> <span>Manage Admin</span></a>
-                        </li>
-                        <li>
-                            <a href="users1.php"><i class="fa fa-user"></i> <span>Manage Users</span></a>
-                        </li>
-                        <li>
+                        </li>                      
+			<li>
                             <a href="rescue.php"><i class="	fa fa-calendar-o"></i> <span>Rescue</span></a> 
                         </li>
                         <li>
@@ -48,6 +39,8 @@
                 </div>
             </div>
         </div>    
+    </div>
+    
         <div class="page-wrapper">
             <div class="content">
                 <div class="row">
@@ -63,13 +56,13 @@
                 <div class="row">
                     <div class="col-lg-8 offset-lg-2">
                         <?php
-               $id=$_GET['id'];
-    $result = $db->prepare("SELECT * FROM admin where id= :post_id");
-    $result->bindParam(':post_id', $id);
-    $result->execute();
-    for($i=0; $row = $result->fetch(); $i++){                        
-?>
-<form action="update_admin.php" method="post" enctype="multipart/form-data"> 
+                               $id=$_GET['id'];
+                                $result = $db->prepare("SELECT * FROM admin where id= :post_id");
+                                $result->bindParam(':post_id', $id);
+                                $result->execute();
+                                for($i=0; $row = $result->fetch(); $i++){                        
+                        ?>
+                        <form action="update_admin.php" method="post" enctype="multipart/form-data"> 
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group">
@@ -82,23 +75,17 @@
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label>Full Name</label>
-                                       <input class="form-control" type="text" name="name"  value="<?php echo $row['name']; ?>">
-                                        
+                                       <input class="form-control" type="text" name="name"  value="<?php echo $row['name']; ?>">                                        
                                     </div>
-
-                                </div>
-                            
+                                </div>                            
                             </div>
                             <div class="row">
-                                <div class="col-md-6">
-                                    
+                                <div class="col-md-6">                                    
                                     <div class="form-group">
                                         <label>Email </label>
                                         <input class="form-control" type="text" name="email" value="<?php echo $row['email']; ?>">
-                                    </div>
-                                
+                                    </div>                                
                                 </div>
-
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label>Phone Number  </label>
