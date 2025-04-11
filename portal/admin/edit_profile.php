@@ -208,7 +208,6 @@
 
 </div>
 
-<!-- Bootstrap JS and dependencies -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
 
 </body>
@@ -219,8 +218,8 @@
 .submenu-list {
     list-style: none;
     padding-left: 20px;
-    margin: 0; /* Remove any margin */
-    background-color: #2c3e50; /* Ensure the background blends with the sidebar */
+    margin: 0; 
+    background-color: #2c3e50;
 }   
 .submenu-list li {
     margin: 0;
@@ -244,4 +243,25 @@
     background-color: #fff;
     color: #2c3e50;
 }
-</style>
+
+.form-group label {
+    font-weight: 400;
+    color: #333;
+}
+
+.form-control {
+    border-radius: 10px;
+    padding: 10px;
+    border: 1px solid #ddd;
+    transition: all 0.3s ease;
+}
+
+.form-control:focus {
+    border-color: #007bff;
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.2);
+}
+</style> 
+
+</body>
+</html>
+
