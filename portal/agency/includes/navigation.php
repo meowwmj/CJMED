@@ -1,4 +1,4 @@
-<div class="header">
+		<div class="header">
 			<div class="header-left">
 				<a href="index.php" class="logo">
 					<img src="assets/img/pdrr.png" width="35" height="35" alt=""> <span>CJMED</span>
@@ -40,7 +40,7 @@
 											</span>
 											<div class="media-body">
 												<p class="noti-details">There is a emergency at <span class="noti-title"><?php echo $row['address'] ?>, </span> the <span class="noti-time"><?php echo $row['agency_name'] ?></span> is needed</p>
-												<p class="noti-time"><span class="notification-time"><?php echo $row['date'] ?></span></p>
+												<p class="noti-time"><span class="notification-time"><?php echo date('m/d/Y'); ?></span></p>
 											</div>
                                         </div>
                                     </a>
@@ -58,7 +58,7 @@
                 
                 <li class="nav-item dropdown has-arrow">
                     
-                  <a href="#" class="dropdown-toggle nav-link user-link" data-toggle="dropdown">
+                <a href="#" class="dropdown-toggle nav-link user-link" data-toggle="dropdown">
                         <span class="user-img">
                             <?php
                             if (!empty($_SESSION['SESS_PRO_PIC'])) {
@@ -75,8 +75,8 @@
                     </a>
 					<div class="dropdown-menu">
 						<a class="dropdown-item" href="profile.php">My Profile</a>
-						<!-- <a class="dropdown-item" href="edit-profile.html">Edit Profile</a>
-						<a class="dropdown-item" href="settings.html">Settings</a> -->
+						<a class="dropdown-item" href="emergency_type.php">Emergency Type</a>
+						<!--<a class="dropdown-item" href="settings.html">Settings</a> -->
 						<a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">Logout</a>
 					</div>
                 </li>
@@ -85,8 +85,8 @@
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="fa fa-ellipsis-v"></i></a>
                 <div class="dropdown-menu dropdown-menu-right">
                     <a class="dropdown-item" href="profile.php">My Profile</a>
-                   <!--  <a class="dropdown-item" href="edit-profile.html">Edit Profile</a>
-                    <a class="dropdown-item" href="settings.html">Settings</a> -->
+                    <a class="dropdown-item" href="emergency_type.php">Emergency Type</a>
+                    <!--<a class="dropdown-item" href="settings.html">Settings</a> -->
                     <a class="dropdown-item" href="logout.php">Logout</a>
                 </div>
             </div>
