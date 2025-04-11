@@ -54,7 +54,7 @@
             </div>
         </div>  
 	
-       <div class="page-wrapper">
+    <div class="page-wrapper">
             <div class="content">
                 <div class="row">
                     <div class="col-sm-7 col-6">
@@ -124,7 +124,7 @@
         </div>
     </div>
 
-<?php include 'includes/message.php'; ?>
+    <?php include 'includes/message.php'; ?>
             </div>
         </div>
         <div class="sidebar-overlay" data-reff=""></div>
@@ -159,7 +159,6 @@
 
 </div>
 
-<!-- Bootstrap JS and dependencies -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
 
 </body>
