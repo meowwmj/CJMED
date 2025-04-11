@@ -40,7 +40,7 @@
             </div>
         </div>
          
-            <div class="page-wrapper">
+          <div class="page-wrapper">
                 <div class="content">
                 <div class="row">
                     <div class="col-lg-8 offset-lg-2">
@@ -83,16 +83,16 @@
                                         <th>#</th>
                                         <th>Name</th>
                                         <th>Description</th>
-                                        <th class="text-right">Action</th>
+                                        <th>Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                     <?php
-                $result = $db->prepare("SELECT * FROM emergency_type ");
-                $result->execute();
-                for($i=1; $row = $result->fetch(); $i++){ 
-               
-               ?> 
+                                    <?php
+                                        $result = $db->prepare("SELECT * FROM emergency_type ");
+                                        $result->execute();
+                                        for($i=1; $row = $result->fetch(); $i++){ 
+                                    
+                                    ?> 
                                     <tr>
                                         <td><?php echo $i;?></td>
                                         <td><?php echo $row['name']; ?></td>
@@ -101,7 +101,7 @@
                                             <div class="dropdown dropdown-action">
                                                 <a href="#" class="action-icon dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="fa fa-ellipsis-v"></i></a>
                                                 <div class="dropdown-menu dropdown-menu-right">
-                                                    <!-- <a class="dropdown-item" href="edit_emergency_type.php?id=<?php echo $row['id'];?>"><i class="fa fa-pencil m-r-5"></i> Edit</a> -->
+                                                    <a class="dropdown-item" href="edit_emergency_type.php?id=<?php echo $row['id'];?>"><i class="fa fa-pencil m-r-5"></i> Edit</a>
                                                     <a class="dropdown-item" href="delete_type.php?id=<?=$row['id'] ?>"><i class="fa fa-trash-o m-r-5"></i> Delete</a>
                                                 </div>
                                             </div>
@@ -159,14 +159,12 @@
 
     <div class="sidebar-overlay" data-reff=""></div>
     <script src="assets/js/jquery-3.2.1.min.js"></script>
-	<script src="assets/js/popper.min.js"></script>
+    <script src="assets/js/popper.min.js"></script>
     <script src="assets/js/bootstrap.min.js"></script>
     <script src="assets/js/jquery.dataTables.min.js"></script>
     <script src="assets/js/dataTables.bootstrap4.min.js"></script>
     <script src="assets/js/jquery.slimscroll.js"></script>
     <script src="assets/js/app.js"></script>
+
 </body>
-
-
-<!-- departments23:21-->
 </html>
