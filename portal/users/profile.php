@@ -36,7 +36,7 @@
             </div>
         </div>
 
-    <div class="page-wrapper">
+     <div class="page-wrapper">
             <div class="content">
                 <div class="row">
                     <div class="col-sm-7 col-6">
@@ -99,7 +99,9 @@
                             </div>                        
                         </div>
                     </div>
-                </div>				
+                </div>
+                
+				
             </div>
         </div>
     </div>
