@@ -195,5 +195,26 @@
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
 
+<style>
+/* Form fields */
+.form-group label {
+    font-weight: 400;
+    color: #333;
+}
+
+/* Input fields */
+.form-control {
+    border-radius: 10px;
+    padding: 10px;
+    border: 1px solid #ddd;
+    transition: all 0.3s ease;
+}
+
+/* Input focus effect */
+.form-control:focus {
+    border-color: #007bff;
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.2);
+}
+</style> 
 </body>
-</html> 
+</html>
