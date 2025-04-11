@@ -157,7 +157,8 @@
                                                 </div>
                                             </div>
                                         </div>
-
+                                        
+                                        <div class="col-md-6">
                                         <div class="form-group">
                                             <label>Profile Picture</label>
                                             <input class="form-control" type="file" name="profile_pic">
