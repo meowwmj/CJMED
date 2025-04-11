@@ -25,14 +25,14 @@
                         <li class="">
                             <a href="view-emergency.php"><i class="fa fa-file"></i> <span>Emergency</span> <span class="badge badge-pill btn-primary float-right"><?php echo $row['total'] ;?></span></a>
                         </li>
-                    <?php } ?>
+                        <?php } ?>
                         <li>
                             <a href="report_history.php"><i class="fa fa-file-text-o"></i> <span>History</span></a>
                         </li>
                         <li>                          
                             <a href="view-archived-emergencies.php"><i class="fa fa-archive"></i> <span>Archived</span></a>
                         </li>
-                      <li>
+                        <li>
                             <a href="#"><i class="fa fa-users"></i> <span>Manage</span> <span class="menu-arrow"></span></a>
                             <ul class="submenu-list">
                                 <li>
@@ -94,15 +94,10 @@
                                 $_SESSION['SESS_EMAIL'] = $new_email;
                                 $_SESSION['SESS_ADDRESS'] = $new_address;
                                 $_SESSION['SESS_PRO_PIC'] = $new_profile_pic;
-
-                                // Assuming you want to update the database
-                                // You can perform a database update query here to persist the changes
-                                // Example:
-                                // $update_query = "UPDATE users SET first_name = ?, phone_number = ?, email = ?, address = ?, profile_pic = ? WHERE id = ?";
-                                // $stmt = $db->prepare($update_query);
-                                // $stmt->execute([$new_first_name, $new_phone_number, $new_email, $new_address, $new_profile_pic, $user_id]);
-
-                                echo '<div class="alert alert-success">Profile updated successfully!</div>';
+                                
+                                $update_query = "UPDATE users SET first_name = ?, phone_number = ?, email = ?, address = ?, profile_pic = ? WHERE id = ?";
+                                $stmt = $db->prepare($update_query);
+                                $stmt->execute([$new_first_name, $new_phone_number, $new_email, $new_address, $new_profile_pic, $user_id]);
                             }
                         ?>
 
