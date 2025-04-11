@@ -163,6 +163,7 @@
                                             <label>Profile Picture</label>
                                             <input class="form-control" type="file" name="profile_pic">
                                         </div>
+                                            </div>
 
                                         <div class="m-t-20 text-center">
                                             <button class="btn btn-primary submit-btn">Update Profile</button>
