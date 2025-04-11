@@ -60,12 +60,12 @@
                     </div>
                 </div>
                  <?php
-               $id=$_GET['id'];
-    $result = $db->prepare("SELECT * FROM emergency_type where id= :post_id");
-    $result->bindParam(':post_id', $id);
-    $result->execute();
-    for($i=0; $row = $result->fetch(); $i++){                        
-?>
+		    $id=$_GET['id'];
+		    $result = $db->prepare("SELECT * FROM emergency_type where id= :post_id");
+		    $result->bindParam(':post_id', $id);
+		    $result->execute();
+		    for($i=0; $row = $result->fetch(); $i++){                        
+		?>
                 <div class="row">
                     <div class="col-lg-8 offset-lg-2">
                         <form>
