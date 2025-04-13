@@ -49,7 +49,7 @@ if (isset($_FILES['photo']) && $_FILES['photo']['error'] === UPLOAD_ERR_OK) {
 
     if (move_uploaded_file($_FILES['photo']['tmp_name'], $path)) {
         $sql = "INSERT INTO users (name, email, username, password, phone, user_id, photo, birthday, age, latitude, longitude, barangay, municipality, province, address) 
-                VALUES (:a, :b, :c, :d, :e, :f, :i, :g, :h, :lat, :lon, :barangay, :municipality, :province, :address)";
+                VALUES (:a, :b, :c, :d, :e, :f, :g, :h, :i, :j, :k, :l, :m, :n, :o)";
         $q = $db->prepare($sql);
         $q->execute([
             ':a' => $a,
@@ -61,17 +61,17 @@ if (isset($_FILES['photo']) && $_FILES['photo']['error'] === UPLOAD_ERR_OK) {
             ':g' => $birthday,
             ':h' => $age,
             ':i' => $file_name_new,
-            ':lat' => $latitude,
-            ':lon' => $longitude,
-            ':barangay' => $barangay,
-            ':municipality' => $municipality,
-            ':province' => $province,
-            ':address' => $address
+            ':j' => $latitude,
+            ':k' => $longitude,
+            ':l' => $barangay,
+            ':m' => $municipality,
+            ':n' => $province,
+            ':o' => $address
         ]);
     }
 } else {
     $sql = "INSERT INTO users (name, email, username, password, phone, user_id, birthday, age, latitude, longitude, barangay, municipality, province, address) 
-            VALUES (:a, :b, :c, :d, :e, :f, :g, :h, :lat, :lon, :barangay, :municipality, :province, :address)";
+            VALUES (:a, :b, :c, :d, :e, :f, :g, :h, :j, :k, :l, :m, :n, :o)";
     $q = $db->prepare($sql);
     $q->execute([
         ':a' => $a,
@@ -82,12 +82,12 @@ if (isset($_FILES['photo']) && $_FILES['photo']['error'] === UPLOAD_ERR_OK) {
         ':f' => $f,
         ':g' => $birthday,
         ':h' => $age,
-        ':lat' => $latitude,
-        ':lon' => $longitude,
-        ':barangay' => $barangay,
-        ':municipality' => $municipality,
-        ':province' => $province,
-        ':address' => $address
+        ':j' => $latitude,
+        ':k' => $longitude,
+        ':l' => $barangay,
+        ':m' => $municipality,
+        ':n' => $province,
+        ':o' => $address
     ]);
 }
 
