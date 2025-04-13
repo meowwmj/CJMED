@@ -122,7 +122,7 @@
                     <div class="col-lg-8">
                         <div class="card">
                             <div class="card-header">
-                                <h4 class="card-title">Emergency Reports per Agency</h4>
+                                <h4 class="card-title">Emergency Reports per Municipalities</h4>
                             </div>
                             <div class="card-body">
                                 <canvas id="barChart" height="200"></canvas>
