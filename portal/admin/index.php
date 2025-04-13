@@ -100,7 +100,7 @@
                                 <h4 class="card-title">Agencies and Users</h4>
                             </div>
                             <div class="card-body">
-                                <canvas id="agencyUserChart" height="250"></canvas>
+                                <canvas id="agencyUserChart" height="200"></canvas>
                             </div>
                         </div>
                     </div>
