@@ -1,8 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
 
-
-<!-- register24:03-->
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
@@ -11,62 +9,87 @@
     <link rel="stylesheet" type="text/css" href="assets/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="assets/css/font-awesome.min.css">
     <link rel="stylesheet" type="text/css" href="assets/css/style.css">
-    <!--[if lt IE 9]>
-		<script src="assets/js/html5shiv.min.js"></script>
-		<script src="assets/js/respond.min.js"></script>
-	<![endif]-->
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.13/cropper.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.13/cropper.min.js"></script>
 </head>
 
 <body>
-    <div class="main-wrapper  account-wrapper">
+    <div class="main-wrapper account-wrapper">
         <div class="account-page">
             <div class="account-center">
                 <div class="account-box">
 
                     <form method="post" action="save_users.php" enctype="multipart/form-data" class="form-signin">
-						<div class="account-logo">
-                            <a href="/portal/users/sign-in.php"><img src="assets/img/pdrr.png" alt=""></a><br>
+                        <div class="account-logo">
+                            <a href="/hiraya/portal/users/sign-in.php"><img src="assets/img/pdrr.png" alt=""></a><br>
                             <p>CJMED</p>
                         </div>
-                            
+
                         <div class="form-group">
-                            <input type="text" class="form-control" name="name" id="name" placeholder="Fullname" required="true">
+                            <input type="text" class="form-control" name="name" placeholder="Fullname" required>
                         </div>
-                      
+
                         <div class="form-group">
-                            <input type="text" class="form-control" name="email" id="email" placeholder="Email" required="true">
+                            <input type="text" class="form-control" name="email" placeholder="Email" required>
                         </div>
-                         <div class="form-group">
-                           <input type="text" class="form-control" name="username" id="username" placeholder="Username" required="true">
-                        </div>
+
                         <div class="form-group">
-                        <input type="password" class="form-control" name="password" id="password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters" placeholder="Password" required="true">
-                        <small id="password-strength" style="display: block; margin-top: 5px;">Password strength will appear here</small>
+                            <input type="text" class="form-control" name="username" placeholder="Username" required>
+                        </div>
+
+                        <div class="form-group">
+                            <input type="password" class="form-control" name="password" id="password" 
+                                   pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" 
+                                   title="Must contain at least one number, one uppercase and lowercase letter, and at least 8 characters" 
+                                   placeholder="Password" required>
+                            <small id="password-strength" style="display: block; margin-top: 5px;">Password strength will appear here</small>
                             <div id="strength-bar" style="height: 8px; width: 100%; background-color: #ddd; margin-top: 5px; border-radius: 4px; overflow: hidden;">
                                 <div id="strength-fill" style="height: 100%; width: 0%; background-color: red; transition: width 0.3s;"></div>
                             </div>
                         </div>
+
                         <div class="form-group">
-                        <input type="password" class="form-control" name="confirmpass" id="confirmpass" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters" placeholder="Confirm Password" required="true">
-                        <small id="confirm-pass-error" style="color: red; display: none;">Passwords do not match.</small>
+                            <input type="password" class="form-control" name="confirmpass" id="confirmpass" 
+                                   pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" 
+                                   placeholder="Confirm Password" required>
+                            <small id="confirm-pass-error" style="color: red; display: none;">Passwords do not match.</small>
                         </div>
+
                         <div class="form-group">
-                        <input type="text" class="form-control" name="phone" id="phone" placeholder="Contact" maxlength="11" required="true">
-                        <small id="phone-error" style="color: red; display: none;">Invalid contact number. Must start with 09 and be 11 digits long.</small>
+                            <input type="text" class="form-control" name="phone" id="phone" placeholder="Contact" maxlength="11" required>
+                            <small id="phone-error" style="color: red; display: none;">Invalid contact number. Must start with 09 and be 11 digits long.</small>
                         </div>
+
                         <div class="form-group">
-                        <input type="text" class="form-control" name="address" id="address" placeholder="Address" required="true">
+                            <label for="birthday">Birthday</label>
+                            <input type="date" class="form-control" name="birthday" id="birthday" required>
                         </div>
+
+                        <div class="form-group">
+                            <label for="age">Age</label>
+                            <input type="text" class="form-control" name="age" id="age" readonly>
+                        </div>
+
                         <div class="form-group" hidden>
                             <label>User ID</label>
-                            <input type="text" name="user_id"  value="<?php echo rand(1000,9999); ?>" class="form-control"> 
+                            <input type="text" name="user_id" value="<?php echo rand(1000,9999); ?>" class="form-control"> 
                         </div>
 
+                        <!-- Hidden Location Inputs -->
+                        <input type="hidden" name="latitude" id="latitude">
+                        <input type="hidden" name="longitude" id="longitude">
+                        <input type="hidden" name="barangay" id="barangay">
+                        <input type="hidden" name="municipality" id="municipality">
+                        <input type="hidden" name="province" id="province">
 
-                            <!-- Profile Picture Upload -->
+                        <!-- Address Input -->
+                        <div class="form-group">
+                            <label for="address">Full Address</label>
+                            <input type="text" class="form-control" name="address" id="address" readonly>
+                        </div>
+
+                        <!-- Profile Picture Upload -->
                         <div class="form-group">
                             <label>Picture</label>
                             <div class="profile-upload">
@@ -79,7 +102,7 @@
                             </div>
                         </div>
 
-                        <!-- Modal for Cropping -->
+                        <!-- Cropper Modal -->
                         <div id="cropperModal">
                             <div class="modal-content">
                                 <div class="cropper-container">
@@ -87,23 +110,30 @@
                                 </div>
                                 <button type="button" id="cropButton">Crop</button>
                             </div>
-                        </div>                         
-                        <div class="form-group checkbox">
-                            
-                        </div>
+                        </div>    
+
                         <div class="form-group text-center">
-                       <input type="submit" name="login" class="btn btn-primary btn-user btn-block" value="Signup">
+                            <input type="submit" name="login" class="btn btn-primary btn-user btn-block" value="Signup">
                         </div>
+
                         <div class="text-center login-link">
                             Already have an account? <a href="sign-in.php">Login</a>
                         </div>
+
                     </form>
                 </div>
             </div>
         </div>
     </div>
+
+    <!-- Scripts -->
+    <script src="assets/js/jquery-3.2.1.min.js"></script>
+    <script src="assets/js/popper.min.js"></script>
+    <script src="assets/js/bootstrap.min.js"></script>
+    <script src="assets/js/app.js"></script>
+
     <script>
-        // Password Strength Indicator
+        // Password strength logic
         document.getElementById("password").addEventListener("input", function () {
             const password = this.value;
             const strengthText = document.getElementById("password-strength");
@@ -139,8 +169,24 @@
                     strengthFill.style.backgroundColor = "green";
                     break;
             }
+        });
 
-            // Contact Number Validation
+        // Confirm password check
+        document.getElementById("confirmpass").addEventListener("input", function () {
+            const password = document.getElementById("password").value;
+            const confirmPassword = this.value;
+            const error = document.getElementById("confirm-pass-error");
+
+            if (confirmPassword !== password) {
+                error.style.display = "block";
+                this.style.borderColor = "red";
+            } else {
+                error.style.display = "none";
+                this.style.borderColor = "green";
+            }
+        });
+
+        // Phone validation
         document.getElementById("phone").addEventListener("input", function () {
             const phone = this.value;
             const phoneError = document.getElementById("phone-error");
@@ -154,127 +200,133 @@
                 this.style.borderColor = "red";
             }
         });
+
+        // Age calculation
+        document.getElementById("birthday").addEventListener("change", function () {
+            const birthday = new Date(this.value);
+            const today = new Date();
+            let age = today.getFullYear() - birthday.getFullYear();
+            const m = today.getMonth() - birthday.getMonth();
+            if (m < 0 || (m === 0 && today.getDate() < birthday.getDate())) age--;
+            document.getElementById("age").value = age;
         });
-         // Image Preview
-         document.getElementById("photo").addEventListener("change", function (event) {
+
+        // CropperJS Image Preview
+        document.getElementById("photo").addEventListener("change", function (event) {
             const file = event.target.files[0];
             if (file) {
                 const reader = new FileReader();
                 reader.onload = function (e) {
-                    document.getElementById("previewImg").src = e.target.result;
+                    document.getElementById("cropperModal").style.display = "block";
+                    document.getElementById("cropperImage").src = e.target.result;
+
+                    const image = document.getElementById("cropperImage");
+                    const cropper = new Cropper(image, {
+                        aspectRatio: 1,
+                        viewMode: 1,
+                        autoCropArea: 1
+                    });
+
+                    document.getElementById("cropButton").addEventListener("click", function () {
+                        const canvas = cropper.getCroppedCanvas({ width: 150, height: 150 });
+                        document.getElementById("previewImg").src = canvas.toDataURL();
+                        document.getElementById("cropperModal").style.display = "none";
+                        cropper.destroy();
+                    });
                 };
                 reader.readAsDataURL(file);
             }
         });
-        
-        document.getElementById("confirmpass").addEventListener("input", function () {
-        const password = document.getElementById("password").value;
-        const confirmPassword = this.value;
-        const error = document.getElementById("confirm-pass-error");
 
-        if (confirmPassword !== password) {
-            error.style.display = "block";
-            this.style.borderColor = "red";
-        } else {
-            error.style.display = "none";
-            this.style.borderColor = "green";
-        }
-    });
-        </script>
-    <script src="assets/js/jquery-3.2.1.min.js"></script>
-	<script src="assets/js/popper.min.js"></script>
-    <script src="assets/js/bootstrap.min.js"></script>
-    <script src="assets/js/app.js"></script>
-</body>
-<script>
-document.getElementById("photo").addEventListener("change", function (event) {
-    const file = event.target.files[0];
-    if (file) {
-        const reader = new FileReader();
-        reader.onload = function (e) {
-            document.getElementById("cropperModal").style.display = "block";
-            document.getElementById("cropperImage").src = e.target.result;
+        // Geolocation + Address Autofill
+        window.onload = function () {
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(function (position) {
+                    const lat = position.coords.latitude;
+                    const lon = position.coords.longitude;
 
-            // Initialize Cropper
-            const image = document.getElementById("cropperImage");
-            const cropper = new Cropper(image, {
-                aspectRatio: 1, // Square crop
-                viewMode: 1,
-                autoCropArea: 1
-            });
+                    document.getElementById("latitude").value = lat;
+                    document.getElementById("longitude").value = lon;
 
-            // Crop and Preview
-            document.getElementById("cropButton").addEventListener("click", function () {
-                const canvas = cropper.getCroppedCanvas({
-                    width: 150, // Adjust size for better preview
-                    height: 150
+                    fetch(`https://nominatim.openstreetmap.org/reverse?format=json&lat=${lat}&lon=${lon}&zoom=18&addressdetails=1`)
+                        .then(response => response.json())
+                        .then(data => {
+                            const address = data.address;
+
+                            // Extract values for individual hidden fields
+                            document.getElementById("barangay").value = address.village || address.suburb || "";
+                            document.getElementById("municipality").value = address.city || address.town || address.municipality || "";
+                            document.getElementById("province").value = address.state || "";
+
+                            // Build full address string
+                            let fullAddress = [
+                                address.road,
+                                address.neighbourhood,
+                                address.suburb || address.village,
+                                address.city || address.town || address.municipality,
+                                address.state,
+                                address.postcode
+                            ].filter(Boolean).join(", ");
+
+                            document.getElementById("address").value = fullAddress;
+                        })
+                        .catch(error => console.error("Error fetching address:", error));
+                }, function (error) {
+                    console.warn("Geolocation access denied or unavailable.");
                 });
-
-                document.getElementById("previewImg").src = canvas.toDataURL();
-                document.getElementById("cropperModal").style.display = "none";
-                cropper.destroy(); // Cleanup cropper instance
-            });
+            } else {
+                console.warn("Geolocation is not supported by this browser.");
+            }
         };
-        reader.readAsDataURL(file);
-    }
-});
-</script>
+    </script>
 
-<!-- register24:03-->
+    <!-- CSS Styles -->
+    <style>
+        body {
+            background: linear-gradient(135deg, rgb(231, 237, 237), #3f97da);
+            background-attachment: fixed;
+        }
+
+        .account-box {
+            background: #fdfdfd;
+            display: flex;
+            flex-direction: column;
+            padding: 25px;
+            border-radius: 20px;
+            box-shadow: 0 0 128px 0 rgba(0,0,0,0.1), 0 32px 64px -48px rgba(0,0,0,0.5);
+        }
+
+        #cropperModal {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: white;
+            padding: 20px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+            border-radius: 10px;
+            z-index: 1000;
+            text-align: center;
+        }
+
+        .cropper-container {
+            max-width: 250px;
+            max-height: 250px;
+            overflow: hidden;
+            margin: auto;
+        }
+
+        #cropButton {
+            margin-top: 10px;
+            padding: 10px 20px;
+            background-color: #3f97da;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+    </style>
+</body>
+
 </html>
-
-<style>
-body {
-    background: linear-gradient(135deg, rgb(231, 237, 237), #3f97da);
-    background-size: cover; /* Ensures the background covers the whole page */
-    background-attachment: fixed; /* Optional: Keeps the background fixed when scrolling */
-}     
-
-div.account-box {
-    background: #fdfdfd;
-    display: flex;
-    flex-direction: column;
-    padding: 25px 25px;
-    border-radius: 20px;
-    box-shadow: 0 0 128px 0 rgba(0,0,0,0.1),
-                0 32px 64px -48px rgba(0,0,0,0.5);
-}
-
-div.container {
-  padding: 10px;
-}
-
-/* Modal Styling */
-#cropperModal {
-    display: none;
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    background: white;
-    padding: 20px;
-    box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
-    border-radius: 10px;
-    z-index: 1000;
-    text-align: center;
-}
-
-/* Cropper Image Container */
-.cropper-container {
-    max-width: 250px; /* Smaller Size */
-    max-height: 250px;
-    overflow: hidden;
-    margin: auto;
-}
-
-/* Crop Button */
-#cropButton {
-    margin-top: 10px;
-    padding: 8px 15px;
-    border: none;
-    background: #007bff;
-    color: white;
-    border-radius: 5px;
-    cursor: pointer;
-}
-</style>
