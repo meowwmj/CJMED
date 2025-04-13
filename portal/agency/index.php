@@ -97,7 +97,7 @@
                     <div class="col-lg-4">
                         <div class="card member-panel">
                             <div class="card-header bg-white">
-                                <h4 class="card-title">Agencies vs Users</h4>
+                                <h4 class="card-title">Agencies and Users</h4>
                             </div>
                             <div class="card-body">
                                 <canvas id="agencyUserChart" height="250"></canvas>
