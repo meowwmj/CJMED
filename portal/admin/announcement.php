@@ -57,9 +57,7 @@
         </div>    
     </div>
    
-
-
-    <div class="page-wrapper">
+  <div class="page-wrapper">
             <div class="content">
               <div class="card">   
                 <div class="choice-container">
@@ -215,16 +213,7 @@ document.addEventListener("DOMContentLoaded", function() {
     loadWeatherData();  // Load the first 8 towns
 });
 </script>
-
-
-
-                    </div>
-                </div>
-            </div>
-
-            
-
-
+</div>
 
         <?php include 'includes/message.php'; ?>
         </div>
@@ -240,70 +229,66 @@ document.addEventListener("DOMContentLoaded", function() {
     <script src="assets/js/app.js"></script>
 
 
- <!-- Logout Confirmation Modal -->
- <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="logoutModalLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="logoutModalLabel">Confirm Logout</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        Are you sure you want to log out?
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-        <a href="logout.php" class="btn btn-danger">Logout</a>
-      </div>
-    </div>
-  </div>
-</div>
-
-<div class="page-wrapper">
             <div class="content">
-              <div class="card">   
-                <div class="card-header">
-                    <h1 class="card-title d-inline-block">Useful Links</h1></a>
-                </div>
-                    
-          <section class="banners" style="margin-top:10px;">    
-            <div class="row justify-content-center">
-                <div class="col-12 col-md-3 mb-3">
-                    <a href="https://bagong.pagasa.dost.gov.ph/index.php" target="_blank">
-                        <img src="https://pdrrmo.bulacan.gov.ph/wp-content/themes/pdrrmcv1-ais/assets/images/Pagasa Banner.jpg" alt="" class="banner-item">
-                    </a>
-                </div>
-                <div class="col-12 col-md-3 mb-3">
-                    <a href="http://prffwc.synthasite.com/status-of-pampanga-river-basin.php" target="_blank">
-                        <img src="https://pdrrmo.bulacan.gov.ph/wp-content/themes/pdrrmcv1-ais/assets/images/Pampanga River.jpg" alt="" class="banner-item">
-                    </a>
-                </div>
-                <div class="col-12 col-md-3 mb-3">
-                    <a href="http://prffwc.synthasite.com/hydro-forecast.php" target="_blank">
-                        <img src="https://pdrrmo.bulacan.gov.ph/wp-content/themes/pdrrmcv1-ais/assets/images/Hydrological.jpg" alt="" class="banner-item">
-                    </a>
-                </div>
-            </div>
+                <div class="row mb-4">
+                    <div class="col-12">
+                        <div class="card">
+                            <div class="card-header">
+                                <h4 class="card-title">Useful Links</h4>
+                            </div>
+                            <section class="banners" style="margin-top:10px;">    
+                        <div class="row justify-content-center">
+                            <div class="col-12 col-md-3 mb-3">
+                                <a href="https://bagong.pagasa.dost.gov.ph/index.php" target="_blank">
+                                    <img src="https://pdrrmo.bulacan.gov.ph/wp-content/themes/pdrrmcv1-ais/assets/images/Pagasa Banner.jpg" alt="" class="banner-item">
+                                </a>
+                            </div>
+                            <div class="col-12 col-md-3 mb-3">
+                                <a href="http://prffwc.synthasite.com/status-of-pampanga-river-basin.php" target="_blank">
+                                    <img src="https://pdrrmo.bulacan.gov.ph/wp-content/themes/pdrrmcv1-ais/assets/images/Pampanga River.jpg" alt="" class="banner-item">
+                                </a>
+                            </div>
+                            <div class="col-12 col-md-3 mb-3">
+                                <a href="http://prffwc.synthasite.com/hydro-forecast.php" target="_blank">
+                                    <img src="https://pdrrmo.bulacan.gov.ph/wp-content/themes/pdrrmcv1-ais/assets/images/Hydrological.jpg" alt="" class="banner-item">
+                                </a>
+                            </div>
+                        </div>
 
-            <div class="row justify-content-center mt-4">
-                <div class="col-12 col-md-4 mb-3">
-                    <a href="http://faultfinder.phivolcs.dost.gov.ph/" target="_blank">
-                        <img src="https://pdrrmo.bulacan.gov.ph/wp-content/uploads/2022/01/Fault-Finder.jpg" alt="" class="banner-item">
-                    </a>
+                        <div class="row justify-content-center mt-4">
+                            <div class="col-12 col-md-4 mb-3">
+                                <a href="http://faultfinder.phivolcs.dost.gov.ph/" target="_blank">
+                                    <img src="https://pdrrmo.bulacan.gov.ph/wp-content/uploads/2022/01/Fault-Finder.jpg" alt="" class="banner-item">
+                                </a>
+                            </div>
+                            <div class="col-12 col-md-4 mb-3">
+                                <a href="https://www.phivolcs.dost.gov.ph/index.php/earthquake/earthquake-information3" target="_blank">
+                                    <img src="https://pdrrmo.bulacan.gov.ph/wp-content/uploads/2022/01/Philvocs.jpg" alt="" class="banner-item">
+                                </a>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <div class="col-12 col-md-4 mb-3">
-                    <a href="https://www.phivolcs.dost.gov.ph/index.php/earthquake/earthquake-information3" target="_blank">
-                        <img src="https://pdrrmo.bulacan.gov.ph/wp-content/uploads/2022/01/Philvocs.jpg" alt="" class="banner-item">
-                    </a>
+                <?php include 'includes/Message.php'; ?>
+            </div>
+        </div>
+
+        <!-- Logout Modal -->
+        <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="logoutModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Confirm Logout</h5>
+                        <button type="button" class="close" data-dismiss="modal"><span>&times;</span></button>
+                    </div>
+                    <div class="modal-body">Are you sure you want to log out?</div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                        <a href="logout.php" class="btn btn-danger">Logout</a>
+                    </div>
                 </div>
             </div>
         </div>
-    </section>
-    </div>
- </div>
-</div>
 
 <style>
 .submenu-list {
