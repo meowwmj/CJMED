@@ -156,6 +156,27 @@
         <script src="assets/js/chart.js"></script>
         <script src="assets/js/app.js"></script>
 
+        <script>
+        $(document).ready(function () {
+            $('.dash-widget-info h3').each(function () {
+                let $this = $(this);
+                let countTo = $this.text();
+                $this.text('0');
+
+                $({ countNum: 0 }).animate({ countNum: countTo }, {
+                    duration: 1000,
+                    easing: 'swing',
+                    step: function () {
+                        $this.text(Math.floor(this.countNum));
+                    },
+                    complete: function () {
+                        $this.text(this.countNum);
+                    }
+                });
+            });
+        });
+        </script>
+
         <!-- Emergencies Per Month Chart -->
         <script>
         <?php
