@@ -36,7 +36,12 @@
             </div>
         </div>
     
-        <?php
+     <div class="page-wrapper">
+            <div class="content">
+              <div class="card">   
+                <div class="choice-container">
+
+                   <?php
                     // Weather API Key
                     $apiKey = '980c1618e365c5afc9ebbff60fa6781f'; // Replace with your OpenWeatherMap API Key
 
