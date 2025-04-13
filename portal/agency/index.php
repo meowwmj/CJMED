@@ -4,7 +4,7 @@
     <div class="main-wrapper">
         <?php include 'includes/navigation.php'; ?>
         <?php include 'includes/sidebar.php'; ?>
-        
+
         <div class="page-wrapper">
             <div class="content">
                 <div class="row">
@@ -13,18 +13,17 @@
                         <?php
                         $result = $db->prepare("SELECT count(*) as total FROM emergency");
                         $result->execute();
-                        for ($i = 0; $row = $result->fetch(); $i++) {
+                        $row = $result->fetch();
                         ?>
-                            <a href="view-emergency.php">
-                                <div class="dash-widget">
-                                    <span class="dash-widget-bg1"><i class="fa fa-stethoscope" aria-hidden="true"></i></span>
-                                    <div class="dash-widget-info text-right">
-                                        <h3><?php echo $row['total']; ?></h3>
-                                        <span class="widget-title1">Emergency <i class="fa fa-check" aria-hidden="true"></i></span>
-                                    </div>
+                        <a href="view-emergency.php">
+                            <div class="dash-widget">
+                                <span class="dash-widget-bg1"><i class="fa fa-stethoscope"></i></span>
+                                <div class="dash-widget-info text-right">
+                                    <h3><?php echo $row['total']; ?></h3>
+                                    <span class="widget-title1">Emergency <i class="fa fa-check"></i></span>
                                 </div>
-                            </a>
-                        <?php } ?>
+                            </div>
+                        </a>
                     </div>
 
                     <!-- Users Tile -->
@@ -32,18 +31,17 @@
                         <?php
                         $result = $db->prepare("SELECT count(*) as total FROM users");
                         $result->execute();
-                        for ($i = 0; $row = $result->fetch(); $i++) {
+                        $row = $result->fetch();
                         ?>
-                            <a href="users1.php">
-                                <div class="dash-widget">
-                                    <span class="dash-widget-bg2"><i class="fa fa-user-o"></i></span>
-                                    <div class="dash-widget-info text-right">
-                                        <h3><?php echo $row['total']; ?></h3>
-                                        <span class="widget-title2">Users <i class="fa fa-check" aria-hidden="true"></i></span>
-                                    </div>
+                        <a href="users1.php">
+                            <div class="dash-widget">
+                                <span class="dash-widget-bg2"><i class="fa fa-user-o"></i></span>
+                                <div class="dash-widget-info text-right">
+                                    <h3><?php echo $row['total']; ?></h3>
+                                    <span class="widget-title2">Users <i class="fa fa-check"></i></span>
                                 </div>
-                            </a>
-                        <?php } ?>
+                            </div>
+                        </a>
                     </div>
 
                     <!-- Agency Tile -->
@@ -51,18 +49,17 @@
                         <?php
                         $result = $db->prepare("SELECT count(*) as total FROM agency");
                         $result->execute();
-                        for ($i = 0; $row = $result->fetch(); $i++) {
+                        $row = $result->fetch();
                         ?>
-                            <a href="agency.php">
-                                <div class="dash-widget">
-                                    <span class="dash-widget-bg3"><i class="fa fa-user-md" aria-hidden="true"></i></span>
-                                    <div class="dash-widget-info text-right">
-                                        <h3><?php echo $row['total']; ?></h3>
-                                        <span class="widget-title3">Agency <i class="fa fa-check" aria-hidden="true"></i></span>
-                                    </div>
+                        <a href="agency.php">
+                            <div class="dash-widget">
+                                <span class="dash-widget-bg3"><i class="fa fa-user-md"></i></span>
+                                <div class="dash-widget-info text-right">
+                                    <h3><?php echo $row['total']; ?></h3>
+                                    <span class="widget-title3">Agency <i class="fa fa-check"></i></span>
                                 </div>
-                            </a>
-                        <?php } ?>
+                            </div>
+                        </a>
                     </div>
 
                     <!-- Ongoing Emergencies Tile -->
@@ -70,56 +67,53 @@
                         <?php
                         $result = $db->prepare("SELECT count(*) as total FROM emergency WHERE status = 'Pending'");
                         $result->execute();
-                        for ($i = 0; $row = $result->fetch(); $i++) {
+                        $row = $result->fetch();
                         ?>
-                            <a href="view-emergency.php">
-                                <div class="dash-widget">
-                                    <span class="dash-widget-bg4"><i class="fa fa-heartbeat" aria-hidden="true"></i></span>
-                                    <div class="dash-widget-info text-right">
-                                        <h3><?php echo $row['total']; ?></h3>
-                                        <span class="widget-title4">Ongoing <i class="fa fa-check" aria-hidden="true"></i></span>
-                                    </div>
+                        <a href="view-emergency.php">
+                            <div class="dash-widget">
+                                <span class="dash-widget-bg4"><i class="fa fa-heartbeat"></i></span>
+                                <div class="dash-widget-info text-right">
+                                    <h3><?php echo $row['total']; ?></h3>
+                                    <span class="widget-title4">Ongoing <i class="fa fa-check"></i></span>
                                 </div>
-                            </a>
-                        <?php } ?>
+                            </div>
+                        </a>
                     </div>
                 </div>
 
-                <!-- Emergencies Per Month -->
+                <!-- Charts Section -->
                 <div class="row">
-                    <div class="col-12 col-md-12 col-lg-8 col-xl-8">
+                    <div class="col-lg-8">
                         <div class="card member-panel">
                             <div class="card-header bg-white">
                                 <h4 class="card-title">Emergencies Per Month</h4>
                             </div>
                             <div class="card-body">
-                                <canvas id="emergencyChart" width="400" height="200"></canvas>
+                                <canvas id="emergencyChart" height="200"></canvas>
                             </div>
                         </div>
                     </div>
 
-                    <!-- Agencies vs Users -->
-                    <div class="col-12 col-md-12 col-lg-4 col-xl-4">
+                    <div class="col-lg-4">
                         <div class="card member-panel">
                             <div class="card-header bg-white">
                                 <h4 class="card-title">Agencies vs Users</h4>
                             </div>
                             <div class="card-body">
-                                <canvas id="agencyUserChart" height="100"></canvas>
+                                <canvas id="agencyUserChart" height="250"></canvas>
                             </div>
                         </div>
                     </div>
                 </div>
 
-                <!-- Emergency Chart Per Year -->
                 <div class="row">
-                    <div class="col-12 col-md-12 col-lg-12 col-xl-12">
+                    <div class="col-lg-12">
                         <div class="card">
                             <div class="card-header">
                                 <h4 class="card-title">Emergencies Per Year</h4>
                             </div>
                             <div class="card-body">
-                                <canvas id="emergencyYearChart" width="400" height="200"></canvas>
+                                <canvas id="emergencyYearChart" height="200"></canvas>
                             </div>
                         </div>
                     </div>
@@ -128,57 +122,46 @@
             </div>
         </div>
 
-        <!-- Logout Modal -->
-        <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title">Confirm Logout</h5>
-                        <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    </div>
-                    <div class="modal-body">Are you sure you want to log out?</div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-                        <a href="logout.php" class="btn btn-danger">Logout</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="sidebar-overlay" data-reff=""></div>
 
         <!-- JS Scripts -->
         <script src="assets/js/jquery-3.2.1.min.js"></script>
         <script src="assets/js/popper.min.js"></script>
         <script src="assets/js/bootstrap.min.js"></script>
         <script src="assets/js/jquery.slimscroll.js"></script>
-        <script src="assets/js/Chart.bundle.js"></script>
-        <script src="assets/js/chart.js"></script>
         <script src="assets/js/app.js"></script>
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2"></script>
 
         <script>
-        $(document).ready(function () {
-            $('.dash-widget-info h3').each(function () {
-                let $this = $(this);
-                let countTo = $this.text();
-                $this.text('0');
-
-                $({ countNum: 0 }).animate({ countNum: countTo }, {
-                    duration: 1000,
-                    easing: 'swing',
-                    step: function () {
-                        $this.text(Math.floor(this.countNum));
-                    },
-                    complete: function () {
-                        $this.text(this.countNum);
-                    }
-                });
-            });
-        });
+            // Register plugin for Chart.js v3+
+            Chart.register(ChartDataLabels);
         </script>
 
-        <!-- Emergencies Per Month Chart -->
         <script>
+            // Animated Tile Counters
+            $(document).ready(function () {
+                $('.dash-widget-info h3').each(function () {
+                    let $this = $(this);
+                    let countTo = $this.text();
+                    $this.text('0');
+                    $({ countNum: 0 }).animate({ countNum: countTo }, {
+                        duration: 1000,
+                        easing: 'swing',
+                        step: function () {
+                            $this.text(Math.floor(this.countNum));
+                        },
+                        complete: function () {
+                            $this.text(this.countNum);
+                        }
+                    });
+                });
+            });
+        </script>
+
+     <!-- Emergencies Per Month Chart -->
+     <script>
         <?php
             $query = $db->prepare("SELECT YEAR(created_at) as year, MONTH(created_at) as month, COUNT(*) as total FROM emergency GROUP BY YEAR(created_at), MONTH(created_at) ORDER BY year ASC, month ASC");
             $query->execute();
@@ -209,6 +192,11 @@
             options: {
                 responsive: true,
                 maintainAspectRatio: false,
+                plugins: {
+                    datalabels: {
+                        display: false // Disable numbers inside the bar chart
+                    }
+                },
                 scales: {
                     x: { ticks: { font: { size: 14 }, color: '#555' }, grid: { display: false } },
                     y: { beginAtZero: true, ticks: { font: { size: 14 }, color: '#555' } }
@@ -249,6 +237,11 @@
             options: {
                 responsive: true,
                 maintainAspectRatio: false,
+                plugins: {
+                    datalabels: {
+                        display: false // Disable numbers inside the bar chart
+                    }
+                },
                 scales: {
                     x: { ticks: { font: { size: 14 }, color: '#555' }, grid: { display: false } },
                     y: { beginAtZero: true, ticks: { font: { size: 14 }, color: '#555' } }
@@ -284,7 +277,12 @@
                 responsive: true,
                 maintainAspectRatio: false,
                 plugins: {
-                    legend: { display: false }
+                    datalabels: {
+                        display: false // Disable numbers inside the pie chart
+                    },
+                    legend: {
+                        display: true
+                    }
                 }
             }
         });
