@@ -2,8 +2,7 @@
 
 <body>
     <div class="main-wrapper">
-        <?php include 'includes/navigation.php'; ?>
-        <?php include 'includes/sidebar.php'; ?>    
+        <?php include 'includes/navigation.php'; ?>  
         <div class="sidebar" id="sidebar">
             <div class="sidebar-inner slimscroll">
                 <div id="sidebar-menu" class="sidebar-menu">
