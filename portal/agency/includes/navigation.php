@@ -75,7 +75,6 @@
                     </a>
 					<div class="dropdown-menu">
 						<a class="dropdown-item" href="profile.php">My Profile</a>
-						<a class="dropdown-item" href="emergency_type.php">Emergency Type</a>
 						<!--<a class="dropdown-item" href="settings.html">Settings</a> -->
 						<a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">Logout</a>
 					</div>
