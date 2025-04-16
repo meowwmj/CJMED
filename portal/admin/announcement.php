@@ -7,7 +7,6 @@
             <div class="sidebar-inner slimscroll">
                 <div id="sidebar-menu" class="sidebar-menu">
                     <ul>
-
                         <li class="">
                             <a href="index.php"><i class="fa fa-dashboard"></i> <span>Dashboard</span></a>
                         </li>
@@ -318,6 +317,38 @@ document.addEventListener("DOMContentLoaded", function() {
     color: #2c3e50;
 }
 </style>
-	
+
+<style>
+    .weather-container {
+        padding: 1rem;
+    }
+    .weather-info {
+        border: 1px solid #ccc;
+        border-radius: 10px;
+        padding: 1rem;
+        width: 250px;
+        background: #f9f9f9;
+        box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+        text-align: center;
+    }
+    .weather-info img {
+        width: 80px;
+        height: 80px;
+    }
+    .show-more {
+        display: block;
+        margin: 1rem auto;
+        padding: 0.5rem 1rem;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+    .useful-links {
+        margin: 2rem;
+        text-align: center;
+    }
+</style>
+				    
 </body>
 </html>
