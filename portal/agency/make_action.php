@@ -78,10 +78,11 @@
                                 <li class="list-group-item"><strong>Email:</strong> <?php echo $_SESSION['SESS_EMAIL']; ?></li>
                                 <li class="list-group-item"><strong>Age:</strong> <?php echo $row['age']; ?></li>
                                 <li class="list-group-item"><strong>Status:</strong>
-                                    <select class="select form-control" name="status">
-                                        <option value="Pending">Ongoing</option>
-                                        <option value="Resolved">Resolved</option>
-                                    </select>
+                                   <select class="select" name="status">
+                                            <option value="Reported">Reported</option>
+                                            <option value="Pending">Ongoing</option>
+                                            <option value="Resolved">Resolved</option>
+                                   </select>
                                 </li>                             
                                 <li class="list-group-item"><strong>Injury:</strong> <?php echo $row['injury']; ?></li>
                                 <li class="list-group-item"><strong>Description:</strong> <?php echo $row['description']; ?></li>
