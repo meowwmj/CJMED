@@ -313,6 +313,17 @@ date_default_timezone_set('Asia/Manila');
     
     </script>
 
+    <script>
+        document.getElementById('age').addEventListener('input', function() {
+            const age = parseInt(this.value);
+            const error = document.getElementById('ageError');
+            if (isNaN(age) || age < 1 || age > 120) {
+                error.style.display = 'block';
+            } else {
+                error.style.display = 'none';
+            }
+        });
+    </script>
 
     <?php include 'includes/message.php'; ?>
             </div>
