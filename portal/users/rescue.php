@@ -121,7 +121,7 @@
                 const lat = position.coords.latitude;
                 const lng = position.coords.longitude;
 
-                map.setView([lat, lng], 15);
+                map.setView([lat, lng], 18);
 
                 getAddress(lat, lng, (address) => {
                     L.marker([lat, lng]).addTo(map)
