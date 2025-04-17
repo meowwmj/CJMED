@@ -115,8 +115,10 @@
                                                 <td class="text-center"><?php echo $row['emergency_category']; ?></td>
                                                 <td class="text-center"><?php echo $row['address']; ?></td>
                                                 <td class="text-center">
-                                                    <?php
-                                                    if ($row['status'] == "Pending") {
+                                                   <?php
+                                                    if ($row['status'] == "Reported") {
+                                                        echo "<span class='badge badge-warning'>Reported</span>";
+                                                    } elseif ($row['status'] == "Pending") {
                                                         echo "<span class='badge badge-danger'>Ongoing</span>";
                                                     } else {
                                                         echo "<span class='badge badge-success'>Resolved</span>";
@@ -169,7 +171,19 @@
     <script src="assets/js/bootstrap-datetimepicker.min.js"></script>
     <script src="assets/js/app.js"></script>
 
-    <script>
+    <style>
+        .badge-warning {
+            background-color:rgb(232, 37, 40) !important;
+            color:rgb(255, 255, 255) !important;
+        }
+
+        .badge-danger {
+            background-color: #ffbc00 !important;
+            color:rgb(255, 255, 255) !important;
+        }
+    </style>
+
+    <script>    
         $(document).ready(function () {
             // Periodic refresh
             setInterval(function () {
@@ -219,6 +233,22 @@
                             th {
                                 background-color: #f2f2f2;
                             }
+                            .badge {
+                                padding: 5px 10px;
+                                border-radius: 12px;
+                                color: #212529;
+                            }
+                            .badge-warning {
+                                background-color:rgb(232, 37, 40);
+                            }
+                            .badge-danger {
+                                background-color: #ffbc00
+                                color: #fff;
+                            }
+                            .badge-success {
+                                background-color: #28a745;
+                                color: #fff;
+                            }
                         </style>
                     </head>
                     <body>${printContents}</body>
@@ -230,5 +260,6 @@
             });
         });
     </script>
+    
 </body>
 </html>
