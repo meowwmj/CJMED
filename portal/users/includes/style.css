@@ -401,11 +401,11 @@ table.table td h2 span {
 }
 .bg-warning,
 .badge-warning {
-	background-color: #244855 !important;
+	background-color: rgb(232, 37, 40) !important;
 }
 .bg-danger,
 .badge-danger {
-	background-color: #f62d51 !important;
+	background-color: #ffbc00 !important;
 }
 .bg-white {
 	background-color: #fff;
@@ -5328,7 +5328,3 @@ body {
 .btn-white:hover {
     background-color: #f1f1f1;
 }
-
-
-
-		
