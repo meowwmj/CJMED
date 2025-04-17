@@ -93,8 +93,8 @@
                                 <li class="list-group-item"><strong>Age:</strong> <?php echo $row['age']; ?></li>
                                 <li class="list-group-item"><strong>Status:</strong>
                                         <select class="select" name="status">
-                                            <option value="Reported">Reported</option>
-                                            <option value="Pending">Ongoing</option>
+                                            <option value="Pending">Reported</option>
+                                            <option value="Ongoing">Ongoing</option>
                                             <option value="Resolved">Resolved</option>
                                         </select>
                                 </li>                             
