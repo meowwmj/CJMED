@@ -401,11 +401,11 @@ table.table td h2 span {
 }
 .bg-warning,
 .badge-warning {
-	background-color: rgb(232, 37, 40) !important;
+	background-color: #244855 !important;
 }
 .bg-danger,
 .badge-danger {
-	background-color: #dc3545 !important;
+	background-color: #f62d51 !important;
 }
 .bg-white {
 	background-color: #fff;
@@ -4942,7 +4942,6 @@ div.card {
 .table th, .table td {
     padding: 12px;
     text-align: center;
-    border: 1px solid #ddd; /* Soft border */
 }
 
 .table th {
@@ -5007,7 +5006,7 @@ div.agency {
 }
 
 
-div.col-lg-3 {
+div.col-lg-3 {	
     background: #fdfdfd;
     flex-direction: column;
     padding: 25px 25px;
@@ -5016,7 +5015,14 @@ div.col-lg-3 {
                 0 32px 64px -48px rgba(0,0,0,0.5);
 				
 }
-
+div.card-box {  
+    background: #fdfdfd;
+    flex-direction: column;
+    padding: 25px 25px;
+    border-radius: 20px;
+    box-shadow: 0 0 128px 0 rgba(0,0,0,0.1),
+                0 32px 64px -48px rgba(0,0,0,0.5);
+}
 
 /* ----------------------------------------------------ANNOUNCEMENT WEATHER------------------------------------------------ */
 
@@ -5033,13 +5039,15 @@ div.col-lg-3 {
 
         .weather-container {
             display: grid;
-            grid-template-columns: repeat(4, 1fr); /* 4 tiles per row */
-            gap: 20px;
+            grid-template-columns: repeat(1, 1fr); /*tiles per row */
+            gap: 40px;
             justify-items: center;
+			margin-bottom: 0; /* Remove any bottom margin */
+    		padding-bottom: 0; /* Remove any bottom padding */
         }
 
         .weather-info {
-            background-color: #fff;
+			background-color: rgba(159, 159, 159, 0.3); /* Translucent gray */
             padding: 20px;
             border-radius: 10px;
             box-shadow: 0 2px 5px rgba(0,0,0,0.1);
@@ -5059,7 +5067,7 @@ div.col-lg-3 {
         }
 
         .weather-info img {
-            width: 50px;
+            width: 70px;
         }
 
         .weather-info p {
@@ -5327,4 +5335,37 @@ body {
 
 .btn-white:hover {
     background-color: #f1f1f1;
+}
+
+/*-----------------------------------------------------------PAGASA--------------------------------------------------------------------------*/
+.banner-item {
+	width: 100%;
+	border-radius: 5px;
+	box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+	transition: transform 0.3s ease-in-out;
+}
+.banner-item:hover {
+	transform: scale(1.05);
+	
+}
+@media (max-width: 767px) {
+	.col-12 {
+		flex: 0 0 100%;
+	}
+}
+.col-12.col-md-3, .col-12.col-md-4 {
+	padding-left: 10px;
+	padding-right: 10px;
+}
+.headline {
+	text-align: center;
+	font-size: 1.8rem;
+	font-weight: bold;
+	margin-bottom: 20px;
+}
+.banners {
+	padding: 10px 0;
+	margin-top: 0; /* Remove top margin to close gap between sections */
+    padding-top: 0; /* Remove top padding */
+    
 }
