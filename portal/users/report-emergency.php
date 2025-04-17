@@ -1,4 +1,6 @@
-    <?php include 'includes/head.php'; ?>
+<?php include 'includes/head.php';
+date_default_timezone_set('Asia/Manila');
+?>
 
     <body>
         <div class="main-wrapper">
@@ -69,10 +71,11 @@
                                         <input class="form-control" type="text" name="patient_name" value="<?= $_SESSION['SESS_FIRST_NAME'] ?>" readonly>
                                     </div>
 
-                                    <div class="form-group" hidden>
-                                        <label>Date</label>
-                                        <input class="form-control" name="dates" value="<?= date('m-d-Y') ?>" readonly>
-                                    </div>
+                                   	<div class="form-group" hidden>
+                    				    <label>Date & Time</label>
+                    				    <input class="form-control" value="<?= date('m-d-Y h:i A') ?>" readonly>
+                    				    <input type="hidden" name="dates" value="<?= date('Y-m-d H:i:s') ?>">
+                    				</div>   
 
                                     <div class="form-group">
                                         <label>Contact</label>
@@ -222,6 +225,17 @@
             });
         </script>
 
+    <script>
+        document.getElementById('age').addEventListener('input', function() {
+            const age = parseInt(this.value);
+            const error = document.getElementById('ageError');
+            if (isNaN(age) || age < 1 || age > 120) {
+                error.style.display = 'block';
+            } else {
+                error.style.display = 'none';
+            }
+        });
+    </script>
 
     <style>
     /* Flexbox for horizontal layout */
