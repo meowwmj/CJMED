@@ -66,17 +66,19 @@
                 </div>
             </div>
 
-            <!-- Filters Section -->
+          <!-- Filters Section -->
             <div class="row">
                 <div class="col-md-4">
                     <div class="form-group">
                         <select class="form-control" name="status" id="status">
                             <option value="">All</option>
+                            <option value="Reported">Reported</option>
                             <option value="Pending">Ongoing</option>
                             <option value="Resolved">Resolved</option>
                         </select>
                     </div>
                 </div>
+
 
                 <div class="col-md-3">
                     <div class="form-group">
