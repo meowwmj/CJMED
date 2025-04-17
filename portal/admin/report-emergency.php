@@ -1,6 +1,4 @@
-<?php include 'includes/head.php'; 
-date_default_timezone_set('Asia/Manila');
-?>
+<?php include 'includes/head.php';?>
 
 <body>
     <div class="main-wrapper">
@@ -89,9 +87,9 @@ date_default_timezone_set('Asia/Manila');
                                 </div>
 
                                 <div class="form-group" hidden>
-                                    <label>Date</label>
-                                    <input class="form-control" name="dates" value="<?= date('Y-m-d H:i:s') ?>" readonly>
-                                </div>                            
+				    <label>Date & Time</label>
+				    <input class="form-control" name="dates" value="<?= date('m-d-Y h:i A') ?>" readonly>
+			        </div>                           
 
                                 <div class="form-group">
                                     <label>Contact</label>
