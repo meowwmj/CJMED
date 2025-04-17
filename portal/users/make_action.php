@@ -143,6 +143,18 @@
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 
+     <style>
+        .badge-warning {
+            background-color:rgb(232, 37, 40) !important;
+            color:rgb(255, 255, 255) !important;
+        }
+
+        .badge-danger {
+            background-color: #ffbc00 !important;
+            color:rgb(255, 255, 255) !important;
+        }
+    </style>
+
    <script>
     document.addEventListener("DOMContentLoaded", function () {
         <?php
