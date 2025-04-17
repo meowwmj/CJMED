@@ -76,13 +76,15 @@
                                 <li class="list-group-item"><strong>Status: </strong>
                                     <td class="text-center">
                                         <strong>
-                                            <?php
-                                                if($row['status'] == "Pending"){
-                                                    echo "<span class='badge badge-danger'>Ongoing</span>";   
-                                                } else {
-                                                    echo "<span class='badge badge-success'>Resolved</span>";
-                                                }     
-                                            ?> 
+                                             <?php
+                                                    if ($row['status'] == "Reported") {
+                                                        echo "<span class='badge badge-warning'>Reported</span>";
+                                                    } elseif ($row['status'] == "Pending") {
+                                                        echo "<span class='badge badge-danger'>Ongoing</span>";
+                                                    } else {
+                                                        echo "<span class='badge badge-success'>Resolved</span>";
+                                                    }
+                                             ?>
                                         </strong>  
                                     </td>                     
                                 <li class="list-group-item"><strong>Injury:</strong> <?php echo $row['injury']; ?></li>
