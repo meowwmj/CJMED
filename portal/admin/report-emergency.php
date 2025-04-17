@@ -1,4 +1,6 @@
-<?php include 'includes/head.php';?>
+<?php include 'includes/head.php';
+date_default_timezone_set('Asia/Manila');
+?>
 
 <body>
     <div class="main-wrapper">
@@ -235,6 +237,17 @@
         });
     </script>
 
+<script>
+    document.getElementById('age').addEventListener('input', function() {
+        const age = parseInt(this.value);
+        const error = document.getElementById('ageError');
+        if (isNaN(age) || age < 1 || age > 120) {
+            error.style.display = 'block';
+        } else {
+            error.style.display = 'none';
+        }
+    });
+</script>
 
 <style>
  /* Flexbox for horizontal layout */
