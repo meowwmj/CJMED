@@ -86,7 +86,7 @@
                                     <input class="form-control" type="text" name="patient_name" value="<?= $_SESSION['SESS_FIRST_NAME'] ?>" readonly>
                                 </div>
 
-                                <div class="form-group" hidden>
+                                <div class="form-group">
 				    <label>Date & Time</label>
 				    <input class="form-control" name="dates" value="<?= date('m-d-Y h:i A') ?>" readonly>
 			        </div>                           
