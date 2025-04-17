@@ -131,15 +131,15 @@
                                                 <td class="text-center"><?php echo $row['emergency_category']; ?></td>
                                                 <td class="text-center"><?php echo $row['address']; ?></td>
                                                 <td class="text-center">
-                                                    <?php
-                                                    if ($row['status'] == "Reported") {
+                                                <?php
+                                                    if ($row['status'] == "Pending") {
                                                         echo "<span class='badge badge-warning'>Reported</span>";
-                                                    } elseif ($row['status'] == "Pending") {
+                                                    } elseif ($row['status'] == "Ongoing") {
                                                         echo "<span class='badge badge-danger'>Ongoing</span>";
                                                     } else {
                                                         echo "<span class='badge badge-success'>Resolved</span>";
                                                     }
-                                                    ?>
+                                                ?>
                                                 </td>
                                                 <td class="text-center"><?php echo $row['created_at']; ?></td>
                                                 <td class="text-center">
