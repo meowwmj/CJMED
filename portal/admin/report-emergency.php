@@ -88,7 +88,7 @@ date_default_timezone_set('Asia/Manila');
                                     <input class="form-control" type="text" name="patient_name" value="<?= $_SESSION['SESS_FIRST_NAME'] ?>" readonly>
                                 </div>
 
-                             	<div class="form-group">
+                             	<div class="form-group" hidden>
 				    <label>Date & Time</label>
 				    <input class="form-control" value="<?= date('m-d-Y h:i A') ?>" readonly>
 				    <input type="hidden" name="dates" value="<?= date('Y-m-d H:i:s') ?>">
