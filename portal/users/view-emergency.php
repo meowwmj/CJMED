@@ -42,6 +42,7 @@
                 <div class="col-sm-4 col-3">
                     <h4 class="page-title">Emergency Incident Reports</h4>
                 </div>
+            </div>
 
               <!-- Filters Section -->
               <div class="row">
