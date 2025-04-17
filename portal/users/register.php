@@ -85,7 +85,7 @@
 
                         <!-- Address Input -->
                         <div class="form-group">
-                            <label for="address">Full Address</label>
+                            <label for="address">Address</label>
                             <input type="text" class="form-control" name="address" id="address" readonly>
                         </div>
 
