@@ -2,7 +2,7 @@
 
 <body>
     <div class="main-wrapper">
-        <?php include 'includes/navigation.php'; ?>  
+        <?php include 'includes/navigation.php'; ?> 
         <div class="sidebar" id="sidebar">
             <div class="sidebar-inner slimscroll">
                 <div id="sidebar-menu" class="sidebar-menu">
@@ -36,15 +36,18 @@
         </div>
         
   <!-- Page Wrapper -->
-    <div class="page-wrapper">
+  <div class="page-wrapper">
         <div class="content">
             <div class="row">
                 <div class="col-sm-4 col-3">
                     <h4 class="page-title">Emergency Incident Reports</h4>
                 </div>
+                <div class="col-sm-8 col-9 text-right m-b-20">
+                    <a href="report-emergency.php" class="btn btn-primary btn-rounded float-right"><i class="fa fa-plus"></i> Report Emergency</a>
+                </div>
             </div>
 
-            <!-- Filters Section -->
+              <!-- Filters Section -->
               <div class="row">
                 <div class="col-md-4">
                     <div class="form-group">
@@ -108,15 +111,15 @@
                                                 <td class="text-center"><?php echo $row['emergency_category']; ?></td>
                                                 <td class="text-center"><?php echo $row['address']; ?></td>
                                                 <td class="text-center">
-                                                   <?php
-                                                        if ($row['status'] == "Pending") {
-                                                            echo "<span class='badge badge-warning'>Reported</span>";
-                                                        } elseif ($row['status'] == "Ongoing") {
-                                                            echo "<span class='badge badge-danger'>Ongoing</span>";
-                                                        } else {
-                                                            echo "<span class='badge badge-success'>Resolved</span>";
-                                                        }
-                                                   ?>
+                                                <?php
+                                                    if ($row['status'] == "Pending") {
+                                                        echo "<span class='badge badge-warning'>Reported</span>";
+                                                    } elseif ($row['status'] == "Ongoing") {
+                                                        echo "<span class='badge badge-danger'>Ongoing</span>";
+                                                    } else {
+                                                        echo "<span class='badge badge-success'>Resolved</span>";
+                                                    }
+                                                ?>
                                                 </td>
                                                 <td class="text-center"><?php echo $row['created_at']; ?></td>
                                                 <td class="text-center">
@@ -255,3 +258,4 @@
     
 </body>
 </html>
+
