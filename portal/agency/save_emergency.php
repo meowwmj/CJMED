@@ -1,3 +1,4 @@
+
 <?php
 session_start();
 include('includes/connect.php');
@@ -13,7 +14,7 @@ $latitude = $_POST['latitude'] ?? null;
 $longitude = $_POST['longitude'] ?? null;
 $address = $_POST['address'] ?? null;
 $status = $_POST['status'] ?? 'Pending';
-$dates = $_POST['dates'] ?? date('Y-m-d');
+$dates = $_POST['dates'] ?? date('m-d-Y h:i A');
 $injury = $_POST['injury'] ?? null;
 $description = $_POST['description'] ?? null;
 $agency_id = $_POST['agency_id'] ?? null;
