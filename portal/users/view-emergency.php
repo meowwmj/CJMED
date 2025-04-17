@@ -121,7 +121,7 @@
                                                     }
                                                 ?>
                                                 </td>
-                                                <td class="text-center"><?php echo $row['created_at']; ?></td>
+                                                <td class="text-center"><?php echo $row['dates']; ?></td>
                                                 <td class="text-center">
                                                     <a class="btn btn-primary" href="make_action.php?id=<?php echo $row['id']; ?>"><i class="fa fa-eye"></i></a>
                                                 </td>
