@@ -142,33 +142,35 @@
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 
-    <script>
-        document.addEventListener("DOMContentLoaded", function() {
-            var address = document.getElementById("emergency-address").innerText.trim();
-            if (!address) {
-                alert("No address available.");
-                return;
-            }
-            fetch(`https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(address)}`)
-                .then(response => response.json())
-                .then(data => {
-                    if (data.length === 0) {
-                        alert("Location not found!");
-                        return;
-                    }
-                    var lat = parseFloat(data[0].lat);
-                    var lon = parseFloat(data[0].lon);
-                    var map = L.map('map').setView([lat, lon], 15);
-                    L.tileLayer('https://{s}.google.com/vt/lyrs=s&x={x}&y={y}&z={z}', {
-                        maxZoom: 20,
-                        subdomains: ['mt0', 'mt1', 'mt2', 'mt3']
-                    }).addTo(map);
-                    L.marker([lat, lon]).addTo(map)
-                        .bindPopup("<b>Emergency Location</b><br>" + address)
-                        .openPopup();
-                })
-                .catch(error => console.error("Error fetching location:", error));
-        });
-    </script>
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+        <?php
+            $lat = $row['latitude'];
+            $lon = $row['longitude'];
+            $address = addslashes($row['address']);
+        ?>
+        var lat = <?php echo $lat; ?>;
+        var lon = <?php echo $lon; ?>;
+        var address = "<?php echo $address; ?>";
+
+        if (!lat || !lon) {
+            alert("No coordinates available.");
+            return;
+        }
+
+        var map = L.map('map').setView([lat, lon], 20);
+
+        // Keep using the Google-style tile layer
+        L.tileLayer('https://{s}.google.com/vt/lyrs=s&x={x}&y={y}&z={z}', {
+            maxZoom: 19,
+            subdomains: ['mt0', 'mt1', 'mt2', 'mt3']
+        }).addTo(map);
+
+        L.marker([lat, lon]).addTo(map)
+            .bindPopup("<b>Emergency Location</b><br>" + address)
+            .openPopup();
+    });
+</script>
+
 </body>
 </html>
