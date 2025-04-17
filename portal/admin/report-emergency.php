@@ -186,7 +186,7 @@
                     document.getElementById('latitude').value = lat;
                     document.getElementById('longitude').value = lng;
 
-                    const map = L.map('map').setView([lat, lng], 15);
+                    const map = L.map('map').setView([lat, lng], 20);
 
                     L.tileLayer('https://{s}.google.com/vt/lyrs=s&x={x}&y={y}&z={z}', {
                         maxZoom: 18,
