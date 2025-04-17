@@ -283,7 +283,6 @@ document.addEventListener("DOMContentLoaded", function() {
         border: 1px solid #ccc;
         border-radius: 10px;
         padding: 1rem;
-        width: 250px;
         background: #f9f9f9;
         box-shadow: 0 2px 6px rgba(0,0,0,0.1);
         text-align: center;
