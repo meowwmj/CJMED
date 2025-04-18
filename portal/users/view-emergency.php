@@ -46,7 +46,7 @@
 
           <!-- Filters Section -->
             <div class="row">
-                <div class="col-md-3">
+                <div class="col-md-2">
                     <div class="form-group">
                         <select class="form-control mx-1" name="status" id="status">
                             <option value="">All Status</option>
@@ -57,7 +57,7 @@
                     </div>
                 </div>
 
-                <div class="col-md-2">
+                <div class="col-md-3">
                     <button class="btn btn-primary " id="print-btn" style="margin-top: 3px;"><i class="fa fa-print"></i> Print</button>
                 </div>
 
