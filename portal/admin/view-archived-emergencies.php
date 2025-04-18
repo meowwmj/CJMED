@@ -55,38 +55,42 @@
         </div>    
         </div>
 
-         <div class="page-wrapper">
+        <div class="page-wrapper">
             <div class="content">
                 <div class="row">
-                    <div class="col-sm-7 col-6">
-                        <h3 class="page-title">Archived Emergencies</h3>
+                    <div class="col-sm-4 col-3">
+                        <h4 class="page-title">Archived Emergencies</h4>
                     </div>
 
-                    <!-- Filters: Year, Month, Day -->
-                    <div class="col-sm-5 col-6 text-right m-b-20">
+                    <!-- Filters on the right: Year, Month, and Day -->
+                    <div class="col-sm-8 col-9 text-right m-b-20">
                         <form method="GET" action="" id="history-form">
-                            <!-- Year Filter -->
                             <select name="year" class="form-control d-inline-block" style="width: auto;" onchange="this.form.submit()">
                                 <option value="">Select Year</option>
-                                <option value="<?php echo date('Y'); ?>" <?php echo (isset($_GET['year']) && $_GET['year'] == date('Y') ? 'selected' : ''); ?>><?php echo date('Y'); ?></option>
-                            </select>
-
-                            <!-- Month Filter -->
-                            <select name="month" class="form-control d-inline-block" style="width: auto;" onchange="this.form.submit()">
-                                <option value="">Select Month</option>
                                 <?php
-                                for ($m = 1; $m <= 12; $m++) {
-                                    echo '<option value="' . $m . '" ' . (isset($_GET['month']) && $_GET['month'] == $m ? 'selected' : '') . '>' . date("F", mktime(0, 0, 0, $m, 10)) . '</option>';
+                                // Fetch years from your data or set a range
+                                for ($y = 2025; $y <= date('Y'); $y++) {
+                                    echo '<option value="' . $y . '" ' . ($_GET['year'] == $y ? 'selected' : '') . '>' . $y . '</option>';
                                 }
                                 ?>
                             </select>
 
-                            <!-- Day Filter -->
+                            <select name="month" class="form-control d-inline-block" style="width: auto;" onchange="this.form.submit()">
+                                <option value="">Select Month</option>
+                                <?php
+                                // Fetch months
+                                for ($m = 1; $m <= 4; $m++) {
+                                    echo '<option value="' . $m . '" ' . ($_GET['month'] == $m ? 'selected' : '') . '>' . date("F", mktime(0, 0, 0, $m, 10)) . '</option>';
+                                }
+                                ?>
+                            </select>
+
                             <select name="day" class="form-control d-inline-block" style="width: auto;" onchange="this.form.submit()">
                                 <option value="">Select Day</option>
                                 <?php
+                                // Generate day options (1 to 31)
                                 for ($d = 1; $d <= 31; $d++) {
-                                    echo '<option value="' . $d . '" ' . (isset($_GET['day']) && $_GET['day'] == $d ? 'selected' : '') . '>' . $d . '</option>';
+                                    echo '<option value="' . $d . '" ' . ($_GET['day'] == $d ? 'selected' : '') . '>' . $d . '</option>';
                                 }
                                 ?>
                             </select>
