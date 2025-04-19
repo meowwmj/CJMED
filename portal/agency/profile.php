@@ -106,18 +106,5 @@
     </div>
 </div>
 
-<!-- Show message if just updated -->
-<script>
-document.addEventListener("DOMContentLoaded", function () {
-    if (localStorage.getItem("profileUpdated") === "true") {
-        localStorage.removeItem("profileUpdated");
-        const alert = document.createElement("div");
-        alert.className = "alert alert-success";
-        alert.innerText = "Profile updated successfully!";
-        document.querySelector(".content").prepend(alert);
-    }
-});
-</script>
-
 </body>
 </html>
