@@ -71,7 +71,7 @@
                         </span>
 
 
-						<span><?php echo $_SESSION['SESS_FIRST_NAME'];?></span>
+						<span><?php echo $_SESSION['SESS_AGENCY_NAME'];?></span>
                     </a>
 					<div class="dropdown-menu">
 						<a class="dropdown-item" href="profile.php">My Profile</a>
