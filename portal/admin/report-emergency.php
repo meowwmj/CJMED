@@ -84,7 +84,7 @@ date_default_timezone_set('Asia/Manila');
                                 </div>
 
                                 <div class="form-group">
-                                    <label>Patient's Name</label>
+                                    <label>Admin's Name</label>
                                     <input class="form-control" type="text" name="patient_name" value="<?= $_SESSION['SESS_FIRST_NAME'] ?>" readonly>
                                 </div>
 
