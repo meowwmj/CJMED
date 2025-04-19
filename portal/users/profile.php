@@ -3,39 +3,10 @@
 <body>
     <div class="main-wrapper">
         <?php include 'includes/navigation.php'; ?>
-        <div class="sidebar" id="sidebar">
-            <div class="sidebar-inner slimscroll">
-                <div id="sidebar-menu" class="sidebar-menu">
-                    <ul>
-                        <li>
-                            <a href="report-emergency.php"><i class="fa fa-heartbeat"></i> <span>Report Emergency</span></a>
-                        </li> 
-                        <li>
-                        <?php
-                        $result = $db->prepare("SELECT count(*) as total FROM emergency WHERE status = 'Pending' ORDER BY id DESC ");
-                        $result->execute();
-                        for($i=0; $row = $result->fetch(); $i++){ ?>
-                    <li><a href="view-emergency.php"><i class="fa fa-file"></i> <span>Emergency</span> <span class="badge badge-pill btn-primary float-right"><?php echo $row['total'] ;?></span></a></li>
-                    <?php } ?>
-                        </li>
-                        <li>
-                            <a href="announcement.php"><i class="fa fa-bell"></i> <span>Announcements</span></a>
-                        </li>           
-                        <li>
-                            <a href="report_history.php"><i class="fa fa-file-text-o"></i> <span>History</span></a>
-                        </li>
-                        <li>
-                            <a href="rescue.php"><i class="fa fa-calendar-o"></i> <span>Rescue</span></a> 
-                        </li>
-                        <li>
-                            <a href="logout.php"><i class="fa fa-power-off"></i> <span>Logout</span></a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-
-     <div class="page-wrapper">
+        <?php include 'includes/sidebar.php'; ?>    
+    </div>
+        
+        <div class="page-wrapper">
             <div class="content">
                 <div class="row">
                     <div class="col-sm-7 col-6">
@@ -59,17 +30,18 @@
                                     }
                                     ?>                                    </div>
                                 </div>
-                                <div class="profile-basic">
-                                    
+
+                                <div class="profile-basic">                                    
                                     <div class="row">
                                         <div class="col-md-5">
                                             <div class="profile-info-left">
                                                 <h3 class="user-name m-t-0 mb-0"><?php echo $_SESSION['SESS_FIRST_NAME'];?></h3>
-                                                <small class="text-muted">User</small><br>
-                                                <div class="staff-id">USER-<?php echo $_SESSION['SESS_USERS_ID'];?></div>
+                                                <small class="text-muted">Users</small><br>
+                                                <div class="staff-id">USR-<?php echo $_SESSION['SESS_USERS_ID'];?></div>
                                                 
                                             </div>
                                         </div>
+                                        
                                         <div class="col-md-7">
                                             <ul class="personal-info">
 
@@ -137,8 +109,10 @@
             </div>
         </div>
     </div>
+
 </div>
 
+<!-- Bootstrap JS and dependencies -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
 
 </body>
