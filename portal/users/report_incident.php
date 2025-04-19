@@ -258,7 +258,6 @@ date_default_timezone_set('Asia/Manila');
         background: none;
         border: none;
         border-bottom: 3px solid transparent; /* For underline effect */
-        transition: all 0.3s ease;
     }
 
     /* Hover effect */
