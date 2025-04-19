@@ -65,7 +65,7 @@
                                 </div>
 
                                  <div class="form-group">
-                                    <label>Patient's Name</label>
+                                    <label>User's Name</label>
                                     <input class="form-control" type="text" name="patient_name" value="<?= $_SESSION['SESS_FIRST_NAME'] ?>" readonly>
                                 </div>
 
