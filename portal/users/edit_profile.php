@@ -16,7 +16,7 @@
                 <?php
                 $admin_id = $_SESSION['SESS_MEMBER_ID'];
 
-                $stmt = $db->prepare("SELECT * FROM users WHERE id = ?");
+                $stmt = $db->prepare("SELECT * FROM admin WHERE id = ?");
                 $stmt->execute([$admin_id]);
                 $admin = $stmt->fetch(PDO::FETCH_ASSOC);
 
@@ -24,7 +24,7 @@
                     die("Admin not found.");
                 }
 
-                user_id = $admin['user_id'];
+                $agency_id = $admin['agency_id'];
 
                 // Handle form submission
                 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -89,7 +89,7 @@
                             <?php
                             if (isset($_GET['id'])) {
                                 $id = $_GET['id'];
-                                $result = $db->prepare("SELECT * FROM users WHERE id = :post_id");
+                                $result = $db->prepare("SELECT * FROM admin WHERE id = :post_id");
                                 $result->bindParam(':post_id', $id);
                                 $result->execute();
                                 $row = $result->fetch();
