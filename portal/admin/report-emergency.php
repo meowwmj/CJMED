@@ -61,8 +61,8 @@ date_default_timezone_set('Asia/Manila');
     <div class="content">
         <div class="card">   
              <div class="choice-container">
-                <a href="rescue.php"><div class="choice-item active" id="reportYourselfText" onclick="setActive(this)">🚨 Report Yourself</div></a>
-                <a href="rescue.php"><div class="choice-item" id="reportIncidentText" onclick="setActive(this)">📢 Report an Incident</div></a>
+                <a href="report-emergency.php"><div class="choice-item active" id="reportYourselfText" onclick="setActive(this)">🚨 Report Yourself</div></a>
+                <a href="report_incident.php"><div class="choice-item" id="reportIncidentText" onclick="setActive(this)">📢 Report an Incident</div></a>
             </div>
                 <form action="save_emergency.php" method="post" enctype="multipart/form-data">
                         <?php if(get("success")):?>
