@@ -26,9 +26,9 @@
 
                 // Handle form submission
                 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-                    $name     = $_POST['agency_name'];
+                    $agency_name     = $_POST['agency_name'];
                     $email    = $_POST['email'];
-                    $phone    = $_POST['phone_number'];
+                    $phone_number    = $_POST['phone_number'];
                     $username = $_POST['username'];
                     $address  = $_POST['address'];
                     $photo    = $admin['photo']; // Default to existing photo
@@ -51,10 +51,10 @@
                     $stmt->execute([$name, $email, $phone, $username, $address, $photo, $admin_id]);
 
                     // Update session variables
-                    $_SESSION['SESS_AGENCY_NAME']   = $name;
+                    $_SESSION['SESS_AGENCY_NAME']   = $agency_name;
                     $_SESSION['SESS_USERNAME']      = $username;
                     $_SESSION['SESS_EMAIL']         = $email;
-                    $_SESSION['SESS_PHONE_NUMBER']  = $phone;
+                    $_SESSION['SESS_PHONE_NUMBER']  = $phone_number;
                     $_SESSION['SESS_ADDRESS']       = $address;
                     $_SESSION['SESS_PRO_PIC']       = $photo;
 
