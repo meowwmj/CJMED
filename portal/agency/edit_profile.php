@@ -100,7 +100,7 @@
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label>First Name</label>
-                                                <input class="form-control" type="text" name="name" value="<?php echo $row['name']; ?>" required>
+                                                <input class="form-control" type="text" name="agency_name" value="<?php echo $row['agency_name']; ?>" required>
                                             </div>
                                         </div>
                                         <div class="col-md-6">
@@ -130,7 +130,7 @@
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label>Phone Number</label>
-                                                <input class="form-control" type="text" name="phone" value="<?php echo $row['phone']; ?>" required>
+                                                <input class="form-control" type="text" name="phone_number" value="<?php echo $row['phone_number']; ?>" required>
                                             </div>
                                         </div>
                                         <div class="col-md-6">
