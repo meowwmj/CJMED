@@ -48,7 +48,7 @@
 
                     // Update agency record
                     $stmt = $db->prepare("UPDATE agency SET agency_name=?, email=?, phone_number=?, username=?, address=?, photo=? WHERE id=?");
-                    $stmt->execute([$name, $email, $phone, $username, $address, $photo, $admin_id]);
+                    $stmt->execute([$agency_name, $email, $phone_number, $username, $address, $photo, $admin_id]);
 
                     // Update session variables
                     $_SESSION['SESS_AGENCY_NAME']   = $agency_name;
