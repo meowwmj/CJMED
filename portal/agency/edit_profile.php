@@ -84,7 +84,14 @@
                                     ?>
                                 </div>
                             </div>
-
+                            <?php
+                            if (isset($_GET['id'])) {
+                                $id = $_GET['id'];
+                                $result = $db->prepare("SELECT * FROM admin WHERE id = :post_id");
+                                $result->bindParam(':post_id', $id);
+                                $result->execute();
+                                $row = $result->fetch();
+                            ?>
                             <div class="profile-basic">
                                 <form action="edit_profile.php" method="POST" enctype="multipart/form-data">
                                     <div class="row">
@@ -137,6 +144,7 @@
                                     </div>
                                 </form>
                             </div>
+                            <?php } ?>
                         </div>
                     </div>
                 </div>
