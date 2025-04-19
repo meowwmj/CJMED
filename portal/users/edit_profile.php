@@ -49,8 +49,8 @@
                     }
 
                     // Update admin record using agency_id
-                    $stmt = $db->prepare("UPDATE user SET name=?, email=?, phone=?, username=?, address=?, photo=? WHERE agency_id=?");
-                    $stmt->execute([$name, $email, $phone, $username, $address, $photo, $user_id]);
+                    $stmt = $db->prepare("UPDATE user SET name=?, email=?, phone=?, username=?, address=?, photo=? WHERE id=?");
+                    $stmt->execute([$name, $email, $phone, $username, $address, $photo, $admin_id]);
 
                     // Update session variables
                     $_SESSION['SESS_FIRST_NAME']   = $name;
