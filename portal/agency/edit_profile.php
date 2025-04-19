@@ -24,13 +24,11 @@
                     die("Admin not found.");
                 }
 
-                $agency_id = $admin['agency_id'];
-
                 // Handle form submission
                 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-                    $name     = $_POST['name'];
+                    $name     = $_POST['agency_name'];
                     $email    = $_POST['email'];
-                    $phone    = $_POST['phone'];
+                    $phone    = $_POST['phone_number'];
                     $username = $_POST['username'];
                     $address  = $_POST['address'];
                     $photo    = $admin['photo']; // Default to existing photo
@@ -48,17 +46,17 @@
                         }
                     }
 
-                    // Update admin record using agency_id
-                    $stmt = $db->prepare("UPDATE admin SET name=?, email=?, phone=?, username=?, address=?, photo=? WHERE agency_id=?");
-                    $stmt->execute([$name, $email, $phone, $username, $address, $photo, $agency_id]);
+                    // Update agency record
+                    $stmt = $db->prepare("UPDATE agency SET agency_name=?, email=?, phone_number=?, username=?, address=?, photo=? WHERE id=?");
+                    $stmt->execute([$name, $email, $phone, $username, $address, $photo, $admin_id]);
 
                     // Update session variables
-                    $_SESSION['SESS_FIRST_NAME']   = $name;
-                    $_SESSION['SESS_USERNAME']     = $username;
-                    $_SESSION['SESS_EMAIL']        = $email;
-                    $_SESSION['SESS_PHONE_NUMBER'] = $phone;
-                    $_SESSION['SESS_ADDRESS']      = $address;
-                    $_SESSION['SESS_PRO_PIC']      = $photo;
+                    $_SESSION['SESS_AGENCY_NAME']   = $name;
+                    $_SESSION['SESS_USERNAME']      = $username;
+                    $_SESSION['SESS_EMAIL']         = $email;
+                    $_SESSION['SESS_PHONE_NUMBER']  = $phone;
+                    $_SESSION['SESS_ADDRESS']       = $address;
+                    $_SESSION['SESS_PRO_PIC']       = $photo;
 
                     // Redirect to profile page
                     echo "<script>window.location.href = 'profile.php';</script>";
@@ -78,35 +76,28 @@
                             <div class="profile-img-wrap">
                                 <div class="profile-img">
                                     <?php
-                                    if (!empty($_SESSION['SESS_PRO_PIC'])) {
-                                        echo '<img class="rounded-circle" src="../../uploads/' . $_SESSION['SESS_PRO_PIC'] . '" width="24" height="24">';
+                                    if (!empty($admin['photo'])) {
+                                        echo '<img class="rounded-circle" src="../../uploads/' . $admin['photo'] . '" width="24" height="24">';
                                     } else {
                                         echo '<img class="rounded-circle" src="../../uploads/default.jpg" width="24" height="24">';
                                     }
                                     ?>
                                 </div>
                             </div>
-                            <?php
-                            if (isset($_GET['id'])) {
-                                $id = $_GET['id'];
-                                $result = $db->prepare("SELECT * FROM agency WHERE id = :post_id");
-                                $result->bindParam(':post_id', $id);
-                                $result->execute();
-                                $row = $result->fetch();
-                            ?>
+
                             <div class="profile-basic">
-                                <form action="edit_profile.php?id=<?php echo $id; ?>" method="POST" enctype="multipart/form-data">
+                                <form action="edit_profile.php" method="POST" enctype="multipart/form-data">
                                     <div class="row">
                                         <div class="col-md-6">
                                             <div class="form-group">
-                                                <label>First Name</label>
-                                                <input class="form-control" type="text" name="agency_name" value="<?php echo $row['agency_name']; ?>" required>
+                                                <label>Agency Name</label>
+                                                <input class="form-control" type="text" name="agency_name" value="<?php echo $admin['agency_name']; ?>" required>
                                             </div>
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label>Username</label>
-                                                <input class="form-control" type="text" name="username" value="<?php echo $row['username']; ?>" required>
+                                                <input class="form-control" type="text" name="username" value="<?php echo $admin['username']; ?>" required>
                                             </div>
                                         </div>
                                     </div>
@@ -115,13 +106,13 @@
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label>Address</label>
-                                                <input class="form-control" type="text" name="address" value="<?php echo $row['address']; ?>" required>
+                                                <input class="form-control" type="text" name="address" value="<?php echo $admin['address']; ?>" required>
                                             </div>
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label>Email</label>
-                                                <input class="form-control" type="email" name="email" value="<?php echo $row['email']; ?>" required>
+                                                <input class="form-control" type="email" name="email" value="<?php echo $admin['email']; ?>" required>
                                             </div>
                                         </div>
                                     </div>
@@ -130,7 +121,7 @@
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label>Phone Number</label>
-                                                <input class="form-control" type="text" name="phone_number" value="<?php echo $row['phone_number']; ?>" required>
+                                                <input class="form-control" type="text" name="phone_number" value="<?php echo $admin['phone_number']; ?>" required>
                                             </div>
                                         </div>
                                         <div class="col-md-6">
@@ -146,7 +137,6 @@
                                     </div>
                                 </form>
                             </div>
-                            <?php } ?>
                         </div>
                     </div>
                 </div>
