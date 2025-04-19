@@ -16,7 +16,7 @@
                 <?php
                 $admin_id = $_SESSION['SESS_MEMBER_ID'];
 
-                $stmt = $db->prepare("SELECT * FROM admin WHERE id = ?");
+                $stmt = $db->prepare("SELECT * FROM agency WHERE id = ?");
                 $stmt->execute([$admin_id]);
                 $admin = $stmt->fetch(PDO::FETCH_ASSOC);
 
