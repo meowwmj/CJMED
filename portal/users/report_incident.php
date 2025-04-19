@@ -79,7 +79,7 @@ date_default_timezone_set('Asia/Manila');
 
                                     <div class="form-group">
                                         <label>Contact</label>
-                                        <input class="form-control" type="text" name="phone">
+                                        <input class="form-control" type="text" name="phone" value="<?= $_SESSION['SESS_PHONE_NUMBER'] ?>" readonly>
                                     </div>
 
                                     <div class="form-group">
