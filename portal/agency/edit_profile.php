@@ -154,43 +154,6 @@
     <!-- Bootstrap Bundle -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
 
-    <!-- AJAX + Preview Script -->
-    <script>
-    $(document).ready(function () {
-        $('#editProfileForm').submit(function (e) {
-            e.preventDefault();
-
-            var formData = new FormData(this);
-
-            $.ajax({
-                url: 'edit_profile.php',
-                type: 'POST',
-                data: formData,
-                contentType: false,
-                processData: false,
-                success: function (res) {
-                    if (res.trim() === "success") {
-                        $('#updateMessage').html('<div class="alert alert-success">Profile updated successfully!</div>');
-                        setTimeout(() => {
-                            window.location.href = "profile.php";
-                        }, 1500);
-                    } else {
-                        $('#updateMessage').html('<div class="alert alert-danger">Update failed: ' + res + '</div>');
-                    }
-                },
-                error: function () {
-                    $('#updateMessage').html('<div class="alert alert-danger">An error occurred while updating.</div>');
-                }
-            });
-        });
-    });
-
-    function previewImage(event) {
-        const output = document.getElementById('previewImg');
-        output.src = URL.createObjectURL(event.target.files[0]);
-        output.onload = () => URL.revokeObjectURL(output.src);
-    }
-    </script>
 
     <!-- Styles -->
     <style>
