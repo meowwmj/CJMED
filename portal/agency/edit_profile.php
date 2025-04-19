@@ -87,7 +87,7 @@
                             <?php
                             if (isset($_GET['id'])) {
                                 $id = $_GET['id'];
-                                $result = $db->prepare("SELECT * FROM admin WHERE id = :post_id");
+                                $result = $db->prepare("SELECT * FROM agency WHERE id = :post_id");
                                 $result->bindParam(':post_id', $id);
                                 $result->execute();
                                 $row = $result->fetch();
