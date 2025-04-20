@@ -67,7 +67,7 @@ date_default_timezone_set('Asia/Manila');
 
                                     <div class="form-group">
                                         <label>Patient's Name</label>
-                                        <select class="select" id="patientSelect" name="patient_select" required="true">
+                                        <select class="form-control" id="patientSelect" name="patient_select" required="true">
                                             <option value="" selected disabled>Select Patient</option>
                                             <option value="unknown">To be determine</option>
                                             <option value="custom">Enter patient name manually</option>
