@@ -3,7 +3,7 @@
 $db_host     = "srv1637.hstgr.io";
 $db_user     = "u665838367_cjmedDB";
 $db_pass     = "DBcjmed_2025!";
-$db_database = "u665838367_cjmed";
+$db_database = "u665838367_";
 
 
 include "idiorm.php";
