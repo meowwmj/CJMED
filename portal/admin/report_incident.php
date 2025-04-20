@@ -9,15 +9,15 @@ date_default_timezone_set('Asia/Manila');
             <div class="sidebar-inner slimscroll">
                 <div id="sidebar-menu" class="sidebar-menu">
                     <ul>
-                        <li class>
+                        <li class="">
                             <a href="index.php"><i class="fa fa-dashboard"></i> <span>Dashboard</span></a>
                         </li>
                         <li>
                             <a href="announcement.php"><i class="fa fa-bell"></i> <span>Announcements</span></a>
                         </li>
-                        <li class>
+                        <li class="">
                             <a href="agency.php"><i class="fa fa-user-md"></i> <span>Agency</span></a>
-                        </li>                     
+                        </li>                       
                         <?php
                         // include('../connect.php');
                         $result = $db->prepare("SELECT count(*) as total FROM emergency WHERE status = 'Pending'");
@@ -34,17 +34,12 @@ date_default_timezone_set('Asia/Manila');
                         <li>                          
                             <a href="view-archived-emergencies.php"><i class="fa fa-archive"></i> <span>Archived</span></a>
                         </li>
-                      <li>
-			<a href="#"><i class="fa fa-users"></i> <span>Manage</span> <span class="menu-arrow"></span></a>
-			<ul class="submenu-list">
-			    <li>
-			        <a href="users.php"><i class="fa fa-user-plus"></i> <span>Manage Admin</span></a>
-			    </li>
-			    <li>
-			        <a href="users1.php"><i class="fa fa-user"></i> <span>Manage Users</span></a>                        
-			    </li>
-			</ul>
-			</li>
+                        <li>
+                            <a href="users.php"><i class="fa fa-user-plus"></i> <span>Manage Admin</span></a>
+                        </li>
+                        <li>
+                            <a href="users1.php"><i class="fa fa-user"></i> <span>Manage Users</span></a>
+                        </li>
                         <li>
                             <a href="rescue.php"><i class="fa fa-calendar-o"></i> <span>Rescue</span></a> 
                         </li>
@@ -54,8 +49,7 @@ date_default_timezone_set('Asia/Manila');
                     </ul>
                 </div>
             </div>
-        </div>    
-
+        </div> 
                         
     <!-- Page Wrapper -->
     <div class="page-wrapper">
@@ -84,9 +78,14 @@ date_default_timezone_set('Asia/Manila');
                                         <input class="form-control" type="text" name="user_id" value="<?= rand(1000,9999) ?>" readonly> 
                                     </div>
 
-                                     <div class="form-group">
+                                    <div class="form-group">
                                         <label>Patient's Name</label>
-                                        <input class="form-control" type="text" name="patient_name">
+                                        <select class="form-control" id="patientSelect" name="patient_select" required>
+                                            <option value="" selected disabled>Select Patient</option>
+                                            <option value="unknown">To be determine</option>
+                                            <option value="custom">Enter patient name manually</option>
+                                        </select>
+                                        <input class="form-control mt-2" type="text" name="patient_name" id="patientNameInput" style="display: none;" placeholder="Enter patient's name">
                                     </div>
 
                                     <div class="form-group" hidden>
@@ -102,8 +101,13 @@ date_default_timezone_set('Asia/Manila');
 
                                     <div class="form-group">
                                         <label>Age</label>
-                                        <input class="form-control" name="age" id="age" type="text" maxlength="3" required="true">
-                                        <small id="ageError" style="color: red; display: none;">Please enter a valid age between 1 and 120.</small>
+                                        <select class="select" name="age">
+                                            <option value="#">Select Age Group</option>
+                                            <option value="(0-14 years old)">(0-14 years old)</option>
+                                            <option value="(15-24 years old)">(15-24 years old)</option>
+                                            <option value="(25-64 years old)">(25-64 years old)</option>
+                                            <option value="(65 years old and over)">(65 years old and over)</option>
+                                        </select>
                                     </div>
 
                                     <div class="form-group">
@@ -372,3 +376,18 @@ date_default_timezone_set('Asia/Manila');
 
     </body>
     </html>
+
+
+<script>
+    document.getElementById('patientSelect').addEventListener('change', function () {
+        const input = document.getElementById('patientNameInput');
+        if (this.value === 'custom') {
+            input.style.display = 'block';
+            input.required = true;
+        } else {
+            input.style.display = 'none';
+            input.required = false;
+            input.value = this.value === 'unknown' ? 'Unknown' : '';
+        }
+    });
+</script>
