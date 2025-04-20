@@ -9,15 +9,15 @@ date_default_timezone_set('Asia/Manila');
             <div class="sidebar-inner slimscroll">
                 <div id="sidebar-menu" class="sidebar-menu">
                     <ul>
-                        <li class="">
+                        <li class>
                             <a href="index.php"><i class="fa fa-dashboard"></i> <span>Dashboard</span></a>
                         </li>
                         <li>
                             <a href="announcement.php"><i class="fa fa-bell"></i> <span>Announcements</span></a>
                         </li>
-                        <li class="">
+                        <li class>
                             <a href="agency.php"><i class="fa fa-user-md"></i> <span>Agency</span></a>
-                        </li>                       
+                        </li>                     
                         <?php
                         // include('../connect.php');
                         $result = $db->prepare("SELECT count(*) as total FROM emergency WHERE status = 'Pending'");
@@ -35,11 +35,16 @@ date_default_timezone_set('Asia/Manila');
                             <a href="view-archived-emergencies.php"><i class="fa fa-archive"></i> <span>Archived</span></a>
                         </li>
                         <li>
-                            <a href="users.php"><i class="fa fa-user-plus"></i> <span>Manage Admin</span></a>
-                        </li>
-                        <li>
-                            <a href="users1.php"><i class="fa fa-user"></i> <span>Manage Users</span></a>
-                        </li>
+            			<a href="#"><i class="fa fa-users"></i> <span>Manage</span> <span class="menu-arrow"></span></a>
+            			<ul class="submenu-list">
+            			    <li>
+            			        <a href="users.php"><i class="fa fa-user-plus"></i> <span>Manage Admin</span></a>
+            			    </li>
+            			    <li>
+            			        <a href="users1.php"><i class="fa fa-user"></i> <span>Manage Users</span></a>                        
+            			    </li>
+            			</ul>
+            			</li>
                         <li>
                             <a href="rescue.php"><i class="fa fa-calendar-o"></i> <span>Rescue</span></a> 
                         </li>
@@ -49,7 +54,7 @@ date_default_timezone_set('Asia/Manila');
                     </ul>
                 </div>
             </div>
-        </div> 
+        </div>    
                         
     <!-- Page Wrapper -->
     <div class="page-wrapper">
