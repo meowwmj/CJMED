@@ -43,10 +43,7 @@
                                     <a href="users1.php"><i class="fa fa-user"></i> <span>Manage Users</span></a>                        
                                 </li>
                             </ul>
-                        </li>
-                        <li>
-                            <a href="rescue.php"><i class="	fa fa-calendar-o"></i> <span>Rescue</span></a> 
-                        </li>
+		       </li>
                         <li>
                             <a href="logout.php"><i class="fa fa-power-off"></i> <span>Logout</span></a>
                         </li>
