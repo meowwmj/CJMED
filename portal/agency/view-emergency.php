@@ -39,7 +39,10 @@ $emergencies = $stmt->fetchAll();
                         </li>
                         <li>
                             <a href="view-archived-emergencies.php"><i class="fa fa-archive"></i> <span>Archived</span></a>
-                        </li>                    
+                        </li>
+                        <li>
+                            <a href="rescue.php"><i class="fa fa-calendar-o"></i> <span>Rescue</span></a> 
+                        </li>                      
                         <li>
                             <a href="logout.php"><i class="fa fa-power-off"></i> <span>Logout</span></a>
                         </li>
@@ -251,7 +254,10 @@ $emergencies = $stmt->fetchAll();
                 location.reload();
             });
         });
+    </script>
 
+
+    <script>
         // Dashboard widgets
         $statusFilter = isset($_GET['status']) ? $_GET['status'] : null;
 
