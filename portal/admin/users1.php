@@ -59,9 +59,7 @@
                             <div class="col-sm-4 col-3">
                                 <h4 class="page-title">All Users</h4>
                             </div> 
-                            <div class="col-sm-8 col-9 text-right m-b-20">
-                                <h4 class="card-title d-inline-block"></h4> <a href="#" class="btn btn-primary">Import</a>
-                            </div>
+                            
                     </div>
                 <div class="row">
                     <div class="col-md-12">
