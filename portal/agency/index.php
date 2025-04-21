@@ -1,3 +1,4 @@
+
 <?php include 'includes/head.php'; ?>
 
 <body>
@@ -26,55 +27,56 @@
                         </a>
                     </div>
 
-                    <!-- Users Tile -->
-                    <div class="col-md-6 col-sm-6 col-lg-6 col-xl-3">
-                        <?php
-                        $result = $db->prepare("SELECT count(*) as total FROM users");
-                        $result->execute();
-                        $row = $result->fetch();
-                        ?>
-                        <a href="users1.php">
-                            <div class="dash-widget">
-                                <span class="dash-widget-bg2"><i class="fa fa-user-o"></i></span>
-                                <div class="dash-widget-info text-right">
-                                    <h3><?php echo $row['total']; ?></h3>
-                                    <span class="widget-title2">Users <i class="fa fa-check"></i></span>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
-
                     <!-- Agency Tile -->
-                    <div class="col-md-6 col-sm-6 col-lg-6 col-xl-3">
-                        <?php
-                        $result = $db->prepare("SELECT count(*) as total FROM agency");
-                        $result->execute();
-                        $row = $result->fetch();
-                        ?>
-                        <a href="agency.php">
-                            <div class="dash-widget">
-                                <span class="dash-widget-bg3"><i class="fa fa-user-md"></i></span>
-                                <div class="dash-widget-info text-right">
-                                    <h3><?php echo $row['total']; ?></h3>
-                                    <span class="widget-title3">Agency <i class="fa fa-check"></i></span>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
-
-                    <!-- Ongoing Emergencies Tile -->
                     <div class="col-md-6 col-sm-6 col-lg-6 col-xl-3">
                         <?php
                         $result = $db->prepare("SELECT count(*) as total FROM emergency WHERE status = 'Pending'");
                         $result->execute();
                         $row = $result->fetch();
                         ?>
-                        <a href="view-emergency.php">
+                        <a href="view-emergency.php?status=Pending">
+                            <div class="dash-widget">
+                                <span class="dash-widget-bg3"><i class="fa fa-user-md"></i></span>
+                                <div class="dash-widget-info text-right">
+                                    <h3><?php echo $row['total']; ?></h3>
+                                    <span class="widget-title3">Reported <i class="fa fa-check"></i></span>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+
+
+                    <!-- Ongoing Emergencies Tile -->
+                    <div class="col-md-6 col-sm-6 col-lg-6 col-xl-3">
+                        <?php
+                        $result = $db->prepare("SELECT count(*) as total FROM emergency WHERE status = 'Ongoing'");
+                        $result->execute();
+                        $row = $result->fetch();
+                        ?>
+                        <a href="view-emergency.php?status=Ongoing">
                             <div class="dash-widget">
                                 <span class="dash-widget-bg4"><i class="fa fa-heartbeat"></i></span>
                                 <div class="dash-widget-info text-right">
                                     <h3><?php echo $row['total']; ?></h3>
                                     <span class="widget-title4">Ongoing <i class="fa fa-check"></i></span>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+
+                    <!-- Users Tile -->
+                    <div class="col-md-6 col-sm-6 col-lg-6 col-xl-3">
+                        <?php
+                        $result = $db->prepare("SELECT count(*) as total FROM emergency WHERE status = 'Resolved'");
+                        $result->execute();
+                        $row = $result->fetch();
+                        ?>
+                        <a href="view-emergency.php?status=Resolved">
+                            <div class="dash-widget">
+                                <span class="dash-widget-bg2"><i class="fa fa-user-o"></i></span>
+                                <div class="dash-widget-info text-right">
+                                    <h3><?php echo $row['total']; ?></h3>
+                                    <span class="widget-title2">Resolved <i class="fa fa-check"></i></span>
                                 </div>
                             </div>
                         </a>
@@ -122,7 +124,7 @@
                     <div class="col-lg-8">
                         <div class="card">
                             <div class="card-header">
-                                <h4 class="card-title">Emergency Reports per Municipality</h4>
+                                <h4 class="card-title">Emergency Reports per Municipalities</h4>
                             </div>
                             <div class="card-body">
                                 <canvas id="barChart" height="200"></canvas>
@@ -336,6 +338,7 @@
             });
         });
         </script>
+
 
     </div>
 </body>
