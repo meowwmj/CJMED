@@ -45,9 +45,7 @@ date_default_timezone_set('Asia/Manila');
             			    </li>
             			</ul>
             			</li>
-                        <li>
-                            <a href="rescue.php"><i class="fa fa-calendar-o"></i> <span>Rescue</span></a> 
-                        </li>
+                        
                         <li>
                             <a href="logout.php"><i class="fa fa-power-off"></i> <span>Logout</span></a>
                         </li>
