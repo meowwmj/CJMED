@@ -1170,15 +1170,76 @@ textarea.form-control {
 	border-radius: 50%;
 	font-size: 40px;
 	height: 65px;
+
 }
+.dash-widget-bg5 {
+	width: 65px;
+	float: left;
+	color: #fff;
+	display: block;
+	font-size: 50px;
+	text-align: center;
+	line-height: 65px;
+	background: #7E5CAD;
+	border-radius: 50%;
+	font-size: 40px;
+	height: 65px;
+}
+/*-----------------
+	Dashboard Widget
+-----------------------*/
+.dash-widget {
+	transition: transform 0.2s ease-in-out;
+}
+
+.dash-widget:hover {
+	transform: scale(1.02);
+}
+
+.wide-widget {
+	width: 100%;
+}
+
+.tile-row {
+display: flex;
+flex-wrap: wrap;
+margin-left: -0.5rem;
+margin-right: -0.5rem;
+}
+
+.tile-col {
+	flex: 0 0 20%;
+	max-width: 20%;
+	padding: 0 0.5rem;
+}
+
+@media (max-width: 1199.98px) {
+	.tile-col {
+		flex: 0 0 50%;
+		max-width: 50%;
+	}
+}
+
+@media (max-width: 767.98px) {
+	.tile-col {
+		flex: 0 0 100%;
+		max-width: 100%;
+	}
+}
+/*-----------------
+	End
+-----------------------*/
+
 .card-table.card-table-top .card-body {
 	height: 175px;
 	overflow-y: auto;
 	-webkit-overflow-scrolling: touch;
 }
+
 .chart-title {
 	margin-bottom: 25px;
 }
+
 .chart-title h4 {
 	display: inline-block;
 	font-size: 18px;
@@ -1395,6 +1456,15 @@ ul.chat-user-total li i.old-users {
 	padding: 5px 10px;
 	border-radius: 4px;
 	font-size: 13px;
+
+}
+.dash-widget-info > span.widget-title5 {
+	background: #7E5CAD;
+	color: #fff;
+	padding: 5px 10px;
+	border-radius: 4px;
+	font-size: 13px;
+
 }
 .member-panel .contact-list > li:last-child {
 	border-bottom: 0;
