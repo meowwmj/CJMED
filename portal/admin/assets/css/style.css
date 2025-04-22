@@ -1153,7 +1153,7 @@ textarea.form-control {
 	font-size: 50px;
 	text-align: center;
 	line-height: 65px;
-	background: #7a92a3;
+	background: #f62d51;
 	border-radius: 50%;
 	font-size: 40px;
 	height: 65px;
@@ -1170,6 +1170,49 @@ textarea.form-control {
 	border-radius: 50%;
 	font-size: 40px;
 	height: 65px;
+
+}
+.dash-widget-bg5 {
+	width: 65px;
+	float: left;
+	color: #fff;
+	display: block;
+	font-size: 50px;
+	text-align: center;
+	line-height: 65px;
+	background: #7a92a3;
+	border-radius: 50%;
+	font-size: 40px;
+	height: 65px;
+
+}
+.dash-widget-bg6 {
+	width: 65px;
+	float: left;
+	color: #fff;
+	display: block;
+	font-size: 50px;
+	text-align: center;
+	line-height: 65px;
+	background: #7E5CAD;
+	border-radius: 50%;
+	font-size: 40px;
+	height: 65px;
+
+}
+.dash-widget-bg7 {
+	width: 65px;
+	float: left;
+	color: #fff;
+	display: block;
+	font-size: 50px;
+	text-align: center;
+	line-height: 65px;
+	background: #344955;
+	border-radius: 50%;
+	font-size: 40px;
+	height: 65px;
+
 }
 .card-table.card-table-top .card-body {
 	height: 175px;
@@ -1383,7 +1426,7 @@ ul.chat-user-total li i.old-users {
 	font-size: 13px;
 }
 .dash-widget-info > span.widget-title3 {
-	background: #7a92a3;
+	background: #f62d51;
 	color: #fff;
 	padding: 5px 10px;
 	border-radius: 4px;
@@ -1395,7 +1438,49 @@ ul.chat-user-total li i.old-users {
 	padding: 5px 10px;
 	border-radius: 4px;
 	font-size: 13px;
+
 }
+.dash-widget-info > span.widget-title5 {
+	background: #7a92a3;
+	color: #fff;
+	padding: 5px 10px;
+	border-radius: 4px;
+	font-size: 13px;
+}
+
+.dash-widget-info > span.widget-title6 {
+	background: #7E5CAD;
+	color: #fff;
+	padding: 5px 10px;
+	border-radius: 4px;
+	font-size: 13px;
+}
+
+.dash-widget-info > span.widget-title7 {
+	background: #344955;
+	color: #fff;
+	padding: 5px 10px;
+	border-radius: 4px;
+	font-size: 13px;
+}
+/*-----------------
+	Dashboard Widget
+-----------------------*/
+.dash-widget {
+	transition: transform 0.2s ease-in-out;
+}
+
+.dash-widget:hover {
+	transform: scale(1.02);
+}
+
+.wide-widget {
+	width: 100%;
+}
+/*-----------------
+	End
+-----------------------*/
+
 .member-panel .contact-list > li:last-child {
 	border-bottom: 0;
 }
