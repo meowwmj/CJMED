@@ -8,6 +8,61 @@
         <div class="page-wrapper">
             <div class="content">
                 <div class="row">
+
+                    <!-- Admin Tile -->
+                 <div class="col-md-6 col-sm-6 col-lg-6 col-xl-4">
+                        <?php
+                        $result = $db->prepare("SELECT count(*) as total FROM admin");
+                        $result->execute();
+                        $row = $result->fetch();
+                        ?>
+                        <a href="users.php">
+                            <div class="dash-widget" style="height: 120px;">
+                                <span class="dash-widget-bg7"><i class="fa fa-user"></i></span>
+                                <div class="dash-widget-info text-right">
+                                    <h3><?php echo $row['total']; ?></h3>
+                                    <span class="widget-title7">Admin <i class="fa fa-check"></i></span>
+                                </div>
+                            </div>
+                        </a>                        
+                    </div>
+             
+                    <!-- Agency Tile -->
+                    <div class="col-md-6 col-sm-6 col-lg-6 col-xl-4">
+                        <?php
+                        $result = $db->prepare("SELECT count(*) as total FROM agency");
+                        $result->execute();
+                        $row = $result->fetch();
+                        ?>
+                        <a href="agency.php">
+                            <div class="dash-widget" style="height: 120px;">
+                                <span class="dash-widget-bg5"><i class="fa fa-ambulance"></i></span>
+                                <div class="dash-widget-info text-right">
+                                    <h3><?php echo $row['total']; ?></h3>
+                                    <span class="widget-title5">Agency <i class="fa fa-check"></i></span>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+
+                    <!-- Users Tile -->
+                    <div class="col-md-6 col-sm-6 col-lg-6 col-xl-4">
+                        <?php
+                        $result = $db->prepare("SELECT count(*) as total FROM users");
+                        $result->execute();
+                        $row = $result->fetch();
+                        ?>
+                        <a href="users1.php">
+                            <div class="dash-widget" style="height: 120px;">
+                                <span class="dash-widget-bg6"><i class="fa fa-user-o"></i></span>
+                                <div class="dash-widget-info text-right">
+                                    <h3><?php echo $row['total']; ?></h3>
+                                    <span class="widget-title6">Users <i class="fa fa-check"></i></span>
+                                </div>
+                            </div>
+                        </a>                        
+                    </div>
+
                     <!-- Emergency Tile -->
                     <div class="col-md-6 col-sm-6 col-lg-6 col-xl-3">
                         <?php
@@ -26,50 +81,33 @@
                         </a>
                     </div>
 
-                    <!-- Users Tile -->
-                    <div class="col-md-6 col-sm-6 col-lg-6 col-xl-3">
-                        <?php
-                        $result = $db->prepare("SELECT count(*) as total FROM users");
-                        $result->execute();
-                        $row = $result->fetch();
-                        ?>
-                        <a href="users1.php">
-                            <div class="dash-widget">
-                                <span class="dash-widget-bg2"><i class="fa fa-user-o"></i></span>
-                                <div class="dash-widget-info text-right">
-                                    <h3><?php echo $row['total']; ?></h3>
-                                    <span class="widget-title2">Users <i class="fa fa-check"></i></span>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
-
-                    <!-- Agency Tile -->
-                    <div class="col-md-6 col-sm-6 col-lg-6 col-xl-3">
-                        <?php
-                        $result = $db->prepare("SELECT count(*) as total FROM agency");
-                        $result->execute();
-                        $row = $result->fetch();
-                        ?>
-                        <a href="agency.php">
-                            <div class="dash-widget">
-                                <span class="dash-widget-bg3"><i class="fa fa-user-md"></i></span>
-                                <div class="dash-widget-info text-right">
-                                    <h3><?php echo $row['total']; ?></h3>
-                                    <span class="widget-title3">Agency <i class="fa fa-check"></i></span>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
-
-                    <!-- Ongoing Emergencies Tile -->
+                    <!-- Reported Tile -->
                     <div class="col-md-6 col-sm-6 col-lg-6 col-xl-3">
                         <?php
                         $result = $db->prepare("SELECT count(*) as total FROM emergency WHERE status = 'Pending'");
                         $result->execute();
                         $row = $result->fetch();
                         ?>
-                        <a href="view-emergency.php">
+                        <a href="view-emergency.php?status=Pending">
+                            <div class="dash-widget">
+                                <span class="dash-widget-bg3"><i class="fa fa-user-md"></i></span>
+                                <div class="dash-widget-info text-right">
+                                    <h3><?php echo $row['total']; ?></h3>
+                                    <span class="widget-title3">Reported <i class="fa fa-check"></i></span>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+
+
+                    <!-- Ongoing Emergencies Tile -->
+                    <div class="col-md-6 col-sm-6 col-lg-6 col-xl-3">
+                        <?php
+                        $result = $db->prepare("SELECT count(*) as total FROM emergency WHERE status = 'Ongoing'");
+                        $result->execute();
+                        $row = $result->fetch();
+                        ?>
+                        <a href="view-emergency.php?status=Ongoing">
                             <div class="dash-widget">
                                 <span class="dash-widget-bg4"><i class="fa fa-heartbeat"></i></span>
                                 <div class="dash-widget-info text-right">
@@ -79,8 +117,25 @@
                             </div>
                         </a>
                     </div>
-                </div>
 
+                    <!-- Resolved Tile -->
+                    <div class="col-md-6 col-sm-6 col-lg-6 col-xl-3">
+                        <?php
+                        $result = $db->prepare("SELECT count(*) as total FROM emergency WHERE status = 'Resolved'");
+                        $result->execute();
+                        $row = $result->fetch();
+                        ?>
+                        <a href="view-emergency.php?status=Resolved">
+                            <div class="dash-widget">
+                                <span class="dash-widget-bg2"><i class="fa fa-check"></i></span>
+                                <div class="dash-widget-info text-right">
+                                    <h3><?php echo $row['total']; ?></h3>
+                                    <span class="widget-title2">Resolved <i class="fa fa-check"></i></span>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
                 <!-- Charts Section -->
                 <div class="row">
                     <div class="col-lg-8">
