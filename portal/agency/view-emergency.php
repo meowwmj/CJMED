@@ -10,56 +10,50 @@ if ($status === 'all') {
 
 $stmt->execute();
 $emergencies = $stmt->fetchAll();
+
+
+if (!isset($_SESSION['SESS_AGENCY_ID'])) {
+    echo "Unauthorized access.";
+    exit();
+}
+
+$agency_id = $_SESSION['SESS_AGENCY_ID'];
 ?>
 
 <body>
-    <div class="main-wrapper">
+<div class="main-wrapper">
         <?php include 'includes/navigation.php'; ?>
         <div class="sidebar" id="sidebar">
             <div class="sidebar-inner slimscroll">
                 <div id="sidebar-menu" class="sidebar-menu">
                     <ul>
-                        <li>
-                            <a href="index.php"><i class="fa fa-dashboard"></i> <span>Dashboard</span></a>
-                        </li>
-                        <li>
-                            <a href="announcement.php"><i class="fa fa-bell"></i> <span>Announcements</span></a>
-                        </li>                       
+                        <li><a href="index.php"><i class="fa fa-dashboard"></i> <span>Dashboard</span></a></li>
+                        <li><a href="announcement.php"><i class="fa fa-bell"></i> <span>Announcements</span></a></li>
                         <?php
                             $result = $db->prepare("SELECT count(*) as total FROM emergency WHERE status = 'Pending'");
                             $result->execute();
                             for($i=0; $row = $result->fetch(); $i++){
                         ?>  
-                        <li class="active">
-                            <a href="view-emergency.php"><i class="fa fa-file"></i> <span>Emergency</span> <span class="badge badge-pill bg-primary float-right"><?php echo $row['total']; ?></span></a>
-                        </li>
+                        <li class="active"><a href="view-emergency.php"><i class="fa fa-file"></i> <span>Emergency</span> <span class="badge badge-pill bg-primary float-right"><?php echo $row['total']; ?></span></a></li>
                         <?php } ?>
-                        <li>
-                            <a href="report_history.php"><i class="fa fa-file-text-o"></i> <span>History</span></a>
-                        </li>
-                        <li>
-                            <a href="view-archived-emergencies.php"><i class="fa fa-archive"></i> <span>Archived</span></a>
-                        </li>
-                        <li>
-                            <a href="rescue.php"><i class="fa fa-calendar-o"></i> <span>Rescue</span></a> 
-                        </li>                      
-                        <li>
-                            <a href="logout.php"><i class="fa fa-power-off"></i> <span>Logout</span></a>
-                        </li>
+                        <li><a href="report_history.php"><i class="fa fa-file-text-o"></i> <span>History</span></a></li>
+                        <li><a href="view-archived-emergencies.php"><i class="fa fa-archive"></i> <span>Archived</span></a></li>
+                        <li><a href="rescue.php"><i class="fa fa-calendar-o"></i> <span>Rescue</span></a></li>
+                        <li><a href="logout.php"><i class="fa fa-power-off"></i> <span>Logout</span></a></li>
                     </ul>
                 </div>
             </div>
         </div>
 
-     <!-- Page Wrapper -->
-     <div class="page-wrapper">
+    <!-- Page Wrapper -->
+    <div class="page-wrapper">
         <div class="content">
             <div class="row">
                 <div class="col-sm-4 col-3">
                     <h4 class="page-title">Emergency Incident Reports</h4>
                 </div>
                 <div class="col-sm-8 col-9 text-right m-b-20">
-                    <a href="report_incident.php" class="btn btn-primary btn-rounded float-right"><i class="fa fa-plus"></i> Report Emergency</a>
+                    <a href="report-emergency.php" class="btn btn-primary btn-rounded float-right"><i class="fa fa-plus"></i> Report Emergency</a>
                 </div>
             </div>
 
@@ -140,9 +134,8 @@ $emergencies = $stmt->fetchAll();
                                         $year = $_GET['year'] ?? '';
                                         $month = $_GET['month'] ?? '';
                                         $day = $_GET['day'] ?? '';
-
-                                        $sql = "SELECT e.*, a.agency_name FROM emergency e INNER JOIN agency a ON e.agency_id = a.agency_id WHERE 1=1";
-                                        $params = [];
+                                        $sql = "SELECT e.*, a.agency_name FROM emergency e INNER JOIN agency a ON e.agency_id = a.agency_id WHERE e.agency_id = :agency_id";
+                                        $params = [':agency_id' => $agency_id];
 
                                         if (!empty($status)) {
                                             $sql .= " AND e.status = :status";
@@ -255,7 +248,6 @@ $emergencies = $stmt->fetchAll();
             });
         });
     </script>
-
 
     <script>
         // Dashboard widgets
