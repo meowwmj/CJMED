@@ -322,7 +322,12 @@ date_default_timezone_set('Asia/Manila');
     }
     
     /* Main container styles */
-
+#snapshot {
+    display: none;
+    margin: 0 auto 15px auto;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
 
     /* Form container */
     .card {
