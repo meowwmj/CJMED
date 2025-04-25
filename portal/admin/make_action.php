@@ -2,68 +2,45 @@
 
 <body>
 <div class="main-wrapper">
-        <?php include 'includes/navigation.php'; ?>
-        <div class="sidebar" id="sidebar">
-            <div class="sidebar-inner slimscroll">
-                <div id="sidebar-menu" class="sidebar-menu">
-                    <ul>
-                        <li class>
-                            <a href="index.php"><i class="fa fa-dashboard"></i> <span>Dashboard</span></a>
-                        </li>
-                        <li>
-                            <a href="announcement.php"><i class="fa fa-bell"></i> <span>Announcements</span></a>
-                        </li>
-                        <li class>
-                            <a href="agency.php"><i class="fa fa-user-md"></i> <span>Agency</span></a>
-                        </li>
-                        <?php
-                        // include('../connect.php');
+    <?php include 'includes/navigation.php'; ?>
+    <div class="sidebar" id="sidebar">
+        <div class="sidebar-inner slimscroll">
+            <div id="sidebar-menu" class="sidebar-menu">
+                <ul>
+                    <li><a href="index.php"><i class="fa fa-dashboard"></i> <span>Dashboard</span></a></li>
+                    <li><a href="announcement.php"><i class="fa fa-bell"></i> <span>Announcements</span></a></li>
+                    <?php
                         $result = $db->prepare("SELECT count(*) as total FROM emergency WHERE status = 'Pending'");
                         $result->execute();
-                        for($i=0; $row = $result->fetch(); $i++){
-                        ?>  
-                        <li class="active">
-                            <a href="view-emergency.php"><i class="fa fa-file"></i> <span>Emergency</span> <span class="badge badge-pill bg-primary float-right"><?php echo $row['total'] ;?></span></a>
-                        </li>
-                        <?php } ?>                       
-                        <li>
-                            <a href="report_history.php"><i class="fa fa-file-text-o"></i> <span>History</span></a>
-                        </li>
-                        <li>                          
-                            <a href="view-archived-emergencies.php"><i class="fa fa-archive"></i> <span>Archived</span></a>
-                        </li>
-                        <li>
-                        <a href="#"><i class="fa fa-users"></i> <span>Manage</span> <span class="menu-arrow"></span></a>
-                        <ul class="submenu-list">
-                            <li>
-                                <a href="users.php"><i class="fa fa-user-plus"></i> <span>Manage Admin</span></a>
-                            </li>
-                            <li>
-                                <a href="users1.php"><i class="fa fa-user"></i> <span>Manage Users</span></a>                        
-                            </li>
-                        </ul>
-                        </li>
-                        
-                        <li>
-                            <a href="logout.php"><i class="fa fa-power-off"></i> <span>Logout</span></a>
-                        </li>
-                    </ul>
-                </div>
+                        for($i=0; $rowCount = $result->fetch(); $i++){
+                    ?>
+                    <li class="active">
+                        <a href="view-emergency.php"><i class="fa fa-file"></i> <span>Emergency</span>
+                            <span class="badge badge-pill bg-primary float-right"><?php echo $rowCount['total']; ?></span>
+                        </a>
+                    </li>
+                    <?php } ?>
+                    <li><a href="report_history.php"><i class="fa fa-file-text-o"></i> <span>History</span></a></li>
+                    <li><a href="view-archived-emergencies.php"><i class="fa fa-archive"></i> <span>Archived</span></a></li>
+                    <li><a href="#" data-toggle="modal" data-target="#logoutModal"><i class="fa fa-power-off"></i> <span>Logout</span></a></li>
+                </ul>
             </div>
-        </div>  
+        </div>
+    </div>
+
     <div class="page-wrapper">
         <div class="content">
             <div class="row">
                 <div class="col-lg-12">
                     <h4 class="page-title text-center">Emergency Details</h4>
                 </div>
-            </div> 
+            </div>
 
-            <?php if(get("success")):?>
+            <?php if(get("success")): ?>
                 <div class="alert alert-success text-center">
                     <?= App::message("success", "Your request has been successfully submitted. Help is on the way!") ?>
                 </div>
-            <?php endif;?>
+            <?php endif; ?>
 
             <div class="row">
                 <?php
@@ -76,7 +53,7 @@
                 ?>
                 <form action="update_status.php?id=<?php echo $id; ?>" method="post" enctype="multipart/form-data" class="w-100">
                     <div class="row">
-                        <!-- Emergency Details on the Left -->
+                        <!-- Emergency Details Left -->
                         <div class="col-md-6">
                             <div class="card p-4 shadow">
                                 <h5>Emergency Information</h5>
@@ -84,7 +61,7 @@
                                     <li class="list-group-item"><strong>Emergency ID:</strong> <?php echo $row['emergency_id']; ?></li>
                                     <li class="list-group-item"><strong>Name:</strong> <?php echo $row['patient_name']; ?></li>
                                     <li class="list-group-item"><strong>Emergency Category:</strong> <?php echo $row['emergency_category']; ?></li>
-                                    <li class="list-group-item"><strong>Address:</strong> <span id="emergency-address"><?php echo $row['address']; ?></span></li>
+                                    <li class="list-group-item"><strong>Address:</strong> <?php echo $row['address']; ?></li>
                                     <li class="list-group-item"><strong>Phone Number:</strong> <?php echo $row['phone']; ?></li>
                                     <li class="list-group-item"><strong>Email:</strong> <?php echo $_SESSION['SESS_EMAIL']; ?></li>
                                     <li class="list-group-item"><strong>Age:</strong> <?php echo $row['age']; ?></li>
@@ -99,15 +76,21 @@
                                     <li class="list-group-item"><strong>Description:</strong> <?php echo $row['description']; ?></li>
 
                                     <?php if (!empty($row['captured_photo'])): ?>
-                                        <li class="list-group-item">
-                                            <strong>Captured Photo:</strong><br>
-                                            <img src="<?php echo $row['captured_photo']; ?>" alt="Captured Photo" style="width: 100%; max-width: 300px; border-radius: 10px; margin-top: 10px;" />
-                                        </li>
+                                    <li class="list-group-item">
+                                        <strong>Captured Photo:</strong><br>
+                                        <a href="#" data-toggle="modal" data-target="#photoModal">
+                                            <img src="<?php echo $row['captured_photo']; ?>" alt="Captured Photo" style="width: 100%; max-width: 300px; border-radius: 10px; margin-top: 10px; cursor: zoom-in;" />
+                                        </a>
+                                        <div class="mt-2">
+                                            <a href="<?php echo $row['captured_photo']; ?>" download="captured_photo.jpg" class="btn btn-sm btn-outline-success">
+                                                <i class="fa fa-download"></i> Download Photo
+                                            </a>
+                                        </div>
+                                    </li>
                                     <?php else: ?>
-                                        <li class="list-group-item">
-                                            <strong>Captured Photo:</strong><br>
-                                            <em>No photo captured.</em>
-                                        </li>
+                                    <li class="list-group-item">
+                                        <strong>Captured Photo:</strong><br><em>No photo captured.</em>
+                                    </li>
                                     <?php endif; ?>
                                 </ul>
                                 <div class="mt-3 text-center">
@@ -116,7 +99,7 @@
                             </div>
                         </div>
 
-                        <!-- Map on the Right -->
+                        <!-- Map Right -->
                         <div class="col-md-6">
                             <div class="card p-4 shadow">
                                 <h5>Location on Map</h5>
@@ -131,13 +114,28 @@
     </div>
 </div>
 
+<!-- Photo Modal -->
+<div class="modal fade" id="photoModal" tabindex="-1" role="dialog" aria-labelledby="photoModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Captured Photo</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span>&times;</span></button>
+      </div>
+      <div class="modal-body text-center">
+        <img src="<?php echo $row['captured_photo']; ?>" alt="Zoomed Captured Photo" style="width: 100%; max-width: 100%; border-radius: 10px;" />
+      </div>
+    </div>
+  </div>
+</div>
+
 <!-- Logout Modal -->
 <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="logoutModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="logoutModalLabel">Confirm Logout</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span>&times;</span></button>
+        <h5 class="modal-title">Confirm Logout</h5>
+        <button type="button" class="close" data-dismiss="modal"><span>&times;</span></button>
       </div>
       <div class="modal-body">Are you sure you want to log out?</div>
       <div class="modal-footer">
@@ -149,8 +147,6 @@
 </div>
 
 <div class="sidebar-overlay" data-reff=""></div>
-
-<!-- Scripts -->
 <script src="assets/js/jquery-3.2.1.min.js"></script>
 <script src="assets/js/popper.min.js"></script>
 <script src="assets/js/bootstrap.min.js"></script>
@@ -160,70 +156,35 @@
 <script src="assets/js/bootstrap-datetimepicker.min.js"></script>
 <script src="assets/js/app.js"></script>
 
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
-    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 
-    <script>
-    document.addEventListener("DOMContentLoaded", function () {
-        <?php
-            $lat = $row['latitude'];
-            $lon = $row['longitude'];
-            $address = addslashes($row['address']);
-        ?>
-        var lat = <?php echo $lat; ?>;
-        var lon = <?php echo $lon; ?>;
-        var address = "<?php echo $address; ?>";
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+    <?php
+        $lat = $row['latitude'];
+        $lon = $row['longitude'];
+        $address = addslashes($row['address']);
+    ?>
+    var lat = <?php echo $lat; ?>;
+    var lon = <?php echo $lon; ?>;
+    var address = "<?php echo $address; ?>";
 
-        if (!lat || !lon) {
-            alert("No coordinates available.");
-            return;
-        }
+    if (!lat || !lon) {
+        alert("No coordinates available.");
+        return;
+    }
 
-        var map = L.map('map').setView([lat, lon], 20);
+    var map = L.map('map').setView([lat, lon], 20);
+    L.tileLayer('https://{s}.google.com/vt/lyrs=s&x={x}&y={y}&z={z}', {
+        maxZoom: 19,
+        subdomains: ['mt0', 'mt1', 'mt2', 'mt3']
+    }).addTo(map);
 
-        // Keep using the Google-style tile layer
-        L.tileLayer('https://{s}.google.com/vt/lyrs=s&x={x}&y={y}&z={z}', {
-            maxZoom: 19,
-            subdomains: ['mt0', 'mt1', 'mt2', 'mt3']
-        }).addTo(map);
-
-        L.marker([lat, lon]).addTo(map)
-            .bindPopup("<b>Emergency Location</b><br>" + address)
-            .openPopup();
-    });
+    L.marker([lat, lon]).addTo(map)
+        .bindPopup("<b>Emergency Location</b><br>" + address)
+        .openPopup();
+});
 </script>
-
 </body>
 </html>
-
-<style>
-.submenu-list {
-    list-style: none;
-    padding-left: 20px;
-    margin: 0; /* Remove any margin */
-    background-color: #2c3e50; /* Ensure the background blends with the sidebar */
-}   
-.submenu-list li {
-    margin: 0;
-    background-color: #2c3e50; 
-    padding: 0px;
-    padding-top: 10px;
-}
-
-.submenu-list a {
-    background-color: #2c3e50;
-    text-decoration: none;
-    font-size: 15px;
-    padding: 10px;
-    display: block;
-    border-radius: 25px;
-    transition: all 0.3s ease;
-}
-
-.submenu-list a:hover,
-.submenu-list .active a {
-    background-color: #fff;
-    color: #2c3e50;
-}
-</style>
-
