@@ -165,7 +165,7 @@ date_default_timezone_set('Asia/Manila');
                                     </div>
                                 </div>
                             </div>
-                           <div class="form-group text-center mt-4">
+ <div class="form-group text-center mt-4">
     <label><strong>Photo Options</strong></label><br>
 
     <!-- Removed the Upload Button -->
