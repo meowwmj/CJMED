@@ -352,7 +352,12 @@ date_default_timezone_set('Asia/Manila');
         box-shadow: 0 0 5px rgba(0, 123, 255, 0.2);
     }
 
-
+#snapshot {
+    display: none;
+    margin: 0 auto 15px auto;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
     </style> 
 
     <script>
