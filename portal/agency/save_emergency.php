@@ -17,6 +17,7 @@ $dates = trim($_POST['dates'] ?? date('Y-m-d H:i:s'));
 $injury = trim($_POST['injury'] ?? '');
 $description = trim($_POST['description'] ?? '');
 $agency_id = trim($_POST['agency_id'] ?? '');
+$capturedPhoto = trim($_POST['capturedPhoto'] ?? '');
 
 // Validate required fields
 $requiredFields = [
@@ -46,21 +47,27 @@ if (!empty($missingFields)) {
     die('Error: The following fields are missing or empty: ' . implode(', ', $missingFields));
 }
 
-// Insert into the database
+// Optional: Validate captured photo format
+if (!empty($capturedPhoto)) {
+    if (!preg_match('/^data:image\/(jpeg|jpg|png);base64,/', $capturedPhoto)) {
+        die('Error: Invalid image format.');
+    }
+}
+
 try {
+    // Insert into database
     $sql = "INSERT INTO emergency (
                 emergency_id, patient_name, phone, age, emergency_category, 
                 latitude, longitude, address, status, dates, injury, 
-                description, agency_id, user_id
+                description, agency_id, user_id, captured_photo
             ) VALUES (
                 :emergency_id, :patient_name, :phone, :age, :emergency_category, 
                 :latitude, :longitude, :address, :status, :dates, :injury, 
-                :description, :agency_id, :user_id
+                :description, :agency_id, :user_id, :captured_photo
             )";
 
     $q = $db->prepare($sql);
     $q->bindParam(':emergency_id', $emergency_id);
-    $q->bindParam(':user_id', $user_id);
     $q->bindParam(':patient_name', $patient_name);
     $q->bindParam(':phone', $phone);
     $q->bindParam(':age', $age);
@@ -73,6 +80,8 @@ try {
     $q->bindParam(':injury', $injury);
     $q->bindParam(':description', $description);
     $q->bindParam(':agency_id', $agency_id);
+    $q->bindParam(':user_id', $user_id);
+    $q->bindParam(':captured_photo', $capturedPhoto);
 
     if ($q->execute()) {
         header("Location: report-emergency.php?success=true");
@@ -83,9 +92,6 @@ try {
     }
 
 } catch (Exception $e) {
-    // Optionally log error to file
-    // error_log("DB Error: " . $e->getMessage());
-
     die('Error: Failed to save data. ' . $e->getMessage());
 }
 ?>
