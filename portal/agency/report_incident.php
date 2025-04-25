@@ -194,6 +194,41 @@ date_default_timezone_set('Asia/Manila');
         <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
         <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
 
+<script>
+    let video = document.getElementById('camera');
+    let canvas = document.getElementById('snapshot');
+    let capturedInput = document.getElementById('capturedPhoto');
+    let cameraSection = document.getElementById('cameraSection');
+    let stream;
+
+    function openCamera() {
+        cameraSection.style.display = 'block';
+        navigator.mediaDevices.getUserMedia({ video: true })
+        .then((mediaStream) => {
+            stream = mediaStream;
+            video.srcObject = mediaStream;
+        })
+        .catch((err) => {
+            alert("Unable to access camera.");
+            console.error(err);
+        });
+    }
+
+    function capturePhoto() {
+        canvas.style.display = 'block';
+        canvas.getContext('2d').drawImage(video, 0, 0, canvas.width, canvas.height);
+        let imageData = canvas.toDataURL('image/png');
+        capturedInput.value = imageData;
+
+        // Stop the stream
+        if (stream) {
+            stream.getTracks().forEach(track => track.stop());
+        }
+
+        video.srcObject = null;
+    }
+</script>
+
         <script>
             document.addEventListener('DOMContentLoaded', function() {
                 if (navigator.geolocation) {
