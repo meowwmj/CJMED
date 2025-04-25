@@ -150,7 +150,25 @@ date_default_timezone_set('Asia/Manila');
                                     </div>
                                 </div>
                             </div>
-                          
+
+ <div class="form-group text-center mt-4">
+    <label><strong>Photo Options</strong></label><br>
+
+    <!-- Removed the Upload Button -->
+
+        <!-- Take Photo Button -->
+    <button type="button" class="btn btn-outline-success" onclick="openCamera()">Take Photo</button>
+
+    <!-- Camera Stream & Capture -->
+    <div id="cameraSection" style="display:none; margin-top: 15px;">
+        <video id="camera" width="300" height="225" autoplay style="border-radius: 10px;"></video><br>
+        <button type="button" class="btn btn-sm btn-primary mt-2" onclick="capturePhoto()">Capture Photo</button>
+        <canvas id="snapshot" width="300" height="225" style="display:none; margin-top:10px;"></canvas>
+        <input type="hidden" name="capturedPhoto" id="capturedPhoto">
+    </div>
+</div>
+
+
                             <div class="text-center mt-4">
                                 <button type="submit" class="btn btn-primary">Rescue</button>
                             </div>
