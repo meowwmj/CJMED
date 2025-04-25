@@ -75,11 +75,13 @@
                                     <li class="list-group-item"><strong>Injury:</strong> <?php echo $row['injury']; ?></li>
                                     <li class="list-group-item"><strong>Description:</strong> <?php echo $row['description']; ?></li>
 
+                                    <!-- Display Captured Photo -->
                                     <?php if (!empty($row['captured_photo'])): ?>
                                     <li class="list-group-item">
                                         <strong>Captured Photo:</strong><br>
                                         <a href="#" data-toggle="modal" data-target="#photoModal">
-                                            <img src="<?php echo $row['captured_photo']; ?>" alt="Captured Photo" style="width: 100%; max-width: 300px; border-radius: 10px; margin-top: 10px; cursor: zoom-in;" />
+                                            <img src="<?php echo $row['captured_photo']; ?>" alt="Captured Photo" 
+                                                 style="width: 100%; max-width: 300px; border-radius: 10px; margin-top: 10px; cursor: zoom-in;" />
                                         </a>
                                         <div class="mt-2">
                                             <a href="<?php echo $row['captured_photo']; ?>" download="captured_photo.jpg" class="btn btn-sm btn-outline-success">
