@@ -254,8 +254,8 @@ date_default_timezone_set('Asia/Manila');
     justify-content: center;
     gap: 10px;
     margin: 30px 0;
-    background-size: cover; /* Ensures the background covers the whole page */
-	background-attachment: fixed; /* Optional: Keeps the background fixed when scrolling */
+    background-size: cover; 
+    background-attachment: fixed;
   }
 
   /* Base button style */
@@ -267,12 +267,12 @@ date_default_timezone_set('Asia/Manila');
     color: #2c3e50; /* Danger red */
     background: none;
     border: none;
-    border-bottom: 3px solid transparent; /* For underline effect */
+    border-bottom: 3px solid transparent;
   }
 
   /* Hover effect */
   .choice-item:hover {
-    color: #721c24; /* Darker red */
+    color: #721c24; 
   }
 
   /* Active style (clicked) */
@@ -280,9 +280,6 @@ date_default_timezone_set('Asia/Manila');
     color: #dc3545;
     border-bottom: 3px solid #dc3545;
   }
- 
- /* Main container styles */
-
 
 /* Form container */
 .card {
