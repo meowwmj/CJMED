@@ -29,111 +29,97 @@
         </div>
     </div>  
 
-    <div class="page-wrapper">
-        <div class="content">
-            <div class="row">
-                <div class="col-lg-12">
-                    <h4 class="page-title text-center">Emergency Details</h4>
-                </div>
-            </div> 
+     <div class="page-wrapper">
+       <div class="content">
+        <div class="row">
+            <div class="col-lg-12">
+                <h4 class="page-title text-center">Emergency Details</h4>
+            </div>
+        </div> 
 
-            <?php if(get("success")): ?>
-                <div class="alert alert-success text-center">
-                    <?= App::message("success", "Your request has been successfully submitted. Help is on the way!") ?>
-                </div>
-            <?php endif; ?>
+        <?php if(get("success")):?>
+            <div class="alert alert-success text-center">
+                <?=App::message("success", "Your request has been successfully submitted. Help is on the way!")?>
+            </div>
+        <?php endif;?>
 
-            <div class="row">
-                <?php
-                if (isset($_GET['id'])) {
+        <div class="row">
+            <?php
+                if(isset($_GET['id'])){
                     $id = $_GET['id'];
                     $result = $db->prepare("SELECT * FROM emergency WHERE id = :post_id");
                     $result->bindParam(':post_id', $id);
                     $result->execute();
                     $row = $result->fetch();
-                ?>
-                <form action="update_status.php?id=<?php echo $id; ?>" method="post" enctype="multipart/form-data" class="w-100">
-                    <div class="row">
-                        <div class="col-md-6">
-                            <div class="card p-4 shadow">
-                                <h5>Emergency Information</h5>
-                                <ul class="list-group list-group-flush">
-                                    <li class="list-group-item"><strong>Emergency ID:</strong> <?php echo $row['emergency_id']; ?></li>
-                                    <li class="list-group-item"><strong>Name:</strong> <?php echo $row['patient_name']; ?></li>
-                                    <li class="list-group-item"><strong>Emergency Category:</strong> <?php echo $row['emergency_category']; ?></li>
-                                    <li class="list-group-item"><strong>Address:</strong> <span id="emergency-address"><?php echo $row['address']; ?></span></li>
-                                    <li class="list-group-item"><strong>Phone Number:</strong> <?php echo $row['phone']; ?></li>
-                                    <li class="list-group-item"><strong>Email:</strong> <?php echo $_SESSION['SESS_EMAIL']; ?></li>
-                                    <li class="list-group-item"><strong>Age:</strong> <?php echo $row['age']; ?></li>
-                                    <li class="list-group-item">
-                                        <strong>Status:</strong>
-                                        <select class="select" name="status">
-                                            <option value="Pending" <?= $row['status'] == 'Pending' ? 'selected' : '' ?>>Reported</option>
-                                            <option value="Ongoing" <?= $row['status'] == 'Ongoing' ? 'selected' : '' ?>>Ongoing</option>
-                                            <option value="Resolved" <?= $row['status'] == 'Resolved' ? 'selected' : '' ?>>Resolved</option>
+            ?>
+            <form action="update_status.php?id=<?php echo $id; ?>" method="post" enctype="multipart/form-data" class="w-100">
+                <div class="row">
+                    <!-- Emergency Details on the Left -->
+                    <div class="col-md-6">
+                        <div class="card p-4 shadow">
+                            <h5>Emergency Information</h5>
+                            <ul class="list-group list-group-flush">
+                                <li class="list-group-item"><strong>Emergency ID:</strong> <?php echo $row['emergency_id']; ?></li>
+                                <li class="list-group-item"><strong>Name:</strong> <?php echo $row['patient_name']; ?></li>
+                                <li class="list-group-item"><strong>Emergency Category:</strong> <?php echo $row['emergency_category']; ?></li>
+                                <li class="list-group-item"><strong>Address:</strong> <span id="emergency-address"><?php echo $row['address']; ?></span></li>
+                                <li class="list-group-item"><strong>Phone Number:</strong> <?php echo $row['phone']; ?></li>
+                                <li class="list-group-item"><strong>Email:</strong> <?php echo $_SESSION['SESS_EMAIL']; ?></li>
+                                <li class="list-group-item"><strong>Age:</strong> <?php echo $row['age']; ?></li>
+                                <li class="list-group-item"><strong>Status:</strong>
+                                         <select class="form-control" name="status">
+                                            <option value="Pending">Reported</option>
+                                            <option value="Ongoing">Ongoing</option>
+                                            <option value="Resolved">Resolved</option>
                                         </select>
-                                    </li>                             
-                                    <li class="list-group-item"><strong>Injury:</strong> <?php echo $row['injury']; ?></li>
-                                    <li class="list-group-item"><strong>Description:</strong> <?php echo $row['description']; ?></li>
-                                    
-                                    <!-- Captured Photo Section -->
-                                    <?php if (!empty($row['captured_photo'])): ?>
-                                    <li class="list-group-item">
-                                        <strong>Captured Photo:</strong><br>
-                                        <a href="<?php echo $row['captured_photo']; ?>" data-lightbox="captured-photo" data-title="Captured Emergency Photo">
-                                            <img src="<?php echo $row['captured_photo']; ?>" alt="Captured Photo"
-                                                style="width: 100%; max-width: 300px; border-radius: 10px; margin-top: 10px; cursor: zoom-in;" />
-                                        </a>
-                                        <div class="mt-2">
-                                            <a href="<?php echo $row['captured_photo']; ?>" download class="btn btn-sm btn-outline-success">
-                                                <i class="fa fa-download"></i> Download Photo
-                                            </a>
-                                        </div>
-                                    </li>
-                                    <?php else: ?>
-                                    <li class="list-group-item"><strong>Captured Photo:</strong><br><em>No photo available.</em></li>
-                                    <?php endif; ?>
-                                </ul>
-
-                                <div class="mt-3 text-center">
-                                    <button class="btn btn-primary submit-btn">Update Status</button>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="col-md-6">
-                            <div class="card p-4 shadow">
-                                <h5>Location on Map</h5>
-                                <div id="map" style="height: 585px; border-radius: 10px;"></div>
+                                </li>                             
+                                <li class="list-group-item"><strong>Injury:</strong> <?php echo $row['injury']; ?></li>
+                                <li class="list-group-item"><strong>Description:</strong> <?php echo $row['description']; ?></li>
+                            </ul>
+                            <div class="mt-3 text-center">
+                                <button class="btn btn-primary submit-btn">Update Status</button>
                             </div>
                         </div>
                     </div>
-                </form>
-                <?php } ?>
-            </div>
+
+                    <!-- Map on the Right -->
+                    <div class="col-md-6">
+                        <div class="card p-4 shadow">
+                            <h5>Location on Map</h5>
+                            <div id="map" style="height: 585px; border-radius: 10px;"></div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+            <?php } ?>
         </div>
     </div>
+</div>
 
-    <!-- Logout Modal -->
-    <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="logoutModalLabel" aria-hidden="true">
-      <div class="modal-dialog" role="document">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title" id="logoutModalLabel">Confirm Logout</h5>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span>&times;</span></button>
-          </div>
-          <div class="modal-body">Are you sure you want to log out?</div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-            <a href="logout.php" class="btn btn-danger">Logout</a>
-          </div>
-        </div>
+
+<!-- Logout Confirmation Modal -->
+<div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="logoutModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="logoutModalLabel">Confirm Logout</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        Are you sure you want to log out?
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+        <a href="logout.php" class="btn btn-danger">Logout</a>
       </div>
     </div>
+  </div>
+</div>
+
 
     <div class="sidebar-overlay" data-reff=""></div>
-
-    <!-- Scripts -->
     <script src="assets/js/jquery-3.2.1.min.js"></script>
     <script src="assets/js/popper.min.js"></script>
     <script src="assets/js/bootstrap.min.js"></script>
@@ -143,13 +129,8 @@
     <script src="assets/js/bootstrap-datetimepicker.min.js"></script>
     <script src="assets/js/app.js"></script>
 
-    <!-- Leaflet -->
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-
-    <!-- Lightbox2 -->
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.4/css/lightbox.min.css" rel="stylesheet" />
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.4/js/lightbox.min.js"></script>
 
     <script>
     document.addEventListener("DOMContentLoaded", function () {
@@ -168,6 +149,8 @@
         }
 
         var map = L.map('map').setView([lat, lon], 20);
+
+        // Keep using the Google-style tile layer
         L.tileLayer('https://{s}.google.com/vt/lyrs=s&x={x}&y={y}&z={z}', {
             maxZoom: 19,
             subdomains: ['mt0', 'mt1', 'mt2', 'mt3']
@@ -177,7 +160,7 @@
             .bindPopup("<b>Emergency Location</b><br>" + address)
             .openPopup();
     });
-    </script>
+</script>
 
 </body>
 </html>
