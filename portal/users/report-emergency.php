@@ -143,11 +143,7 @@ date_default_timezone_set('Asia/Manila');
                                     <div class="form-group">
                                         <label>Province</label>
                                         <span id="province" class="form-control" readonly></span>
-                                    </div>  
-                                    <div class="form-group" hidden>
-                                        <label>User ID</label>
-                                        <input type="text" name="user_id"  value="<?php echo rand(1000,9999); ?>" class="form-control"> 
-                                    </div>
+                                    </div> 
                                 </div>
                             </div>
 
