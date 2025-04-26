@@ -104,7 +104,7 @@ date_default_timezone_set('Asia/Manila');
 
                                     <div class="form-group">
                                         <label>Age</label>
-                                        <select class="select" name="age">
+                                        <select class="form-control" name="age">
                                             <option value="#">Select Age Group</option>
                                             <option value="(0-14 years old)">(0-14 years old)</option>
                                             <option value="(15-24 years old)">(15-24 years old)</option>
