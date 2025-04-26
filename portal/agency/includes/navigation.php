@@ -35,13 +35,13 @@
                                 <li class="notification-message">
                                     <a href="make_action.php?id=<?php echo $row['id'];?>"> 
                                         <div class="media">
-											<span class="avatar">
-												<img alt="John Doe" src="assets/img/user.jpg" class="img-fluid">
-											</span>
-											<div class="media-body">
-												<p class="noti-details">There is a emergency at <span class="noti-title"><?php echo $row['address'] ?>, </span> the <span class="noti-time"><?php echo $row['agency_name'] ?></span> is needed</p>
-												<p class="noti-time"><span class="notification-time"><?php echo date('m/d/Y'); ?></span></p>
-											</div>
+						<span class="avatar">
+							<img alt="John Doe" src="assets/img/user.jpg" class="img-fluid">
+						</span>
+					<div class="media-body">
+						<p class="noti-details">There is a emergency at <span class="noti-title"><?php echo $row['address'] ?>, </span> the <span class="noti-time"><?php echo $row['agency_name'] ?></span> is needed</p>
+						<p class="noti-time"><span class="notification-time"><?php echo date('m/d/Y'); ?></span></p>
+					</div>
                                         </div>
                                     </a>
                                 </li>
@@ -70,14 +70,13 @@
                            <!-- <span class="status online"></span>-->
                         </span>
 
-
-						<span><?php echo $_SESSION['SESS_AGENCY_NAME'];?></span>
+			<span><?php echo $_SESSION['SESS_FIRST_NAME'];?></span>
                     </a>
-					<div class="dropdown-menu">
-						<a class="dropdown-item" href="profile.php">My Profile</a>
-						<!--<a class="dropdown-item" href="settings.html">Settings</a> -->
-						<a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">Logout</a>
-					</div>
+			<div class="dropdown-menu">
+				<a class="dropdown-item" href="profile.php">My Profile</a>
+				<!--<a class="dropdown-item" href="settings.html">Settings</a> -->
+				<a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">Logout</a>
+			</div>
                 </li>
             </ul>
             <div class="dropdown mobile-user-menu float-right">
