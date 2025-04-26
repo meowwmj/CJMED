@@ -1,3 +1,4 @@
+
 <?php include 'includes/head.php';
 date_default_timezone_set('Asia/Manila');
 ?>
@@ -92,7 +93,7 @@ date_default_timezone_set('Asia/Manila');
 
                                     <div class="form-group">
                                         <label>Emergency Category</label>
-                                        <select class="select" name="emergency_category">
+                                        <select class="form-control" name="emergency_category">
                                             <option>Select</option>
                                                 <?php
                                                     $result = $db->prepare("SELECT * FROM emergency_type");
@@ -106,7 +107,7 @@ date_default_timezone_set('Asia/Manila');
                                     
                                     <div class="form-group">
                                         <label>Agency Name</label>
-                                        <select class="select" name="agency_id">
+                                        <select class="form-control" name="agency_id">
                                         <option>Select</option>
                                             <?php
                                             $result = $db->prepare("SELECT * FROM agency");
@@ -119,7 +120,7 @@ date_default_timezone_set('Asia/Manila');
                                         
                                     <div class="form-group">
                                         <label>Description</label>
-                                        <textarea cols="30" rows="2" name="description" class="form-control"></textarea>
+                                        <textarea cols="30" rows="1" name="description" class="form-control"></textarea>
                                     </div>
                                 </div>
 
@@ -322,12 +323,7 @@ date_default_timezone_set('Asia/Manila');
     }
     
     /* Main container styles */
-#snapshot {
-    display: none;
-    margin: 0 auto 15px auto;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-}
+
 
     /* Form container */
     .card {
@@ -357,7 +353,12 @@ date_default_timezone_set('Asia/Manila');
         box-shadow: 0 0 5px rgba(0, 123, 255, 0.2);
     }
 
-
+#snapshot {
+    display: none;
+    margin: 0 auto 15px auto;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
     </style> 
 
     <script>
