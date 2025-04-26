@@ -91,7 +91,7 @@ date_default_timezone_set('Asia/Manila');
                                 <li class="list-group-item"><strong>Email:</strong> <?php echo $_SESSION['SESS_EMAIL']; ?></li>
                                 <li class="list-group-item"><strong>Age:</strong> <?php echo $row['age']; ?></li>
                                 <li class="list-group-item"><strong>Status:</strong>
-                                         <select class="select" name="status">
+                                         <select class="form-control" name="status">
                                             <option value="Pending">Reported</option>
                                             <option value="Ongoing">Ongoing</option>
                                             <option value="Resolved">Resolved</option>
