@@ -92,7 +92,7 @@ date_default_timezone_set('Asia/Manila');
 
                                     <div class="form-group">
                                         <label>Emergency Category</label>
-                                        <select class="select" name="emergency_category">
+                                        <select class="form-control" name="emergency_category">
                                             <option>Select</option>
                                                 <?php
                                                     $result = $db->prepare("SELECT * FROM emergency_type");
@@ -106,7 +106,7 @@ date_default_timezone_set('Asia/Manila');
                                     
                                     <div class="form-group">
                                         <label>Agency Name</label>
-                                        <select class="select" name="agency_id">
+                                        <select class="form-control" name="agency_id">
                                         <option>Select</option>
                                             <?php
                                             $result = $db->prepare("SELECT * FROM agency");
