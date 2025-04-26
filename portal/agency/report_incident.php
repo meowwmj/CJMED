@@ -41,7 +41,7 @@ date_default_timezone_set('Asia/Manila');
             </div>
         </div>
                         
-    <!-- Page Wrapper -->
+   <!-- Page Wrapper -->
     <div class="page-wrapper">
         <div class="content">
             <div class="card">   
@@ -116,21 +116,17 @@ date_default_timezone_set('Asia/Manila');
                                                         <option value="<?= $row['name'] ?>"><?= $row['name'] ?></option>
                                                 <?php endwhile; ?>
                                             </select>
-                                        </div>
+                                        </div>                                    
                                     
-                                    
+                                    <div class="form-group"hidden>
+                                        <label>Agency's ID</label>
+                                        <input class="form-control" type="text" name="agency_id" value="<?= $_SESSION['SESS_AGENCY_ID'] ?>" readonly>
+                                    </div>
+
                                     <div class="form-group">
-                                        <label>Agency Name</label>
-                                        <select class="form-control" name="agency_id">
-                                        <option>Select</option>
-                                            <?php
-                                            $result = $db->prepare("SELECT * FROM agency");
-                                            $result->execute();
-                                            while($row = $result->fetch()): ?>
-                                                <option value="<?= $row['agency_id'] ?>"><?= $row['agency_name'] ?></option>
-                                            <?php endwhile; ?>
-                                            </select>
-                                        </div>
+                                        <label>Agency's Name</label>
+                                        <input class="form-control" type="text" value="<?= $_SESSION['SESS_FIRST_NAME'] ?>" readonly>
+                                    </div>
                                         
                                     <div class="form-group">
                                         <label>Description</label>
