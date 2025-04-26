@@ -136,7 +136,7 @@ date_default_timezone_set('Asia/Manila');
                                             
                                 <div class="form-group">
                                     <label>Description</label>
-                                    <textarea cols="30" rows="2" name="description" class="form-control"></textarea>
+                                    <textarea cols="30" rows="1" name="description" class="form-control"></textarea>
                                 </div>
                             </div>
 
