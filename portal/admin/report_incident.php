@@ -262,164 +262,98 @@ date_default_timezone_set('Asia/Manila');
     });
 </script>
 
-    <style>
-    /* Flexbox for horizontal layout */
-    .choice-container {
-        display: flex;
-        justify-content: center;
-        gap: 10px;
-        margin: 30px 0;
-        background-size: cover; /* Ensures the background covers the whole page */
-        background-attachment: fixed; /* Optional: Keeps the background fixed when scrolling */
-    }
+  <style>
+ /* Flexbox for horizontal layout */
+ .choice-container {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin: 30px 0;
+    background-size: cover; 
+    background-attachment: fixed;
+  }
 
-    /* Base button style */
-    .choice-item {
-        font-size: 20px;
-        font-weight: 600;
-        padding: 12px 25px;
-        cursor: pointer;
-        color: #2c3e50; /* Danger red */
-        background: none;
-        border: none;
-        border-bottom: 3px solid transparent; /* For underline effect */
-    }
+  /* Base button style */
+  .choice-item {
+    font-size: 20px;
+    font-weight: 600;
+    padding: 12px 25px;
+    cursor: pointer;
+    color: #2c3e50; /* Danger red */
+    background: none;
+    border: none;
+    border-bottom: 3px solid transparent;
+  }
 
-    /* Hover effect */
-    .choice-item:hover {
-        color: #721c24; /* Darker red */
-    }
+  /* Hover effect */
+  .choice-item:hover {
+    color: #721c24; 
+  }
 
-    /* Active style (clicked) */
-    .choice-item.active {
-        color: #dc3545;
-        border-bottom: 3px solid #dc3545;
-    }
-    
-    /* Form container */
-    .card {
-        background: #ffffff;
-        border-radius: 10px;
-        padding: 30px;
-        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-    }
+  /* Active style (clicked) */
+  .choice-item.active {
+    color: #dc3545;
+    border-bottom: 3px solid #dc3545;
+  }
 
-    /* Form fields */
-    .form-group label {
-        font-weight: 600;
-        color: #333;
-    }
+/* Form container */
+.card {
+    background: #ffffff;
+    border-radius: 10px;
+    padding: 30px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
 
-    /* Input fields */
-    .form-control {
-        border-radius: 8px;
-        padding: 10px;
-        border: 1px solid #ddd;
-        transition: all 0.3s ease;
-    }
+/* Form fields */
+.form-group label {
+    font-weight: 600;
+    color: #333;
+}
 
-    /* Input focus effect */
-    .form-control:focus {
-        border-color: #007bff;
-        box-shadow: 0 0 5px rgba(0, 123, 255, 0.2);
-    }
+/* Input fields */
+.form-control {
+    border-radius: 8px;
+    padding: 10px;
+    border: 1px solid #ddd;
+    transition: all 0.3s ease;
+}
 
+/* Input focus effect */
+.form-control:focus {
+    border-color: #007bff;
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.2);
+}
 
-     /* Flexbox for horizontal layout */
-     .choice-container {
-        display: flex;
-        justify-content: center;
-        gap: 10px;
-        margin: 30px 0;
-        background-size: cover; /* Ensures the background covers the whole page */
-    	background-attachment: fixed; /* Optional: Keeps the background fixed when scrolling */
-      }
-    
-      /* Base button style */
-      .choice-item {
-        font-size: 20px;
-        font-weight: 600;
-        padding: 12px 25px;
-        cursor: pointer;
-        color: #2c3e50; /* Danger red */
-        background: none;
-        border: none;
-        border-bottom: 3px solid transparent; /* For underline effect */
-      }
-    
-      /* Hover effect */
-      .choice-item:hover {
-        color: #721c24; /* Darker red */
-      }
-    
-      /* Active style (clicked) */
-      .choice-item.active {
-        color: #dc3545;
-        border-bottom: 3px solid #dc3545;
-      }
-     
-     /* Main container styles */
-    
-    
-    /* Form container */
-    .card {
-        background: #ffffff;
-        border-radius: 10px;
-        padding: 30px;
-        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-    }
-    
-    /* Form fields */
-    .form-group label {
-        font-weight: 600;
-        color: #333;
-    }
-    
-    /* Input fields */
-    .form-control {
-        border-radius: 8px;
-        padding: 10px;
-        border: 1px solid #ddd;
-        transition: all 0.3s ease;
-    }
-    
-    /* Input focus effect */
-    .form-control:focus {
-        border-color: #007bff;
-        box-shadow: 0 0 5px rgba(0, 123, 255, 0.2);
-    }
-    
-    .submenu-list {
-        list-style: none;
-        padding-left: 20px;
-        margin: 0; /* Remove any margin */
-        background-color: #2c3e50; /* Ensure the background blends with the sidebar */
-    }   
-    .submenu-list li {
-        margin: 0;
-        background-color: #2c3e50; 
-        padding: 0px;
-        padding-top: 10px;
-    }
-    
-    .submenu-list a {
-        background-color: #2c3e50;
-        text-decoration: none;
-        font-size: 15px;
-        padding: 10px;
-        display: block;
-        border-radius: 25px;
-        transition: all 0.3s ease;
-    }
-    
-    .submenu-list a:hover,
-    .submenu-list .active a {
-        background-color: #fff;
-        color: #2c3e50;
-    }
-    
-    </style> 
+.submenu-list {
+    list-style: none;
+    padding-left: 20px;
+    margin: 0; /* Remove any margin */
+    background-color: #2c3e50; /* Ensure the background blends with the sidebar */
+}   
+.submenu-list li {
+    margin: 0;
+    background-color: #2c3e50; 
+    padding: 0px;
+    padding-top: 10px;
+}
 
+.submenu-list a {
+    background-color: #2c3e50;
+    text-decoration: none;
+    font-size: 15px;
+    padding: 10px;
+    display: block;
+    border-radius: 25px;
+    transition: all 0.3s ease;
+}
+
+.submenu-list a:hover,
+.submenu-list .active a {
+    background-color: #fff;
+    color: #2c3e50;
+}
+
+</style> 
 
     <script>
     // Function to toggle 'active' class
