@@ -33,7 +33,7 @@
             </div>
         </div>
 
-    <div class="page-wrapper">
+   <div class="page-wrapper">
        <div class="content">
         <div class="row">
             <div class="col-lg-12">
@@ -70,23 +70,19 @@
                                 <li class="list-group-item"><strong>Phone Number:</strong> <?php echo $row['phone']; ?></li>
                                 <li class="list-group-item"><strong>Email:</strong> <?php echo $_SESSION['SESS_EMAIL']; ?></li>
                                 <li class="list-group-item"><strong>Age:</strong> <?php echo $row['age']; ?></li>
-                                <li class="list-group-item"><strong>Status: </strong>
-                                    <td class="text-center">
-                                        <strong>
-                                             <?php
-                                                    if ($row['status'] == "Pending") {
-                                                        echo "<span class='badge badge-warning'>Reported</span>";
-                                                    } elseif ($row['status'] == "Ongoing") {
-                                                        echo "<span class='badge badge-danger'>Ongoing</span>";
-                                                    } else {
-                                                        echo "<span class='badge badge-success'>Resolved</span>";
-                                                    }
-                                            ?>
-                                        </strong>  
-                                    </td>                     
+                                <li class="list-group-item"><strong>Status:</strong>
+                                         <select class="form-control" name="status">
+                                            <option value="Pending">Reported</option>
+                                            <option value="Ongoing">Ongoing</option>
+                                            <option value="Resolved">Resolved</option>
+                                        </select>
+                                </li>                             
                                 <li class="list-group-item"><strong>Injury:</strong> <?php echo $row['injury']; ?></li>
                                 <li class="list-group-item"><strong>Description:</strong> <?php echo $row['description']; ?></li>
                             </ul>
+                            <div class="mt-3 text-center">
+                                <button class="btn btn-primary submit-btn">Update Status</button>
+                            </div>
                         </div>
                     </div>
 
@@ -94,7 +90,7 @@
                     <div class="col-md-6">
                         <div class="card p-4 shadow">
                             <h5>Location on Map</h5>
-                            <div id="map" style="height: 485px; border-radius: 10px;"></div>
+                            <div id="map" style="height: 585px; border-radius: 10px;"></div>
                         </div>
                     </div>
                 </div>
@@ -140,19 +136,7 @@
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 
-     <style>
-        .badge-warning {
-            background-color:rgb(232, 37, 40) !important;
-            color:rgb(255, 255, 255) !important;
-        }
-
-        .badge-danger {
-            background-color: #ffbc00 !important;
-            color:rgb(255, 255, 255) !important;
-        }
-    </style>
-
-   <script>
+    <script>
     document.addEventListener("DOMContentLoaded", function () {
         <?php
             $lat = $row['latitude'];
