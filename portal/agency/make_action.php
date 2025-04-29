@@ -77,7 +77,7 @@ date_default_timezone_set('Asia/Manila');
                                     <li class="list-group-item"><strong>Email:</strong> <?php echo $_SESSION['SESS_EMAIL']; ?></li>
                                     <li class="list-group-item"><strong>Age:</strong> <?php echo $row['age']; ?></li>
                                     <li class="list-group-item"><strong>Status:</strong>
-                                           <td class="text-center">
+                                    <td class="text-center">
                                             <strong>
                                                     <?php
                                                         if ($row['status'] == "Pending") {
@@ -88,7 +88,8 @@ date_default_timezone_set('Asia/Manila');
                                                             echo "<span class='badge badge-success'>Resolved</span>";
                                                         }
                                                     ?>
-                                            </st
+                                            </strong>  
+                                        </td>  
                                          <select class="form-control" name="status">
                                             <option value="Pending">Reported</option>
                                             <option value="Ongoing">Ongoing</option>
