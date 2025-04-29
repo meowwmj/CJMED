@@ -84,17 +84,42 @@
                                                     ?>
                                             </strong>  
                                         </td>                     
-                                    <li class="list-group-item"><strong>Injury:</strong> <?php echo $row['injury']; ?></li>
+                                <li class="list-group-item"><strong>Injury:</strong> <?php echo $row['injury']; ?></li>
                                     <li class="list-group-item"><strong>Description:</strong> <?php echo $row['description']; ?></li>
+                                    
+                                    <li class="list-group-item"><strong>Photo:</strong>  
+                                            <a href="javascript:void(0);" onclick="showPhotoModal('<?php echo $row['photo']; ?>')">
+                                                    <strong><?php echo basename($row['photo']); ?></strong>
+                                            </a>
+                                    </li>
+                                    
+                                    <!-- Modal for displaying the large photo -->
+                                    <div class="modal fade" id="photoModal" tabindex="-1" role="dialog" aria-labelledby="photoModalLabel" aria-hidden="true">
+                                        <div class="modal-dialog" role="document">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title" id="photoModalLabel">Emergency Photo</h5>
+                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                        <span aria-hidden="true">&times;</span>
+                                                    </button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <!-- Image will be dynamically inserted here -->
+                                                    <img id="modalPhoto" src="" alt="Emergency Photo" class="img-fluid">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    </div>
                                 </ul>
                             </div>
-                        </div>
-    
+
                         <!-- Map on the Right -->
                         <div class="col-md-6">
                             <div class="card p-4 shadow">
                                 <h5>Location on Map</h5>
-                                <div id="map" style="height: 485px; border-radius: 10px;"></div>
+                                <div id="map" style="height: 533px; border-radius: 10px;"></div>
                             </div>
                         </div>
                     </div>
@@ -103,30 +128,30 @@
             </div>
         </div>
     </div>
-    
-    
+
+
     <!-- Logout Confirmation Modal -->
     <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="logoutModalLabel" aria-hidden="true">
-      <div class="modal-dialog" role="document">
+    <div class="modal-dialog" role="document">
         <div class="modal-content">
-          <div class="modal-header">
+        <div class="modal-header">
             <h5 class="modal-title" id="logoutModalLabel">Confirm Logout</h5>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
+            <span aria-hidden="true">&times;</span>
             </button>
-          </div>
-          <div class="modal-body">
+        </div>
+        <div class="modal-body">
             Are you sure you want to log out?
-          </div>
-          <div class="modal-footer">
+        </div>
+        <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
             <a href="logout.php" class="btn btn-danger">Logout</a>
-          </div>
         </div>
-      </div>
+        </div>
     </div>
-    
-    
+    </div>
+
+
         <div class="sidebar-overlay" data-reff=""></div>
         <script src="assets/js/jquery-3.2.1.min.js"></script>
         <script src="assets/js/popper.min.js"></script>
@@ -136,22 +161,22 @@
         <script src="assets/js/moment.min.js"></script>
         <script src="assets/js/bootstrap-datetimepicker.min.js"></script>
         <script src="assets/js/app.js"></script>
-    
+
         <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
         <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-    
+
         <style>
             .badge-warning {
                 background-color:rgb(232, 37, 40) !important;
                 color:rgb(255, 255, 255) !important;
             }
-    
+
             .badge-danger {
                 background-color: #ffbc00 !important;
                 color:rgb(255, 255, 255) !important;
             }
         </style>
-    
+
         <script>
         document.addEventListener("DOMContentLoaded", function () {
             <?php
@@ -162,25 +187,50 @@
             var lat = <?php echo $lat; ?>;
             var lon = <?php echo $lon; ?>;
             var address = "<?php echo $address; ?>";
-    
+
             if (!lat || !lon) {
                 alert("No coordinates available.");
                 return;
             }
-    
+
             var map = L.map('map').setView([lat, lon], 20);
-    
+
             // Keep using the Google-style tile layer
             L.tileLayer('https://{s}.google.com/vt/lyrs=s&x={x}&y={y}&z={z}', {
                 maxZoom: 19,
                 subdomains: ['mt0', 'mt1', 'mt2', 'mt3']
             }).addTo(map);
-    
+
             L.marker([lat, lon]).addTo(map)
                 .bindPopup("<b>Emergency Location</b><br>" + address)
                 .openPopup();
         });
+
+        // Function to show the modal with the large photo
+        function showPhotoModal(imageUrl) {
+            var modal = new bootstrap.Modal(document.getElementById('photoModal'));
+            document.getElementById('modalPhoto').src = imageUrl;
+            modal.show();  
+        }
+
     </script>
-    
+
+    <style>
+        /* Make the image inside the modal larger */
+        .modal-body img {
+            width: 100%; 
+            max-width: 1000px;
+            height: auto; 
+        }
+
+        /* Adjust the modal width to make it wider */
+        .modal-dialog {
+            width: 90%;  
+            max-width: 1000px; 
+            height: auto;
+            margin: 30px auto;
+        }
+    </style>
+
     </body>
     </html>
