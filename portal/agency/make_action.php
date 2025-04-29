@@ -136,7 +136,7 @@ date_default_timezone_set('Asia/Manila');
                         <div class="col-md-6">
                             <div class="card p-4 shadow">
                                 <h5>Location on Map</h5>
-                                <div id="map" style="height: 600px; border-radius: 10px;"></div>
+                                <div id="map" style="height: 640px; border-radius: 10px;"></div>
                             </div>
                         </div>
                     </div>
