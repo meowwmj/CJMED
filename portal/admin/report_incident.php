@@ -44,8 +44,7 @@ date_default_timezone_set('Asia/Manila');
             			        <a href="users1.php"><i class="fa fa-user"></i> <span>Manage Users</span></a>                        
             			    </li>
             			</ul>
-            			</li>
-                        
+            			</li>                        
                         <li>
                             <a href="logout.php"><i class="fa fa-power-off"></i> <span>Logout</span></a>
                         </li>
@@ -55,8 +54,8 @@ date_default_timezone_set('Asia/Manila');
         </div>    
                         
                        
-    <!-- Page Wrapper -->
-    <div class="page-wrapper">
+   <!-- Page Wrapper -->
+      <div class="page-wrapper">
         <div class="content">
             <div class="card">   
                 <div class="choice-container">
@@ -130,18 +129,23 @@ date_default_timezone_set('Asia/Manila');
                                                         <option value="<?= $row['name'] ?>"><?= $row['name'] ?></option>
                                                 <?php endwhile; ?>
                                             </select>
-                                        </div>                                    
+                                        </div>
                                     
-                                    <div class="form-group"hidden>
-                                        <label>Agency's ID</label>
-                                        <input class="form-control" type="text" name="agency_id" value="<?= $_SESSION['SESS_AGENCY_ID'] ?>" readonly>
-                                    </div>
-
+                                    
                                     <div class="form-group">
-                                        <label>Agency's Name</label>
-                                        <input class="form-control" type="text" value="<?= $_SESSION['SESS_FIRST_NAME'] ?>" readonly>
-                                    </div>
+                                        <label>Agency Name</label>
+                                        <select class="form-control" name="agency_id">
+                                        <option>Select</option>
+                                            <?php
+                                            $result = $db->prepare("SELECT * FROM agency");
+                                            $result->execute();
+                                            while($row = $result->fetch()): ?>
+                                                <option value="<?= $row['agency_id'] ?>"><?= $row['agency_name'] ?></option>
+                                            <?php endwhile; ?>
+                                            </select>
+                                        </div>
                                         
+                                        <!-- Ensure Font Awesome is included in your project -->
                                             <div class="row align-items-start">
                                                 <!-- Picture Preview and File Input -->
                                                 <div class="col-md-8 mb-3">
@@ -235,7 +239,7 @@ date_default_timezone_set('Asia/Manila');
                                     </div>
                                 </div>
                             </div>
-
+                            
                             <div class="text-center mt-4">
                                 <button type="submit" class="btn btn-primary">Rescue</button>
                             </div>
@@ -247,103 +251,103 @@ date_default_timezone_set('Asia/Manila');
 
         <!-- Leaflet.js for Map -->
         <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
-
         <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+
+
 
         <!-- Bootstrap JS -->
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 
-        <script>
-// Handle image file preview (for file input)
-function previewFile() {
-    const preview = document.getElementById('previewImg');
-    const file = document.getElementById('photo').files[0];
-    const reader = new FileReader();
-    
-    reader.onloadend = function () {
-        preview.src = reader.result;
-    }
-    
-    if (file) {
-        reader.readAsDataURL(file);
-    }
-}
-
-// Start camera when modal is shown
-let cameraStream;
-async function startCamera() {
-    const video = document.getElementById('camera');
-    try {
-        // Request camera access
-        cameraStream = await navigator.mediaDevices.getUserMedia({ video: true });
-        video.srcObject = cameraStream;
-    } catch (err) {
-        console.error('Error accessing the camera: ', err);
-    }
-}
-
-// Stop the camera when the modal is closed
-function stopCamera() {
-    if (cameraStream) {
-        const tracks = cameraStream.getTracks();
-        tracks.forEach(track => track.stop()); // Stop all tracks to turn off the camera
-    }
-}
-
-// Capture photo from the camera
-function takePhoto() {
-    const video = document.getElementById('camera');
-    const canvas = document.getElementById('snapshot');
-    const context = canvas.getContext('2d');
-    
-    // Draw the video frame onto the canvas
-    context.drawImage(video, 0, 0, canvas.width, canvas.height);
-    
-    // Show the preview of the photo
-    const img = document.getElementById('preview');
-    img.src = canvas.toDataURL('image/png');
-    
-    // Show the preview container
-    document.getElementById('previewContainer').style.display = 'block';
-}
-
-// Save the photo (either from file or camera)
-function savePhoto() {
-    const photoInput = document.getElementById('photoInput');
-    const previewImg = document.getElementById('previewImg');
-    const preview = document.getElementById('preview');
-    
-    // If the preview is from the camera
-    if (preview.src) {
-        photoInput.value = preview.src; // Save the base64-encoded image
-        previewImg.src = preview.src;   // Update the preview image after saving
-    } else {
-        // If the preview is from the file input
-        const fileInput = document.getElementById('photo').files[0];
-        const reader = new FileReader();
-        
-        reader.onloadend = function () {
-            photoInput.value = reader.result; // Save the base64-encoded image
-            previewImg.src = reader.result;  // Update the preview image after saving
+     <script>
+        // Handle image file preview (for file input)
+        function previewFile() {
+            const preview = document.getElementById('previewImg');
+            const file = document.getElementById('photo').files[0];
+            const reader = new FileReader();
+            
+            reader.onloadend = function () {
+                preview.src = reader.result;
+            }
+            
+            if (file) {
+                reader.readAsDataURL(file);
+            }
         }
-        
-        if (fileInput) {
-            reader.readAsDataURL(fileInput);
+
+        // Start camera when modal is shown
+        let cameraStream;
+        async function startCamera() {
+            const video = document.getElementById('camera');
+            try {
+                // Request camera access
+                cameraStream = await navigator.mediaDevices.getUserMedia({ video: true });
+                video.srcObject = cameraStream;
+            } catch (err) {
+                console.error('Error accessing the camera: ', err);
+            }
         }
-    }
 
-    // Stop the camera to turn it off
-    stopCamera();  // Stop the camera when saving the photo
+        // Stop the camera when the modal is closed
+        function stopCamera() {
+            if (cameraStream) {
+                const tracks = cameraStream.getTracks();
+                tracks.forEach(track => track.stop()); // Stop all tracks to turn off the camera
+            }
+        }
 
-    // Manually hide the modal using Bootstrap's modal instance
-    const cameraModal = new bootstrap.Modal(document.getElementById('cameraModal'));
-    cameraModal.hide();  // This will hide the modal when "Save Photo" is clicked
+        // Capture photo from the camera
+        function takePhoto() {
+            const video = document.getElementById('camera');
+            const canvas = document.getElementById('snapshot');
+            const context = canvas.getContext('2d');
+            
+            // Draw the video frame onto the canvas
+            context.drawImage(video, 0, 0, canvas.width, canvas.height);
+            
+            // Show the preview of the photo
+            const img = document.getElementById('preview');
+            img.src = canvas.toDataURL('image/png');
+            
+            // Show the preview container
+            document.getElementById('previewContainer').style.display = 'block';
+        }
 
-    // Optionally show the form and the preview image (if needed)
-    document.getElementById('formContainer').style.display = 'block';
-}
-</script>
+        // Save the photo (either from file or camera)
+        function savePhoto() {
+            const photoInput = document.getElementById('photoInput');
+            const previewImg = document.getElementById('previewImg');
+            const preview = document.getElementById('preview');
+            
+            // If the preview is from the camera
+            if (preview.src) {
+                photoInput.value = preview.src; // Save the base64-encoded image
+                previewImg.src = preview.src;   // Update the preview image after saving
+            } else {
+                // If the preview is from the file input
+                const fileInput = document.getElementById('photo').files[0];
+                const reader = new FileReader();
+                
+                reader.onloadend = function () {
+                    photoInput.value = reader.result; // Save the base64-encoded image
+                    previewImg.src = reader.result;  // Update the preview image after saving
+                }
+                
+                if (fileInput) {
+                    reader.readAsDataURL(fileInput);
+                }
+            }
 
+            // Stop the camera to turn it off
+            stopCamera();  // Stop the camera when saving the photo
+
+            // Manually hide the modal using Bootstrap's modal instance
+            const cameraModal = new bootstrap.Modal(document.getElementById('cameraModal'));
+            cameraModal.hide();  // This will hide the modal when "Save Photo" is clicked
+
+            // Optionally show the form and the preview image (if needed)
+            document.getElementById('formContainer').style.display = 'block';
+        }
+        </script>
 
         <script>
             document.addEventListener('DOMContentLoaded', function() {
@@ -415,75 +419,98 @@ function savePhoto() {
     });
 </script>
 
-    <style>
-    /* Flexbox for horizontal layout */
-    .choice-container {
-        display: flex;
-        justify-content: center;
-        gap: 10px;
-        margin: 30px 0;
-        background-size: cover; /* Ensures the background covers the whole page */
-        background-attachment: fixed; /* Optional: Keeps the background fixed when scrolling */
-    }
+  <style>
+ /* Flexbox for horizontal layout */
+ .choice-container {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin: 30px 0;
+    background-size: cover; 
+    background-attachment: fixed;
+  }
 
-    /* Base button style */
-    .choice-item {
-        font-size: 20px;
-        font-weight: 600;
-        padding: 12px 25px;
-        cursor: pointer;
-        color: #2c3e50; /* Danger red */
-        background: none;
-        border: none;
-        border-bottom: 3px solid transparent; /* For underline effect */
-    }
+  /* Base button style */
+  .choice-item {
+    font-size: 20px;
+    font-weight: 600;
+    padding: 12px 25px;
+    cursor: pointer;
+    color: #2c3e50; /* Danger red */
+    background: none;
+    border: none;
+    border-bottom: 3px solid transparent;
+  }
 
-    /* Hover effect */
-    .choice-item:hover {
-        color: #721c24; /* Darker red */
-    }
+  /* Hover effect */
+  .choice-item:hover {
+    color: #721c24; 
+  }
 
-    /* Active style (clicked) */
-    .choice-item.active {
-        color: #dc3545;
-        border-bottom: 3px solid #dc3545;
-    }
-    
-    /* Form container */
-    .card {
-        background: #ffffff;
-        border-radius: 10px;
-        padding: 30px;
-        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-    }
+  /* Active style (clicked) */
+  .choice-item.active {
+    color: #dc3545;
+    border-bottom: 3px solid #dc3545;
+  }
 
-    /* Form fields */
-    .form-group label {
-        font-weight: 600;
-        color: #333;
-    }
-
-    /* Input fields */
-    .form-control {
-        border-radius: 8px;
-        padding: 10px;
-        border: 1px solid #ddd;
-        transition: all 0.3s ease;
-    }
-
-    /* Input focus effect */
-    .form-control:focus {
-        border-color: #007bff;
-        box-shadow: 0 0 5px rgba(0, 123, 255, 0.2);
-    }
-
-#snapshot {
-    display: none;
-    margin: 0 auto 15px auto;
+/* Form container */
+.card {
+    background: #ffffff;
     border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    padding: 30px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 }
-    </style> 
+
+/* Form fields */
+.form-group label {
+    font-weight: 600;
+    color: #333;
+}
+
+/* Input fields */
+.form-control {
+    border-radius: 8px;
+    padding: 10px;
+    border: 1px solid #ddd;
+    transition: all 0.3s ease;
+}
+
+/* Input focus effect */
+.form-control:focus {
+    border-color: #007bff;
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.2);
+}
+
+.submenu-list {
+    list-style: none;
+    padding-left: 20px;
+    margin: 0; /* Remove any margin */
+    background-color: #2c3e50; /* Ensure the background blends with the sidebar */
+}   
+.submenu-list li {
+    margin: 0;
+    background-color: #2c3e50; 
+    padding: 0px;
+    padding-top: 10px;
+}
+
+.submenu-list a {
+    background-color: #2c3e50;
+    text-decoration: none;
+    font-size: 15px;
+    padding: 10px;
+    display: block;
+    border-radius: 25px;
+    transition: all 0.3s ease;
+}
+
+.submenu-list a:hover,
+.submenu-list .active a {
+    background-color: #fff;
+    color: #2c3e50;
+}
+
+</style> 
 
     <script>
     // Function to toggle 'active' class
@@ -512,7 +539,7 @@ function savePhoto() {
         <script src="assets/js/moment.min.js"></script>
         <script src="assets/js/bootstrap-datetimepicker.min.js"></script>
         <script src="assets/js/app.js"></script>
-
+    
 
     <!-- Logout Confirmation Modal -->
     <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="logoutModalLabel" aria-hidden="true">
