@@ -54,6 +54,7 @@ date_default_timezone_set('Asia/Manila');
             </div>
         </div>    
                         
+                       
     <!-- Page Wrapper -->
     <div class="page-wrapper">
         <div class="content">
@@ -129,27 +130,78 @@ date_default_timezone_set('Asia/Manila');
                                                         <option value="<?= $row['name'] ?>"><?= $row['name'] ?></option>
                                                 <?php endwhile; ?>
                                             </select>
-                                        </div>
+                                        </div>                                    
                                     
-                                    
-                                    <div class="form-group">
-                                        <label>Agency Name</label>
-                                        <select class="form-control" name="agency_id">
-                                        <option>Select</option>
-                                            <?php
-                                            $result = $db->prepare("SELECT * FROM agency");
-                                            $result->execute();
-                                            while($row = $result->fetch()): ?>
-                                                <option value="<?= $row['agency_id'] ?>"><?= $row['agency_name'] ?></option>
-                                            <?php endwhile; ?>
-                                            </select>
-                                        </div>
-                                        
-                                    <div class="form-group">
-                                        <label>Description</label>
-                                        <textarea cols="30" rows="1" name="description" class="form-control"></textarea>
+                                    <div class="form-group"hidden>
+                                        <label>Agency's ID</label>
+                                        <input class="form-control" type="text" name="agency_id" value="<?= $_SESSION['SESS_AGENCY_ID'] ?>" readonly>
                                     </div>
-                                </div>
+
+                                    <div class="form-group">
+                                        <label>Agency's Name</label>
+                                        <input class="form-control" type="text" value="<?= $_SESSION['SESS_FIRST_NAME'] ?>" readonly>
+                                    </div>
+                                        
+                                            <div class="row align-items-start">
+                                                <!-- Picture Preview and File Input -->
+                                                <div class="col-md-8 mb-3">
+                                                    <div class="form-group">
+                                                        <label class="form-label">Capture and Upload</label>
+                                                        <div class="profile-upload">
+                                                            <div class="upload-img mb-2">
+                                                                <img id="previewImg" src="assets/img/user.jpg" alt="Preview Image" class="img-fluid rounded" style="max-height: 200px;">
+                                                            </div>
+                                                            <div class="upload-input">
+                                                                <input type="file" name="photo" class="form-control" id="photo" accept="image/*" onchange="previewFile()">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <!-- Upload Button (Camera Capture) -->
+                                                <div class="col-md-4 mb-3">
+                                                    <div class="form-group">
+                                                        <label class="form-label"><br></label>
+                                                        <button type="button" class="btn btn-primary mt-1 w-100" data-bs-toggle="modal" data-bs-target="#cameraModal" onclick="startCamera()">
+                                                            <i class="fas fa-camera"></i> Take a Photo
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <!-- Modal for taking a photo -->
+                                            <div class="modal fade" id="cameraModal" tabindex="-1" aria-labelledby="cameraModalLabel" aria-hidden="true">
+                                                <div class="modal-dialog modal-dialog-centered">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <h5 class="modal-title" id="cameraModalLabel">Take a Photo</h5>
+                                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" onclick="stopCamera()"></button>
+                                                        </div>
+
+                                                        <div class="modal-body text-center">
+                                                            <video id="camera" width="100%" height="auto" autoplay playsinline style="border-radius: 10px; background: #000;"></video>
+                                                            <canvas id="snapshot" width="320" height="240" style="display:none;"></canvas>
+                                                            <div class="mt-3">
+                                                                <button type="button" class="btn btn-success" onclick="takePhoto()">Capture</button>
+                                                            </div>
+                                                            <div id="previewContainer" class="mt-3" style="display:none;">
+                                                                <h6>Preview:</h6>
+                                                                <img id="preview" src="" class="img-fluid rounded" />
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="modal-footer">
+                                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" onclick="stopCamera()">Cancel</button>
+                                                            <button type="button" class="btn btn-primary" onclick="savePhoto()">Save Photo</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <!-- Hidden input to submit the photo data -->
+                                            <input type="hidden" id="photoInput" name="photoInput">
+                                        </div>
+
 
                                 <div class="col-md-6">
                                     <div class="form-group">
@@ -174,7 +226,16 @@ date_default_timezone_set('Asia/Manila');
                                     </div>  
                                 </div>
                             </div>
-                          
+
+                            <div class="row">
+                            <div class="col-lg-12">        
+                                    <div class="form-group">
+                                        <label>Description</label>
+                                        <textarea cols="30" rows="2" name="description" class="form-control"></textarea>
+                                    </div>
+                                </div>
+                            </div>
+
                             <div class="text-center mt-4">
                                 <button type="submit" class="btn btn-primary">Rescue</button>
                             </div>
@@ -186,7 +247,103 @@ date_default_timezone_set('Asia/Manila');
 
         <!-- Leaflet.js for Map -->
         <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+
         <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+
+        <!-- Bootstrap JS -->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+        <script>
+// Handle image file preview (for file input)
+function previewFile() {
+    const preview = document.getElementById('previewImg');
+    const file = document.getElementById('photo').files[0];
+    const reader = new FileReader();
+    
+    reader.onloadend = function () {
+        preview.src = reader.result;
+    }
+    
+    if (file) {
+        reader.readAsDataURL(file);
+    }
+}
+
+// Start camera when modal is shown
+let cameraStream;
+async function startCamera() {
+    const video = document.getElementById('camera');
+    try {
+        // Request camera access
+        cameraStream = await navigator.mediaDevices.getUserMedia({ video: true });
+        video.srcObject = cameraStream;
+    } catch (err) {
+        console.error('Error accessing the camera: ', err);
+    }
+}
+
+// Stop the camera when the modal is closed
+function stopCamera() {
+    if (cameraStream) {
+        const tracks = cameraStream.getTracks();
+        tracks.forEach(track => track.stop()); // Stop all tracks to turn off the camera
+    }
+}
+
+// Capture photo from the camera
+function takePhoto() {
+    const video = document.getElementById('camera');
+    const canvas = document.getElementById('snapshot');
+    const context = canvas.getContext('2d');
+    
+    // Draw the video frame onto the canvas
+    context.drawImage(video, 0, 0, canvas.width, canvas.height);
+    
+    // Show the preview of the photo
+    const img = document.getElementById('preview');
+    img.src = canvas.toDataURL('image/png');
+    
+    // Show the preview container
+    document.getElementById('previewContainer').style.display = 'block';
+}
+
+// Save the photo (either from file or camera)
+function savePhoto() {
+    const photoInput = document.getElementById('photoInput');
+    const previewImg = document.getElementById('previewImg');
+    const preview = document.getElementById('preview');
+    
+    // If the preview is from the camera
+    if (preview.src) {
+        photoInput.value = preview.src; // Save the base64-encoded image
+        previewImg.src = preview.src;   // Update the preview image after saving
+    } else {
+        // If the preview is from the file input
+        const fileInput = document.getElementById('photo').files[0];
+        const reader = new FileReader();
+        
+        reader.onloadend = function () {
+            photoInput.value = reader.result; // Save the base64-encoded image
+            previewImg.src = reader.result;  // Update the preview image after saving
+        }
+        
+        if (fileInput) {
+            reader.readAsDataURL(fileInput);
+        }
+    }
+
+    // Stop the camera to turn it off
+    stopCamera();  // Stop the camera when saving the photo
+
+    // Manually hide the modal using Bootstrap's modal instance
+    const cameraModal = new bootstrap.Modal(document.getElementById('cameraModal'));
+    cameraModal.hide();  // This will hide the modal when "Save Photo" is clicked
+
+    // Optionally show the form and the preview image (if needed)
+    document.getElementById('formContainer').style.display = 'block';
+}
+</script>
+
 
         <script>
             document.addEventListener('DOMContentLoaded', function() {
@@ -258,98 +415,75 @@ date_default_timezone_set('Asia/Manila');
     });
 </script>
 
-  <style>
- /* Flexbox for horizontal layout */
- .choice-container {
-    display: flex;
-    justify-content: center;
-    gap: 10px;
-    margin: 30px 0;
-    background-size: cover; 
-    background-attachment: fixed;
-  }
+    <style>
+    /* Flexbox for horizontal layout */
+    .choice-container {
+        display: flex;
+        justify-content: center;
+        gap: 10px;
+        margin: 30px 0;
+        background-size: cover; /* Ensures the background covers the whole page */
+        background-attachment: fixed; /* Optional: Keeps the background fixed when scrolling */
+    }
 
-  /* Base button style */
-  .choice-item {
-    font-size: 20px;
-    font-weight: 600;
-    padding: 12px 25px;
-    cursor: pointer;
-    color: #2c3e50; /* Danger red */
-    background: none;
-    border: none;
-    border-bottom: 3px solid transparent;
-  }
+    /* Base button style */
+    .choice-item {
+        font-size: 20px;
+        font-weight: 600;
+        padding: 12px 25px;
+        cursor: pointer;
+        color: #2c3e50; /* Danger red */
+        background: none;
+        border: none;
+        border-bottom: 3px solid transparent; /* For underline effect */
+    }
 
-  /* Hover effect */
-  .choice-item:hover {
-    color: #721c24; 
-  }
+    /* Hover effect */
+    .choice-item:hover {
+        color: #721c24; /* Darker red */
+    }
 
-  /* Active style (clicked) */
-  .choice-item.active {
-    color: #dc3545;
-    border-bottom: 3px solid #dc3545;
-  }
+    /* Active style (clicked) */
+    .choice-item.active {
+        color: #dc3545;
+        border-bottom: 3px solid #dc3545;
+    }
+    
+    /* Form container */
+    .card {
+        background: #ffffff;
+        border-radius: 10px;
+        padding: 30px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    }
 
-/* Form container */
-.card {
-    background: #ffffff;
+    /* Form fields */
+    .form-group label {
+        font-weight: 600;
+        color: #333;
+    }
+
+    /* Input fields */
+    .form-control {
+        border-radius: 8px;
+        padding: 10px;
+        border: 1px solid #ddd;
+        transition: all 0.3s ease;
+    }
+
+    /* Input focus effect */
+    .form-control:focus {
+        border-color: #007bff;
+        box-shadow: 0 0 5px rgba(0, 123, 255, 0.2);
+    }
+
+#snapshot {
+    display: none;
+    margin: 0 auto 15px auto;
     border-radius: 10px;
-    padding: 30px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
 }
-
-/* Form fields */
-.form-group label {
-    font-weight: 600;
-    color: #333;
-}
-
-/* Input fields */
-.form-control {
-    border-radius: 8px;
-    padding: 10px;
-    border: 1px solid #ddd;
-    transition: all 0.3s ease;
-}
-
-/* Input focus effect */
-.form-control:focus {
-    border-color: #007bff;
-    box-shadow: 0 0 5px rgba(0, 123, 255, 0.2);
-}
-
-.submenu-list {
-    list-style: none;
-    padding-left: 20px;
-    margin: 0; /* Remove any margin */
-    background-color: #2c3e50; /* Ensure the background blends with the sidebar */
-}   
-.submenu-list li {
-    margin: 0;
-    background-color: #2c3e50; 
-    padding: 0px;
-    padding-top: 10px;
-}
-
-.submenu-list a {
-    background-color: #2c3e50;
-    text-decoration: none;
-    font-size: 15px;
-    padding: 10px;
-    display: block;
-    border-radius: 25px;
-    transition: all 0.3s ease;
-}
-
-.submenu-list a:hover,
-.submenu-list .active a {
-    background-color: #fff;
-    color: #2c3e50;
-}
-
-</style> 
+    </style> 
 
     <script>
     // Function to toggle 'active' class
