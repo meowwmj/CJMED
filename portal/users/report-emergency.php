@@ -104,7 +104,7 @@ date_default_timezone_set('Asia/Manila');
                                         </div>
                                     
                                     
-                                    <div class="form-group">
+                                 <div class="form-group">
                                         <label>Agency Name</label>
                                         <select class="form-control" name="agency_id">
                                         <option>Select</option>
@@ -143,11 +143,10 @@ date_default_timezone_set('Asia/Manila');
                                     <div class="form-group">
                                         <label>Province</label>
                                         <span id="province" class="form-control" readonly></span>
-                                    </div> 
+                                    </div>  
                                 </div>
                             </div>
-
- <div class="form-group text-center mt-4">
+                           <div class="form-group text-center mt-4">
     <label><strong>Photo Options</strong></label><br>
 
     <!-- Removed the Upload Button -->
@@ -164,7 +163,6 @@ date_default_timezone_set('Asia/Manila');
     </div>
 </div>
 
-
                             <div class="text-center mt-4">
                                 <button type="submit" class="btn btn-primary">Rescue</button>
                             </div>
@@ -177,7 +175,40 @@ date_default_timezone_set('Asia/Manila');
         <!-- Leaflet.js for Map -->
         <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
         <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+<script>
+    let video = document.getElementById('camera');
+    let canvas = document.getElementById('snapshot');
+    let capturedInput = document.getElementById('capturedPhoto');
+    let cameraSection = document.getElementById('cameraSection');
+    let stream;
 
+    function openCamera() {
+        cameraSection.style.display = 'block';
+        navigator.mediaDevices.getUserMedia({ video: true })
+        .then((mediaStream) => {
+            stream = mediaStream;
+            video.srcObject = mediaStream;
+        })
+        .catch((err) => {
+            alert("Unable to access camera.");
+            console.error(err);
+        });
+    }
+
+    function capturePhoto() {
+        canvas.style.display = 'block';
+        canvas.getContext('2d').drawImage(video, 0, 0, canvas.width, canvas.height);
+        let imageData = canvas.toDataURL('image/png');
+        capturedInput.value = imageData;
+
+        // Stop the stream
+        if (stream) {
+            stream.getTracks().forEach(track => track.stop());
+        }
+
+        video.srcObject = null;
+    }
+</script>
         <script>
             document.addEventListener('DOMContentLoaded', function() {
                 if (navigator.geolocation) {
@@ -237,51 +268,16 @@ date_default_timezone_set('Asia/Manila');
         </script>
 
 <script>
-    let video = document.getElementById('camera');
-    let canvas = document.getElementById('snapshot');
-    let capturedInput = document.getElementById('capturedPhoto');
-    let cameraSection = document.getElementById('cameraSection');
-    let stream;
-
-    function openCamera() {
-        cameraSection.style.display = 'block';
-        navigator.mediaDevices.getUserMedia({ video: true })
-        .then((mediaStream) => {
-            stream = mediaStream;
-            video.srcObject = mediaStream;
-        })
-        .catch((err) => {
-            alert("Unable to access camera.");
-            console.error(err);
-        });
-    }
-
-    function capturePhoto() {
-        canvas.style.display = 'block';
-        canvas.getContext('2d').drawImage(video, 0, 0, canvas.width, canvas.height);
-        let imageData = canvas.toDataURL('image/png');
-        capturedInput.value = imageData;
-
-        // Stop the stream
-        if (stream) {
-            stream.getTracks().forEach(track => track.stop());
+    document.getElementById('age').addEventListener('input', function() {
+        const age = parseInt(this.value);
+        const error = document.getElementById('ageError');
+        if (isNaN(age) || age < 1 || age > 120) {
+            error.style.display = 'block';
+        } else {
+            error.style.display = 'none';
         }
-
-        video.srcObject = null;
-    }
+    });
 </script>
-
-    <script>
-        document.getElementById('age').addEventListener('input', function() {
-            const age = parseInt(this.value);
-            const error = document.getElementById('ageError');
-            if (isNaN(age) || age < 1 || age > 120) {
-                error.style.display = 'block';
-            } else {
-                error.style.display = 'none';
-            }
-        });
-    </script>
 
     <style>
     /* Flexbox for horizontal layout */
@@ -317,9 +313,6 @@ date_default_timezone_set('Asia/Manila');
         border-bottom: 3px solid #dc3545;
     }
     
-    /* Main container styles */
-
-
     /* Form container */
     .card {
         background: #ffffff;
@@ -406,6 +399,20 @@ date_default_timezone_set('Asia/Manila');
     </div>
     </div>
 
-
     </body>
     </html>
+
+
+<script>
+    document.getElementById('patientSelect').addEventListener('change', function () {
+        const input = document.getElementById('patientNameInput');
+        if (this.value === 'custom') {
+            input.style.display = 'block';
+            input.required = true;
+        } else {
+            input.style.display = 'none';
+            input.required = false;
+            input.value = this.value === 'unknown' ? 'Unknown' : '';
+        }
+    });
+</script>
