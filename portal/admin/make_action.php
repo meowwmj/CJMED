@@ -81,7 +81,6 @@ date_default_timezone_set('Asia/Manila');
                         <!-- Emergency Details on the Left -->
                         <div class="col-md-6">
                             <div class="card p-4 shadow">
-                                <h5>Emergency Information</h5>
                                 <ul class="list-group list-group-flush">
                                     <li class="list-group-item"><strong>Emergency ID:</strong> <?php echo $row['emergency_id']; ?></li>
                                     <li class="list-group-item"><strong>Name:</strong> <?php echo $row['patient_name']; ?></li>
@@ -91,6 +90,19 @@ date_default_timezone_set('Asia/Manila');
                                     <li class="list-group-item"><strong>Email:</strong> <?php echo $_SESSION['SESS_EMAIL']; ?></li>
                                     <li class="list-group-item"><strong>Age:</strong> <?php echo $row['age']; ?></li>
                                     <li class="list-group-item"><strong>Status:</strong>
+                                        <td class="text-center">
+                                            <strong>
+                                                    <?php
+                                                        if ($row['status'] == "Pending") {
+                                                            echo "<span class='badge badge-warning'>Reported</span>";
+                                                        } elseif ($row['status'] == "Ongoing") {
+                                                            echo "<span class='badge badge-danger'>Ongoing</span>";
+                                                        } else {
+                                                            echo "<span class='badge badge-success'>Resolved</span>";
+                                                        }
+                                                    ?>
+                                            </strong>  
+                                        </td><br><br>
                                          <select class="form-control" name="status">
                                             <option value="Pending">Reported</option>
                                             <option value="Ongoing">Ongoing</option>
@@ -107,6 +119,10 @@ date_default_timezone_set('Asia/Manila');
                                             </a>
                                         </li>
                                     <?php endif; ?>
+
+                            <div class="mt-3 text-center">
+                                <button class="btn btn-primary submit-btn">Update Status</button>
+                            </div>
 
                                     <!-- Modal for displaying the large photo -->
                                     <div class="modal fade" id="photoModal" tabindex="-1" role="dialog" aria-labelledby="photoModalLabel" aria-hidden="true">
@@ -134,7 +150,7 @@ date_default_timezone_set('Asia/Manila');
                         <div class="col-md-6">
                             <div class="card p-4 shadow">
                                 <h5>Location on Map</h5>
-                                <div id="map" style="height: 533px; border-radius: 10px;"></div>
+                                <div id="map" style="height: 625px; border-radius: 10px;"></div>
                             </div>
                         </div>
                     </div>
