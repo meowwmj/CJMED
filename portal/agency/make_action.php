@@ -43,6 +43,7 @@ date_default_timezone_set('Asia/Manila');
         <div class="content">
             <div class="row">
                 <div class="col-lg-12">
+                    <h4 class="page-title text-center">Emergency Details</h4>
                 </div>
             </div> 
 
@@ -66,7 +67,6 @@ date_default_timezone_set('Asia/Manila');
                         <!-- Emergency Details on the Left -->
                         <div class="col-md-6">
                             <div class="card p-4 shadow">
-                                <h5>Emergency Information</h5>
                                 <ul class="list-group list-group-flush">
                                     <li class="list-group-item"><strong>Emergency ID:</strong> <?php echo $row['emergency_id']; ?></li>
                                     <li class="list-group-item"><strong>Name:</strong> <?php echo $row['patient_name']; ?></li>
