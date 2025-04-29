@@ -91,7 +91,7 @@ date_default_timezone_set('Asia/Manila');
 
                                     <div class="form-group">
                                         <label>Age</label>
-                                        <select class="form-control" name="age">
+                                        <select class="form-control" name="age" required="true">
                                             <option value="#">Select Age Group</option>
                                             <option value="(0-14 years old)">(0-14 years old)</option>
                                             <option value="(15-24 years old)">(15-24 years old)</option>
@@ -107,7 +107,7 @@ date_default_timezone_set('Asia/Manila');
 
                                     <div class="form-group">
                                         <label>Emergency Category</label>
-                                        <select class="form-control" name="emergency_category">
+                                        <select class="form-control" name="emergency_category" required="true">
                                             <option>Select</option>
                                                 <?php
                                                     $result = $db->prepare("SELECT * FROM emergency_type");
