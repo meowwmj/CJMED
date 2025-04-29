@@ -110,9 +110,6 @@ date_default_timezone_set('Asia/Manila');
                             <div class="mt-3 text-center">
                                 <button class="btn btn-primary submit-btn">Update Status</button>
                             </div>
-                        </div>
-                    </div>
-                </div>
 
                                     <!-- Modal for displaying the large photo -->
                                     <div class="modal fade" id="photoModal" tabindex="-1" role="dialog" aria-labelledby="photoModalLabel" aria-hidden="true">
