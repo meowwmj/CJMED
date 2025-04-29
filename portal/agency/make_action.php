@@ -89,7 +89,7 @@ date_default_timezone_set('Asia/Manila');
                                                         }
                                                     ?>
                                             </strong>  
-                                        </td><br>
+                                        </td><br><br>
                                          <select class="form-control" name="status">
                                             <option value="Pending">Reported</option>
                                             <option value="Ongoing">Ongoing</option>
