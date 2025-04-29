@@ -112,17 +112,15 @@ date_default_timezone_set('Asia/Manila');
                                     <li class="list-group-item"><strong>Injury:</strong> <?php echo $row['injury']; ?></li>
                                     <li class="list-group-item"><strong>Description:</strong> <?php echo $row['description']; ?></li>
 
-                                    <?php if (!empty($row['photo']) && file_exists($row['photo'])) : ?>
-                                        <li class="list-group-item"><strong>Photo:</strong>                                             
-                                            <a href="javascript:void(0);" onclick="showPhotoModal('<?php echo $row['photo']; ?>')">
-                                                <strong><?php echo basename($row['photo']); ?></strong>
-                                            </a>
-                                        </li>
-                                    <?php endif; ?>
+                                    <li class="list-group-item"><strong>Photo:</strong>  
+                                         <a href="javascript:void(0);" onclick="showPhotoModal('<?php echo $row['photo']; ?>')">
+                                            <strong><?php echo basename($row['photo']); ?></strong>
+                                         </a>
+                                    </li>
 
-                            <div class="mt-3 text-center">
-                                <button class="btn btn-primary submit-btn">Update Status</button>
-                            </div>
+                                    <div class="mt-3 text-center">
+                                        <button class="btn btn-primary submit-btn">Update Status</button>
+                                    </div>
 
                                     <!-- Modal for displaying the large photo -->
                                     <div class="modal fade" id="photoModal" tabindex="-1" role="dialog" aria-labelledby="photoModalLabel" aria-hidden="true">
