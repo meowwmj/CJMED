@@ -43,7 +43,6 @@ date_default_timezone_set('Asia/Manila');
         <div class="content">
             <div class="row">
                 <div class="col-lg-12">
-                    <h4 class="page-title text-center">Emergency Details</h4>
                 </div>
             </div> 
 
